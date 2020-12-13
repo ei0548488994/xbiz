@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom"
 import Parser from 'html-react-parser';
 import logo from '../img/newlogo.png'; 
 /*import {useDispatch} from 'react-redux';*/
+import '../css/dashboard.css'
 
 export default function Dashboard() {
   const [error, setError] = useState("")
