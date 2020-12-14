@@ -3,6 +3,7 @@ import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import axios from 'axios';
+import firebase from 'firebase'
 
 export default function Signup() {
   const emailRef = useRef()
@@ -16,21 +17,31 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("):הסיסמאות לא תואמות")
     }
-
+      debugger;
     try {
-      let url = 'http://localhost:3002/api';
+      let url = 'http://localhost:3004/api';
       setError("")
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
       console.log(currentUser.uid);
-      axios.get(url + '/createUser',).then(response => {
-        console.log(response)
-        return response.data
-    }).catch(o => { console.log(o); });
+      
+      firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+        // Send token to your backend via HTTPS
+        return axios({
+          method: 'post',
+          url: url + '/createUser',
+          data:{currentUser:currentUser}
+      }).then(response => {
+          console.log("gfg",response)
+          return response.data
+      }).catch(o => { console.log(o); });
+        // ...
+      }).catch(function(error) {
+        // Handle error
+      });
       history.push("/")
     } catch {
       setError("):לא הצלחנו לייצר בשבילך את החשבון")
