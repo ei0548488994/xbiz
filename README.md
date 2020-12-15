@@ -1,2 +1,2 @@
 # Places
-A business index application
+A business index application.
