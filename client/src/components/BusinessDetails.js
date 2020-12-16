@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../css/style.css'
 import '../css/main-color.css'
 import Header from "./Header";
@@ -9,10 +9,12 @@ import Reviews from './Reviews';
 import AddReviews from './AddReviews';
 import OpenHours from "./OpenHours";
 import Booking from "./Booking";
+import { connect } from 'react-redux';
 import Contact from './Contact';
-
-import MapContainer  from './GoogleMap'
-function BusinessDetails() {
+import { withRouter } from 'react-router-dom';
+// import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory } from '../redux/actions/category.action';
+const BusinessDetails = (props) => {
+  console.log(props.CheckedBusinessDetails)
   return (
     <>
       <div>
@@ -35,12 +37,15 @@ function BusinessDetails() {
                 {/* Titlebar */}
                 <div id="titlebar" className="listing-titlebar">
                   <div className="listing-titlebar-title">
-                    <h2>בית הבורגרים<span className="listing-tag">אוכל &amp; שתיה</span></h2>
+                    <h2>{props.CheckedBusinessDetails.businessName}<span className="listing-tag">{props.CheckedBusinessDetails.description}</span></h2>
                     <span>
                       <a href="#listing-location" className="listing-address">
                         <i className="fa fa-map-marker" />
-                        אבן גבירול 14 באר שבע
-                </a>
+                        {props.CheckedBusinessDetails.adress ?
+                          props.CheckedBusinessDetails.adress.street +
+                          " " + props.CheckedBusinessDetails.adress.city
+                          + " " + props.CheckedBusinessDetails.adress.state : ""}
+                      </a>
                     </span>
                     <div className="star-rating" data-rating={5}>
                       <div className="rating-counter"><a href="#listing-reviews">(31 תגובות)</a></div>
@@ -70,8 +75,8 @@ function BusinessDetails() {
                   {/* Listing Contacts */}
                   <div className="listing-links-container">
                     <ul className="listing-links contact-links">
-                      <li><a href="tel:12-345-678" className="listing-links"><i className="fa fa-phone" /> +12 345 6578</a></li>
-                      <li><a href="mailto:mail@example.com" className="listing-links"><i className="fa fa-envelope-o" /> mail@example.com</a>
+                      <li><a href="tel:12-345-678" className="listing-links"><i className="fa fa-phone" />{props.CheckedBusinessDetails.phone}</a></li>
+                      <li><a href="mailto:mail@example.com" className="listing-links"><i className="fa fa-envelope-o" /> {props.CheckedBusinessDetails.email}</a>
                       </li>
                       <li><a href="#" target="_blank" className="listing-links"><i className="fa fa-link" /> www.example.com</a></li>
                     </ul>
@@ -267,7 +272,29 @@ function BusinessDetails() {
         </div>
         {/* Style Switcher / End */}
       </div>
+
     </>
   );
 }
-export default BusinessDetails;
+export default connect(
+  (state) => {
+    return {
+      CheckedBusinessDetails: state.business.CheckedBusinessDetails,
+      // category: state.category.category,
+      // selectedCategoryId: state.category.selectedCategoryId
+    }
+  },
+  (disatch) => {
+    return {
+      // getAllCategories: function () {
+      //   disatch(getAllCategories())
+      // },
+      // setSelectedCategory: function (id) {
+      //   disatch(setSelectedCategoryId(id))
+      // },
+      // getResultOfSearchBYCategory: function (text) {
+      //   disatch(getResultOfSearchByCategory(text))
+      // }
+    }
+  }
+)(withRouter(BusinessDetails));

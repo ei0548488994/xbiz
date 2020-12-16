@@ -1,5 +1,5 @@
 import React from 'react'
-import "../navigtor/dist/navigator.css"
+// import "../navigtor/dist/navigator.css"
 
 
 export default function Navigator() {

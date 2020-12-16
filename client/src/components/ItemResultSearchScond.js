@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
  function ItemResultSearchScond(props) {
     return (
         <>
-            <div className="col-lg-6 col-md-12">
+            {/* <div className="col-lg-6 col-md-12">
                 <a
                     //  href="listings-single-page.html"
                     className="listing-item-container">
@@ -24,7 +24,7 @@ import { withRouter } from 'react-router-dom';
                         <div className="rating-counter">(12 reviews)</div>
                     </div>
                 </a>
-            </div>
+            </div> */}
         </>
     )
 }

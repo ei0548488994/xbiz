@@ -63,15 +63,22 @@ function ResultSearckListSecond(props) {
                                 </div>
                             </div>
                             {/* Sorting / Layout Switcher / End */}
-                            <div className="row">
+
+
+
+
+
+
+                            
+                            {/* <div className="row"> */}
                                 {/* Listing Item */}
-                                <ItemResultSearchScond />
+                                {/* <ItemResultSearchScond /> */}
                                 {/* Listing Item / End */}
                                 {/* Listing Item */}
-                                <ItemResultSearchScond />
+                                {/* <ItemResultSearchScond /> */}
                                 {/* Listing Item / End */}
                                 {/* Listing Item */}
-                                <div className="col-lg-6 col-md-12">
+                                {/* <div className="col-lg-6 col-md-12">
                                     <a href="listings-single-page.html" className="listing-item-container">
                                         <div className="listing-item">
                                             <img src="images/listing-item-03.jpg" alt />
@@ -91,10 +98,10 @@ function ResultSearckListSecond(props) {
                                             <div className="rating-counter">(17 reviews)</div>
                                         </div>
                                     </a>
-                                </div>
+                                </div> */}
                                 {/* Listing Item / End */}
                                 {/* Listing Item */}
-                                <div className="col-lg-6 col-md-12">
+                                {/* <div className="col-lg-6 col-md-12">
                                     <a href="listings-single-page.html" className="listing-item-container">
                                         <div className="listing-item">
                                             <img src="images/listing-item-04.jpg" alt />
@@ -110,10 +117,10 @@ function ResultSearckListSecond(props) {
                                             <div className="rating-counter">(31 reviews)</div>
                                         </div>
                                     </a>
-                                </div>
+                                </div> */}
                                 {/* Listing Item / End */}
                                 {/* Listing Item */}
-                                <div className="col-lg-6 col-md-12">
+                                {/* <div className="col-lg-6 col-md-12">
                                     <a href="listings-single-page.html" className="listing-item-container">
                                         <div className="listing-item">
                                             <img src="images/listing-item-05.jpg" alt />
@@ -128,10 +135,10 @@ function ResultSearckListSecond(props) {
                                             <div className="rating-counter">(46 reviews)</div>
                                         </div>
                                     </a>
-                                </div>
+                                </div> */}
                                 {/* Listing Item / End */}
                                 {/* Listing Item */}
-                                <div className="col-lg-6 col-md-12">
+                                {/* <div className="col-lg-6 col-md-12">
                                     <a href="listings-single-page.html" className="listing-item-container">
                                         <div className="listing-item">
                                             <img src="images/listing-item-06.jpg" alt />
@@ -147,9 +154,9 @@ function ResultSearckListSecond(props) {
                                             <div className="rating-counter">(31 reviews)</div>
                                         </div>
                                     </a>
-                                </div>
+                                </div> */}
                                 {/* Listing Item / End */}
-                            </div>
+                            {/* </div> */}
                             {/* Pagination */}
                             <div className="clearfix" />
                             <div className="row">

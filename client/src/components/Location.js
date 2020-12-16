@@ -1,5 +1,5 @@
 import React from 'react'
-import MapContainer from './GoogleMap'
+
 export default function Location() {
     return (
         <>
@@ -10,7 +10,6 @@ export default function Location() {
               <a href="#" id="streetView">Street View</a>
             </div>
           </div> 
-          <MapContainer className="cssToMap"/>
         </>
     )
 }

@@ -19,9 +19,9 @@ import ResultSearch from './ResultSearch';
 import Register from './Register.js';
 import ResultOfSearchList from './ResultOfSearchList'
 import { searchByCategory } from '../actions/Busieness';
-import YaelLogIn from './yaelLogIn';
-import MapContainer from './GoogleMap'
-// import YaelLogIn from './YaelLogIn'
+import Contact from './Contact'
+import Add_buisness from "./add_business/add_business";
+
 function App(props) {
   // const [allCategories, setAllCategories] = useState()
   const [currentCategoryId, setCurrentCategoryId] = useState(null);
@@ -35,11 +35,11 @@ function App(props) {
   return (
     <>
 
-      <Router>
+      {/* <Router>
         <Header></Header>
         <Switch>
-          <Route path="/LogIn">
-            <YaelLogIn/>
+          <Route path="/HomePage">
+            <HomePage/>
           </Route>
           <Route path="/ResultOfSearchList">
             <ResultOfSearchList />
@@ -48,14 +48,13 @@ function App(props) {
             <BusinessDetails />
           </Route>
           <Route path="/">
-          <HomePage />
+            <HomePage />
           </Route>
         </Switch>
-      </Router>
-
+      </Router> */}
+<Add_buisness/>
     </>
   );
 }
 
 export default App;
-

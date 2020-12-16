@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/main-color.css';
 import '../css/style.css';
 import Header from './Header';
@@ -6,7 +7,10 @@ import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import Footer from './Footer';
-import { getAllCategories, setSelectedCategoryId, setCategory ,getResultOfSearchByCategory} from '../redux/actions/category.action';
+import {
+    getAllCategories, setSelectedCategoryId, setCategory, getResultofSearchByText
+    , getResultOfSearchByCategory
+} from '../redux/actions/category.action';
 
 // import { getAllCategoriesAction } from '../actions/index'
 function HomePage(props) {
@@ -15,18 +19,16 @@ function HomePage(props) {
     // }));
     const dispatch = useDispatch();
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [selectedText, setSelectedText] = useState("");
+
     //const home = useSelector((state) => state.home)
     // console.log(allCategories);
-    var arr2 = [];
+    var mainCategoriesArr = [];
     // debugger;
-    
-
-    // if (props.category.length > 0) {
-    //     Object.keys(props.category).forEach(key => arr2.push({ name: key, value: props.category[key] }))
-    //     console.log("if", arr2)
-    // }
-
-
+    if (props.category != undefined) {
+        Object.keys(props.category).forEach(key => mainCategoriesArr.push({ name: key, value: props.category[key] }))
+        console.log("if", mainCategoriesArr)
+    }
     // Header hero text
     let textRotate = function (el, toRotate, period) {
         this.toRotate = toRotate;
@@ -66,12 +68,21 @@ function HomePage(props) {
         setSelectedCategory(e);
         debugger
     }
+    function flagSearchByText(e) {
+        setSelectedText(e);
+        console.log(e)
+    }
     function searchClick() {
         {
             debugger
             props.history.push('/ResultOfSearchList')
-            props.setSelectedCategory(selectedCategory)
-            props.getResultOfSearchBYCategory(selectedCategory)
+            if (selectedCategory != "") {
+                props.setSelectedCategory(selectedCategory)
+                props.getResultOfSearchBYCategory(selectedCategory)
+            }
+            if (selectedText != "") {
+                props.getResultosSearchBYText(selectedText)
+            }
 
         }
     }
@@ -83,10 +94,10 @@ function HomePage(props) {
 
         // dispatch(getAllCategoriesAction(2));
         // if (allCategories.length > 0) {
-        //     Object.keys(allCategories).forEach(key => arr2.push({ name: key, value: allCategories[key] }))
+        //     Object.keys(allCategories).forEach(key => mainCategoriesArr.push({ name: key, value: allCategories[key] }))
         //     debugger;
         //     console.log(allCategories);
-        //     console.log(arr2)
+        //     console.log(mainCategoriesArr)
         // }
         // let elements = document.getElementsByClassName('text-rotate');
         // for (let i = 0; i < elements.length; i++) {
@@ -126,6 +137,10 @@ function HomePage(props) {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-12">
+                                    <i class="sl sl-icon-login"></i>
+                                    <i class="bi bi-basket2-fill"></i>
+
+
                                     <h2>
                                         מצא קרוב
         {/* Typed words can be configured in script settings at the bottom of this HTML file */}
@@ -134,7 +149,7 @@ function HomePage(props) {
                                     <h4>את האטרקציות הכי שוות, עסקים ועוד</h4>
                                     <div className="main-search-input">
                                         <div className="main-search-input-item">
-                                            <input type="text" placeholder="מה אתה מחפש?" defaultValue />
+                                            <input type="text" onChange={(e) => flagSearchByText(e.target.value)} placeholder="מה אתה מחפש?" />
                                         </div>
                                         <div className="main-search-input-item location">
                                             <div id="autocomplete-container">
@@ -142,18 +157,18 @@ function HomePage(props) {
                                             </div>
                                             <a href="#"><i className="fa fa-map-marker" /></a>
                                         </div>
-                                        {/* <div className="main-search-input-item">
+                                        <div className="main-search-input-item">
                                             <select onChange={(e) => { setSelectedCatgory(e.target.value) }} data-placeholder="All Categories" className="chosen-select">
-                                                {arr2 ?
-                                                    arr2.map((option, i) => (
+                                                {mainCategoriesArr ?
+                                                    mainCategoriesArr.map((option, i) => (
                                                         <option key={i} >
 
-                                                            {option.value.categoryName}
+                                                            {option.value.mainCategoryName}
                                                         </option>
                                                     ))
                                                     : ""}
                                             </select>
-                                        </div> */}
+                                        </div>
                                         <button className="button"
                                             onClick={searchClick}
                                         >Search</button>
@@ -165,26 +180,36 @@ function HomePage(props) {
                                 <div className="col-md-12">
                                     <h5 className="highlighted-categories-headline">או עיין בקטגוריות מוצגות:</h5>
                                     <div className="highlighted-categories">
-                                        {/* Box */}
+                                        {mainCategoriesArr ?
+                                            mainCategoriesArr.map((option, i) => (
+                                               
+                                                  <a key={i} href="listings-list-with-sidebar.html" className="highlighted-category">
+                                                  <i className={option.value.icons} />
+                                                  <h4>{option.value.mainCategoryName}</h4>
+                                                  
+                                              </a>
+                                            ))
+                                            : ""}
+                                        {/* Box
                                         <a href="listings-list-with-sidebar.html" className="highlighted-category">
                                             <i className="im im-icon-Home" />
                                             <h4>Apartments</h4>
-                                        </a>
+                                        </a> */}
                                         {/* Box */}
-                                        <a href="listings-list-full-width.html" className="highlighted-category">
+                                        {/* <a href="listings-list-full-width.html" className="highlighted-category">
                                             <i className="im im-icon-Hamburger" />
                                             <h4>Eat &amp; Drink</h4>
-                                        </a>
+                                        </a> */}
                                         {/* Box */}
-                                        <a href="listings-half-screen-map-list.html" className="highlighted-category">
+                                        {/* <a href="listings-half-screen-map-list.html" className="highlighted-category">
                                             <i className="im im-icon-Electric-Guitar" />
                                             <h4>Events</h4>
-                                        </a>
+                                        </a> */}
                                         {/* Box */}
-                                        <a href="listings-half-screen-map-list.html" className="highlighted-category">
+                                        {/* <a href="listings-half-screen-map-list.html" className="highlighted-category">
                                             <i className="im im-icon-Dumbbell" />
                                             <h4>Fitness</h4>
-                                        </a>
+                                        </a> */}
                                     </div>
                                 </div>
                             </div>
@@ -594,6 +619,9 @@ export default connect(
             },
             getResultOfSearchBYCategory: function (text) {
                 disatch(getResultOfSearchByCategory(text))
+            },
+            getResultosSearchBYText: function (text) {
+                disatch(getResultofSearchByText(text))
             }
         }
     }

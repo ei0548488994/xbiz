@@ -1,4 +1,7 @@
-import { SET_CATEGORY, SET_SELECTED_CATEGORY_ID ,SET_RESULT_OF_SEARCH_BY_CATEROTY} from '../actions/category.action';
+import {
+    SET_CATEGORY, SET_SELECTED_CATEGORY_ID, SET_RESULT_OF_SEARCH_BY_TEXT
+    , SET_RESULT_OF_SEARCH_BY_CATEROTY
+} from '../actions/category.action';
 
 const initialState = {
     category: {},
@@ -14,6 +17,13 @@ export default function categoryReducer(state = initialState, action) {
             return { ...state, selectedCategoryId: action.payload }
         case SET_RESULT_OF_SEARCH_BY_CATEROTY:
             return { ...state, resultOfSearch: action.payload }
+        case SET_RESULT_OF_SEARCH_BY_TEXT:
+            {
+                debugger
+                console.log("action")
+                console.log(action.payload)
+                return { ...state, resultOfSearch: action.payload }
+            }
         default:
             return state
 

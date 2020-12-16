@@ -3,6 +3,7 @@ import CategoryService from '../../services/category.service';
 export const SET_CATEGORY = "[category] SET_CATEGORY";
 export const SET_SELECTED_CATEGORY_ID="[category] SET_SELECTED_CATEGORY_ID"
 export const SET_RESULT_OF_SEARCH_BY_CATEROTY="[category] SET_RESULT_OF_SEARCH_BY_CATEROTY"
+export const SET_RESULT_OF_SEARCH_BY_TEXT="[category] SET_RESULT_OF_SEARCH_BY_TEXT"
 
 export function setCategory(category) {
     return {
@@ -36,6 +37,24 @@ export function setResultOfSearchByCategory(text) {
 export function getResultOfSearchByCategory(text) {
     return async (dispatch) => {
         const categories = await CategoryService.getResultOfSearchByCategory(text);
+        debugger;
         dispatch(setResultOfSearchByCategory(categories))
     }
 }
+export function setResultOfSearchByText(text) { 
+    debugger;
+    return {
+        type: SET_RESULT_OF_SEARCH_BY_TEXT,
+        payload: text
+    }
+}
+export function getResultofSearchByText(text) {
+    debugger;
+    return async (dispatch) => {
+        debugger
+        const data = await CategoryService.getResultSearchByText(text);
+        console.log(data,"   dataaaaaaaaaaa");
+        dispatch(setResultOfSearchByText(data))
+    }
+}
+
