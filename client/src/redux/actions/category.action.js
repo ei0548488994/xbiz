@@ -11,6 +11,12 @@ export function setCategory(category) {
         payload: category
     }
 }
+export function setPopularCategories(popularcategory) {
+    return {
+        type: SET_POPULAR_CATEGORIES,
+        payload: popularcategory
+    }
+}
 
 export function setSelectedCategoryId(id) {
     return {
@@ -28,6 +34,16 @@ export function getAllCategories() {
         dispatch(setCategory(categories))
     }
 }
+
+export function PopularCategories() {
+    debugger
+    return async (dispatch) => {
+        const popularCategories = await CategoryService.getPopularCategories()
+        debugger
+        dispatch(setPopularCategories(popularCategories))
+    }
+}
+
 export function setResultOfSearchByCategory(text) {
     return {
         type: SET_RESULT_OF_SEARCH_BY_CATEROTY,

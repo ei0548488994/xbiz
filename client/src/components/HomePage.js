@@ -3,13 +3,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/main-color.css';
 import '../css/style.css';
 import Header from './Header';
+import UserLocation from './UserLocation'
+import AutoCompleteSearch from './AutoCompleteSearch'
+
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import Footer from './Footer';
 import {
     getAllCategories, setSelectedCategoryId, setCategory, getResultofSearchByText
-    , getResultOfSearchByCategory
+    , getResultOfSearchByCategory, PopularCategories
 } from '../redux/actions/category.action';
 
 // import { getAllCategoriesAction } from '../actions/index'
@@ -20,7 +23,8 @@ function HomePage(props) {
     const dispatch = useDispatch();
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedText, setSelectedText] = useState("");
-
+    console.log("vhbjnk")
+    console.log(props.popularCategories)
     //const home = useSelector((state) => state.home)
     // console.log(allCategories);
     var mainCategoriesArr = [];
@@ -30,43 +34,50 @@ function HomePage(props) {
         console.log("if", mainCategoriesArr)
     }
     // Header hero text
-    let textRotate = function (el, toRotate, period) {
-        this.toRotate = toRotate;
-        this.el = el;
-        this.loopNum = 0;
-        this.period = parseInt(period, 10) || 2000;
-        this.txt = '';
-        this.tick();
-        this.isDeleting = false;
-    };
-    textRotate.prototype.tick = function () {
-        let i = this.loopNum % this.toRotate.length;
-        let fullTxt = this.toRotate[i];
-        if (this.isDeleting) {
-            this.txt = fullTxt.substring(0, this.txt.length - 1);
-        } else {
-            this.txt = fullTxt.substring(0, this.txt.length + 1);
-        }
-        this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
-        let that = this;
-        let delta = 300 - Math.random() * 100;
-        if (this.isDeleting) { delta /= 2; }
-        if (!this.isDeleting && this.txt === fullTxt) {
-            delta = this.period;
-            this.isDeleting = true;
-        } else if (this.isDeleting && this.txt === '') {
-            this.isDeleting = false;
-            this.loopNum++;
-            delta = 500;
-        }
+    // let textRotate = function (el, toRotate, period) {
+    //     this.toRotate = toRotate;
+    //     this.el = el;
+    //     this.loopNum = 0;
+    //     this.period = parseInt(period, 10) || 2000;
+    //     this.txt = '';
+    //     this.tick();
+    //     this.isDeleting = false;
+    // };
+    // textRotate.prototype.tick = function () {
+    //     let i = this.loopNum % this.toRotate.length;
+    //     let fullTxt = this.toRotate[i];
+    //     if (this.isDeleting) {
+    //         this.txt = fullTxt.substring(0, this.txt.length - 1);
+    //     } else {
+    //         this.txt = fullTxt.substring(0, this.txt.length + 1);
+    //     }
+    //     this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+    //     let that = this;
+    //     let delta = 300 - Math.random() * 100;
+    //     if (this.isDeleting) { delta /= 2; }
+    //     if (!this.isDeleting && this.txt === fullTxt) {
+    //         delta = this.period;
+    //         this.isDeleting = true;
+    //     } else if (this.isDeleting && this.txt === '') {
+    //         this.isDeleting = false;
+    //         this.loopNum++;
+    //         delta = 500;
+    //     }
 
-        setTimeout(function () {
-            that.tick();
-        }, delta);
-    };
+    //     setTimeout(function () {
+    //         that.tick();
+    //     }, delta);
+    // };
     function setSelectedCatgory(e) {
-        setSelectedCategory(e);
+        var SelectedCategoryId;
         debugger
+        mainCategoriesArr.forEach(element => {
+            if (element.value.mainCategoryName == e) {
+                var SelectedCategoryId = element.value._id
+                console.log(SelectedCategoryId)
+                setSelectedCategory(SelectedCategoryId);
+            }
+        });
     }
     function flagSearchByText(e) {
         setSelectedText(e);
@@ -78,6 +89,7 @@ function HomePage(props) {
             props.history.push('/ResultOfSearchList')
             if (selectedCategory != "") {
                 props.setSelectedCategory(selectedCategory)
+                debugger
                 props.getResultOfSearchBYCategory(selectedCategory)
             }
             if (selectedText != "") {
@@ -89,7 +101,7 @@ function HomePage(props) {
     useEffect(() => {
         { props.getAllCategories() }
         console.log("out", props.category)
-
+        props.PopularCategories()
 
 
         // dispatch(getAllCategoriesAction(2));
@@ -153,15 +165,17 @@ function HomePage(props) {
                                         </div>
                                         <div className="main-search-input-item location">
                                             <div id="autocomplete-container">
-                                                <input id="autocomplete-input" type="text" placeholder="Location" />
+                                                {/* <input id="autocomplete-input" type="text" placeholder="Location" /> */}
+                                                <UserLocation />
+                                                <AutoCompleteSearch />
                                             </div>
                                             <a href="#"><i className="fa fa-map-marker" /></a>
                                         </div>
-                                        <div className="main-search-input-item">
-                                            <select onChange={(e) => { setSelectedCatgory(e.target.value) }} data-placeholder="All Categories" className="chosen-select">
+                                        <div className="main-search-input-item" >
+                                            <select data-placeholder="All Categories" className="chosen-select" onClick={(e) => { setSelectedCatgory(e.target.value) }}>
                                                 {mainCategoriesArr ?
                                                     mainCategoriesArr.map((option, i) => (
-                                                        <option key={i} >
+                                                        <option key={i}>
 
                                                             {option.value.mainCategoryName}
                                                         </option>
@@ -182,34 +196,14 @@ function HomePage(props) {
                                     <div className="highlighted-categories">
                                         {mainCategoriesArr ?
                                             mainCategoriesArr.map((option, i) => (
-                                               
-                                                  <a key={i} href="listings-list-with-sidebar.html" className="highlighted-category">
-                                                  <i className={option.value.icons} />
-                                                  <h4>{option.value.mainCategoryName}</h4>
-                                                  
-                                              </a>
-                                            ))
+                                                option.value.icons ?
+                                                    <a key={i} href="listings-list-with-sidebar.html" className="highlighted-category">
+                                                        <i className={option.value.icons} />
+                                                        <h4>{option.value.mainCategoryName}</h4>
+
+                                                    </a>
+                                                    : ""))
                                             : ""}
-                                        {/* Box
-                                        <a href="listings-list-with-sidebar.html" className="highlighted-category">
-                                            <i className="im im-icon-Home" />
-                                            <h4>Apartments</h4>
-                                        </a> */}
-                                        {/* Box */}
-                                        {/* <a href="listings-list-full-width.html" className="highlighted-category">
-                                            <i className="im im-icon-Hamburger" />
-                                            <h4>Eat &amp; Drink</h4>
-                                        </a> */}
-                                        {/* Box */}
-                                        {/* <a href="listings-half-screen-map-list.html" className="highlighted-category">
-                                            <i className="im im-icon-Electric-Guitar" />
-                                            <h4>Events</h4>
-                                        </a> */}
-                                        {/* Box */}
-                                        {/* <a href="listings-half-screen-map-list.html" className="highlighted-category">
-                                            <i className="im im-icon-Dumbbell" />
-                                            <h4>Fitness</h4>
-                                        </a> */}
                                     </div>
                                 </div>
                             </div>
@@ -228,42 +222,51 @@ function HomePage(props) {
                         </div>
                         <div className="col-md-12">
                             <div className="categories-boxes-container margin-top-5 margin-bottom-30">
-                                {/* Box */}
+                                {props.popularCategories ?
+                                    props.popularCategories.map((category, i) => (
+                                        <a key={i} href="listings-list-with-sidebar.html" className="category-small-box">
+                                            <i className={category.value.icons}  />
+                                            <h4>{category.value.mainCategoryName}</h4>
+                                            <span className="category-box-counter">{category.value.countBusiness}</span>
+                                        </a>
+                                    ))
+                                    : ""}
+                                {/* Box
                                 <a href="listings-list-with-sidebar.html" className="category-small-box">
                                     <i className="im im-icon-Hamburger" />
                                     <h4>אוכל &amp; שתיה</h4>
                                     <span className="category-box-counter">12</span>
-                                </a>
+                                </a> */}
                                 {/* Box */}
-                                <a href="listings-list-with-sidebar.html" className="category-small-box">
+                                {/* <a href="listings-list-with-sidebar.html" className="category-small-box">
                                     <i className="im  im-icon-Sleeping" />
                                     <h4>מלונות</h4>
                                     <span className="category-box-counter">32</span>
-                                </a>
+                                </a> */}
                                 {/* Box */}
-                                <a href="listings-list-with-sidebar.html" className="category-small-box">
+                                {/* <a href="listings-list-with-sidebar.html" className="category-small-box">
                                     <i className="im im-icon-Shopping-Bag" />
                                     <h4>חנויות</h4>
                                     <span className="category-box-counter">11</span>
-                                </a>
+                                </a> */}
                                 {/* Box */}
-                                <a href="listings-list-with-sidebar.html" className="category-small-box">
+                                {/* <a href="listings-list-with-sidebar.html" className="category-small-box">
                                     <i className="im im-icon-Cocktail" />
                                     <h4>Nightlife</h4>
                                     <span className="category-box-counter">15</span>
-                                </a>
+                                </a> */}
                                 {/* Box */}
-                                <a href="listings-list-with-sidebar.html" className="category-small-box">
+                                {/* <a href="listings-list-with-sidebar.html" className="category-small-box">
                                     <i className="im im-icon-Electric-Guitar" />
                                     <h4>ארועים</h4>
                                     <span className="category-box-counter">21</span>
-                                </a>
+                                </a> */}
                                 {/* Box */}
-                                <a href="listings-list-with-sidebar.html" className="category-small-box">
+                                {/* <a href="listings-list-with-sidebar.html" className="category-small-box">
                                     <i className="im im-icon-Dumbbell" />
                                     <h4>ספורט</h4>
                                     <span className="category-box-counter">28</span>
-                                </a>
+                                </a> */}
                             </div>
                         </div>
                     </div>
@@ -606,7 +609,8 @@ export default connect(
     (state) => {
         return {
             category: state.category.category,
-            selectedCategoryId: state.category.selectedCategoryId
+            selectedCategoryId: state.category.selectedCategoryId,
+            popularCategories: state.category.popularCategories
         }
     },
     (disatch) => {
@@ -614,10 +618,14 @@ export default connect(
             getAllCategories: function () {
                 disatch(getAllCategories())
             },
+            PopularCategories: function () {
+                disatch(PopularCategories())
+            },
             setSelectedCategory: function (id) {
                 disatch(setSelectedCategoryId(id))
             },
             getResultOfSearchBYCategory: function (text) {
+                debugger
                 disatch(getResultOfSearchByCategory(text))
             },
             getResultosSearchBYText: function (text) {

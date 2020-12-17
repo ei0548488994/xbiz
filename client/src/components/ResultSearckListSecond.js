@@ -1,18 +1,56 @@
-import React,{useEffect} from 'react'
+import React, { useEffect,useState } from 'react'
 import Footer from './Footer'
 import { withRouter } from 'react-router-dom';
 import ItemResultSearchScond from './ItemResultSearchScond'
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory } from '../redux/actions/category.action';
-
-function ResultSearckListSecond(props) {
+import { setSelectedBusinessDetails } from '../redux/actions/business.action'
+const ResultSearckListSecond = (props) => {
+    const [selectedCategory, setSelectedCategory] = useState("");
+    var mainCategoriesArr = [];
+    // debugger;
+    if (props.category != undefined) {
+        Object.keys(props.category).forEach(key => mainCategoriesArr.push({ name: key, value: props.category[key] }))
+        console.log("if", mainCategoriesArr)
+    }
+    var arrResultOfSearch = [];
+    Object.keys(props.resultOfSearch).forEach(key => arrResultOfSearch.push({ name: key, value: props.resultOfSearch[key] }))
     var arr2 = [];
     // debugger;
     if (props.category.length > 0) {
         Object.keys(props.category).forEach(key => arr2.push({ name: key, value: props.category[key] }))
         console.log("if", arr2)
     }
+
+
+    function setSelectedCatgory(e) {
+        var SelectedCategoryId;
+        debugger
+        mainCategoriesArr.forEach(element => {
+            if (element.value.mainCategoryName == e) {
+                var SelectedCategoryId = element.value._id
+                console.log(SelectedCategoryId)
+                setSelectedCategory(SelectedCategoryId);
+            }
+        });
+    }
+    // function searchClick() {
+    //     {
+    //         debugger
+    //         props.history.push('/ResultOfSearchList')
+    //         if (selectedCategory != "") {
+    //             props.setSelectedCategory(selectedCategory)
+    //             debugger
+    //             props.getResultOfSearchBYCategory(selectedCategory)
+    //         }
+            // if (selectedText != "") {
+            //     props.getResultosSearchBYText(selectedText)
+            // }
+
+    //     }
+    // }
+    
     useEffect(() => {
         { props.getAllCategories() }
         console.log("out", props.category)
@@ -66,19 +104,79 @@ function ResultSearckListSecond(props) {
 
 
 
+                            <div className="row">
+                                <div className="col-lg-12 col-md-12" onClick={() => {
+                                    props.history.push('/BusinessDetails')
+                                }}>
+
+                                    {arrResultOfSearch ?
+                                        arrResultOfSearch.map((option, i) => (
+                                            option.value.map((val, i) => (
+                                                <div key={i} className="col-lg-6 col-md-12">
+                                                    <a
+                                                        //  href="listings-single-page.html"
+                                                        className="listing-item-container">
+                                                        <div onClick={() => {
+                                                            props.history.push('/BusinessDetails')
+                                                            props.setBusinessSelectedDetails(val)
+                                                        }} className="listing-item">
+                                                            <img src="images/listing-item-01.jpg" alt />
+                                                            <div className="listing-badge now-open">OPEN NOW</div>
+                                                            <div className="listing-item-content">
+                                                                {/* <span className="tag">Eat &amp; Drink</span> */}
+                                                                <span className="tag">{val.description}</span>
+                                                                <h3>{val.businessName}<i className="verified-icon" /></h3>
+                                                                {val.adress ?
+                                                                    <span>{val.adress.street + " " + val.adress.city + " " + val.adress.state}</span>
+                                                                    : ""}</div>
+                                                            <span className="like-icon" />
+                                                        </div>
+                                                        <div className="star-rating" data-rating="3.5">
+                                                            <div className="rating-counter">(12 reviews)</div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            ))
+                                            // <div key={i} className="col-lg-6 col-md-12">
+                                            //     <a
+                                            //         //  href="listings-single-page.html"
+                                            //         className="listing-item-container">
+                                            //         <div onClick={() => {
+                                            //             props.history.push('/BusinessDetails')
+                                            //             props.setBusinessSelectedDetails(option)
+                                            //         }} className="listing-item">
+                                            //             <img src="images/listing-item-01.jpg" alt />
+                                            //             <div className="listing-badge now-open">OPEN NOW</div>
+                                            //             <div className="listing-item-content">
+                                            //                 {/* <span className="tag">Eat &amp; Drink</span> */}
+                                            //                 <span className="tag">{option.value.description}</span>
+                                            //                 <h3>{option.value.businessName}<i className="verified-icon" /></h3>
+                                            //                 {option.value.adress ?
+                                            //                     <span>{option.value.adress.street + " " + option.value.adress.city + " " + option.value.adress.state}</span>
+                                            //                     : ""}</div>
+                                            //             <span className="like-icon" />
+                                            //         </div>
+                                            //         <div className="star-rating" data-rating="3.5">
+                                            //             <div className="rating-counter">(12 reviews)</div>
+                                            //         </div>
+                                            //     </a>
+                                            // </div>
+                                        ))
+                                        : ""}
+                                </div>
+                            </div>
 
 
 
-                            
                             {/* <div className="row"> */}
-                                {/* Listing Item */}
-                                {/* <ItemResultSearchScond /> */}
-                                {/* Listing Item / End */}
-                                {/* Listing Item */}
-                                {/* <ItemResultSearchScond /> */}
-                                {/* Listing Item / End */}
-                                {/* Listing Item */}
-                                {/* <div className="col-lg-6 col-md-12">
+                            {/* Listing Item */}
+                            {/* <ItemResultSearchScond /> */}
+                            {/* Listing Item / End */}
+                            {/* Listing Item */}
+                            {/* <ItemResultSearchScond /> */}
+                            {/* Listing Item / End */}
+                            {/* Listing Item */}
+                            {/* <div className="col-lg-6 col-md-12">
                                     <a href="listings-single-page.html" className="listing-item-container">
                                         <div className="listing-item">
                                             <img src="images/listing-item-03.jpg" alt />
@@ -99,9 +197,9 @@ function ResultSearckListSecond(props) {
                                         </div>
                                     </a>
                                 </div> */}
-                                {/* Listing Item / End */}
-                                {/* Listing Item */}
-                                {/* <div className="col-lg-6 col-md-12">
+                            {/* Listing Item / End */}
+                            {/* Listing Item */}
+                            {/* <div className="col-lg-6 col-md-12">
                                     <a href="listings-single-page.html" className="listing-item-container">
                                         <div className="listing-item">
                                             <img src="images/listing-item-04.jpg" alt />
@@ -118,9 +216,9 @@ function ResultSearckListSecond(props) {
                                         </div>
                                     </a>
                                 </div> */}
-                                {/* Listing Item / End */}
-                                {/* Listing Item */}
-                                {/* <div className="col-lg-6 col-md-12">
+                            {/* Listing Item / End */}
+                            {/* Listing Item */}
+                            {/* <div className="col-lg-6 col-md-12">
                                     <a href="listings-single-page.html" className="listing-item-container">
                                         <div className="listing-item">
                                             <img src="images/listing-item-05.jpg" alt />
@@ -136,9 +234,9 @@ function ResultSearckListSecond(props) {
                                         </div>
                                     </a>
                                 </div> */}
-                                {/* Listing Item / End */}
-                                {/* Listing Item */}
-                                {/* <div className="col-lg-6 col-md-12">
+                            {/* Listing Item / End */}
+                            {/* Listing Item */}
+                            {/* <div className="col-lg-6 col-md-12">
                                     <a href="listings-single-page.html" className="listing-item-container">
                                         <div className="listing-item">
                                             <img src="images/listing-item-06.jpg" alt />
@@ -155,7 +253,7 @@ function ResultSearckListSecond(props) {
                                         </div>
                                     </a>
                                 </div> */}
-                                {/* Listing Item / End */}
+                            {/* Listing Item / End */}
                             {/* </div> */}
                             {/* Pagination */}
                             <div className="clearfix" />
@@ -187,7 +285,7 @@ function ResultSearckListSecond(props) {
                                     <div className="row with-forms">
                                         {/* Cities */}
                                         <div className="col-md-12">
-                                            <input type="text" placeholder="What are you looking for?" defaultValue />
+                                            <input type="text" placeholder="What are you looking for?" />
                                         </div>
                                     </div>
                                     {/* Row / End */}
@@ -195,6 +293,18 @@ function ResultSearckListSecond(props) {
                                     <div className="row with-forms">
                                         {/* Type */}
                                         <div className="col-md-12">
+                                        
+                                            <select data-placeholder="All Categories" className="chosen-select" onClick={(e) => { setSelectedCatgory(e.target.value) }}>
+                                                {mainCategoriesArr ?
+                                                    mainCategoriesArr.map((option, i) => (
+                                                        <option key={i}>
+
+                                                            {option.value.mainCategoryName}
+                                                        </option>
+                                                    ))
+                                                    : ""}
+                                            </select>
+
                                             {/* <select data-placeholder="All Categories" className="chosen-select">
                                                 <option>All Categories</option>
                                                 <option>Shops</option>
@@ -203,7 +313,7 @@ function ResultSearckListSecond(props) {
                                                 <option>Fitness</option>
                                                 <option>Events</option>
                                             </select> */}
-                                            <select
+                                            {/* <select
                                                 // onChange={(e) => { setSelectedCatgory(e.target.value) }}
                                                 data-placeholder="All Categories" className="chosen-select">
                                                 {arr2 ?
@@ -213,11 +323,12 @@ function ResultSearckListSecond(props) {
                                                         </option>
                                                     ))
                                                     : ""}
-                                            </select>
+                                            </select> */}
                                         </div>
                                     </div>
                                     {/* Row / End */}
                                     {/* Row */}
+
                                     <div className="row with-forms">
                                         {/* Cities */}
                                         <div className="col-md-12">
@@ -282,7 +393,8 @@ export default connect(
     (state) => {
         return {
             category: state.category.category,
-            selectedCategoryId: state.category.selectedCategoryId
+            selectedCategoryId: state.category.selectedCategoryId,
+            resultOfSearch: state.category.resultOfSearch,
         }
     },
     (disatch) => {
@@ -295,7 +407,10 @@ export default connect(
             },
             getResultOfSearchBYCategory: function (text) {
                 disatch(getResultOfSearchByCategory(text))
-            }
+            },
+            setBusinessSelectedDetails: function (business) {
+                disatch(setSelectedBusinessDetails(business))
+            },
         }
     }
 )(withRouter(ResultSearckListSecond))
