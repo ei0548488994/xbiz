@@ -52,6 +52,7 @@ const createBusiness = async (req, res) => {
       .json({ maasage: "cannot save buisness", error: error.message });
   }
 };
+
 //read(can delete)
 const getBuisness = async (req, res) => {
   console.log(req.params.id);
@@ -101,15 +102,23 @@ const updateBuisness = async (req, res) => {
 };
 //searchBuisnessByParentCategory
 const searchBuisnessByParentCategory = async (req, res) => {
-  console.log(req.params.name);
+  console.log(req.params.id);
   try {
-    const categories = await Categories.find({
-      parentCategory: req.params.name,
-    });
-    console.log(categories);
-    res.send(categories);
+    const getMainCategories = await MainCategory.findById(req.params.id);
+    if (getMainCategories == null) {
+      res.send("can't find what you look for");
+    } else {
+      console.log(getMainCategories);
+      const getALL = await MainCategory.findById(req.params.id).populate({
+        path: "categories",
+        populate: {
+          path: "business",
+        },
+      });
+      return res.json({ MainCategories: getALL });
+    }
   } catch (error) {
-    res.status(500).json({ maasage: error.maasage });
+    res.status(500).json({ massage: error.maasage });
   }
 };
 //delete
@@ -248,7 +257,13 @@ const deleteBussinesByUser = async (req, res) => {
 const getBuisnessById = async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);
-    res.json(business);
+    console.log(business)
+    if (business == null) {
+      res.send("This business does'nt exist");
+    }
+    else {
+      res.json(business);
+    }
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
@@ -259,12 +274,11 @@ module.exports = {
   getBuisness,
   updateBuisness,
   deleteBusiness,
+  getBuisnessById,
   searchBuisnessByParentCategory,
   getBuisnessByCategory,
   getBuisnessByText,
   getAllBusinessPerUser,
   createBusinessPerUser,
-  deleteBussinesByUser,
-  getBuisnessById,
-  // getBusinessPerUser
+  deleteBussinesByUser
 };

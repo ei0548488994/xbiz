@@ -10,7 +10,9 @@ const path = require("path");
 // const buisnessRouter=require("./routs/api")
 const router = require("./routs/api");
 var bodyParser = require("body-parser");
-const port = 3003;
+const cors =require("cors");
+app.use(cors())
+const port = 3000;
 var nodemailer = require("nodemailer");
 dotenv.config();
 
@@ -37,10 +39,29 @@ mongoose.connect(
   }
 );
 
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//   if (req.method === "OPTIONS") {
+//       res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+//       return res.status(200).json({});
+//   }
+//   next();
+// });‏‏
+
+
 app.use("/api", router);
 
 app.listen(port, () => {
   console.log("listening");
+});
+
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  next();
 });
 
 // mongoose.connection.on('connected',()=>{

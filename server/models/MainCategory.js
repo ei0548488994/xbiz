@@ -14,6 +14,10 @@ const mainCategorySchema = mongoose.Schema({
   icons: {
     type: String,
   },
+  countBusiness: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("MainCategory", mainCategorySchema);

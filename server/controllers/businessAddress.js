@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
-const BusinessAddress = require("../models/BusinessAddress");
+// const BusinessAddress = require("../models/BusinessAddress");
 
 //create
+
 const createBusinessAddress = async (req, res) => {
   var newBusinessAddress = new BusinessAddress({
     cityName: "jerusalem",

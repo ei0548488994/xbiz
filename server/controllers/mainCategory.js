@@ -36,8 +36,45 @@ const getMainCategory = async (req, res) => {
     res.status(400).json({ massage: error.maasage });
   }
 };
+///return the 3 Popular categories
+const getPopularCategories = async (req, res) => {
+  var categories = await MainCategory.find()
+  var max = 0
+  var popularCategories = []
+  ////בהמשך שיהיה נתונים לשנות את זה ליותר גדול מ2
+  try {
+    while (popularCategories.length != 1) {
+      categories.forEach((element) => {
+        if (element.countBusiness > max) {
+          popularCategories.push(element)
+          if (categories.length) {
+            max = 0
+            categories = categories.filter(e => element)
+          }
+        }
+      })
+      popularCategories.forEach((element) => {
+        console.log(element)
+      })
+      res.json(popularCategories);
+    }
+  } catch (error) {
+     res.status(400).json({ message: err.message });
+  }
+}
+// }‏
+const getAllMainCategories = async (req, res) => {
+  try {
+    const categories = await MainCategory.find()
+    return res.json(categories);
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
+  }
+};
 
 module.exports = {
   createMainCategory,
   getMainCategory,
+  getAllMainCategories,
+  getPopularCategories
 };

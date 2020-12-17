@@ -8,6 +8,10 @@ const businessSchema = mongoose.Schema({
   businessName: {
     type: String,
   },
+  totalClicks:{
+    type:Number,
+    default:0
+  },
   category: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Categories",

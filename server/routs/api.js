@@ -17,7 +17,7 @@ const {
   createBusinessPerUser,
   deleteBussinesByUser,
   updateBussinesByUser,
-  getBuisnessById,
+  getBuisnessById
 } = require("../controllers/business");
 const {
   createCategory,
@@ -41,20 +41,30 @@ const {
 const {
   createMainCategory,
   getMainCategory,
+  getPopularCategories,
+  getAllMainCategories
 } = require("../controllers/mainCategory");
 
+
+const {
+ search 
+} = require('../controllers/search'); 
 // router.get("/", ()=>{
 //     console.log("hello get")
 // });
 // router.route("/remove").delete(function(req, res) {});
-// router.get("/searchBuisnessByParentCategory/:name",searchBuisnessByParentCategory);
+
 
 //mainCategory
 router.post("/createMainCategory", createMainCategory);
 router.get("/getMainCategory/:id", getMainCategory);
+router.get("/getPopularCategories", getPopularCategories);
+router.get("/getAllMainCategories", getAllMainCategories);
+
 
 // buisness
 // router.post("/createBusiness", createBusiness);
+router.get("/searchBuisnessByParentCategory/:id",searchBuisnessByParentCategory);
 router.get("/getBuisnessById/:id", getBuisness);
 router.post("/updateBuisness/:name", updateBuisness);
 router.post("/deleteBusiness/:id", deleteBusiness);
@@ -63,7 +73,7 @@ router.post("/getBuisnessByText", getBuisnessByText);
 router.post("/createBusinessPerUser", createBusinessPerUser);
 router.get("/getAllBusinessPerUser/:id", getAllBusinessPerUser);
 // router.post("/updateBussinesByUser/:id", createBusinessPerUser);
-
+ 
 //user
 router.post("/createUser", createUser);
 router.get("/getUser/:id", getUser);
@@ -81,4 +91,6 @@ router.post("/createCategory", createCategory);
 router.post("/updateCategory/:id", updateCategory);
 router.post("/deleteCategory/:id", deleteCategory);
 
+//search
+router.get('/search',search)
 module.exports = router;
