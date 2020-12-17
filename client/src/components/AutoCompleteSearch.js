@@ -1,14 +1,15 @@
+
 import React, { Component } from 'react';
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
-/*import PlacesAutocomplete, {
+import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
-  } from 'react-places-autocomplete'; */
-export class MapContainer extends Component {
+  } from 'react-places-autocomplete'; 
+export class AutoCompleteSearch extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      /*address: '',*/
+      address: '',
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
@@ -18,22 +19,8 @@ export class MapContainer extends Component {
       } 
     }
   }
-    /*onMarkerClick = (props, marker, e) =>
-      this.setState({
-        selectedPlace: props,
-        activeMarker: marker,
-        showingInfoWindow: true
-      });
-   
-    onMapClicked = (props) => {
-      if (this.state.showingInfoWindow) {
-        this.setState({
-          showingInfoWindow: false,
-          activeMarker: null
-        })
-      }
-    };*/
-    /*handleChange = address => {
+
+    handleChange = address => {
       this.setState({ address });
     };
    
@@ -46,11 +33,11 @@ export class MapContainer extends Component {
           this.setState({mapCenter: latLng})
         })
         .catch(error => console.error('Error', error));
-    };*/
+    };
     render() {
       return (
        <div id="googleMap"> 
-        {/*<PlacesAutocomplete
+        <PlacesAutocomplete
         value={this.state.address}
         onChange={this.handleChange}
         onSelect={this.handleSelect}>
@@ -86,26 +73,13 @@ export class MapContainer extends Component {
             </div>
           </div>
         )}
-        </PlacesAutocomplete>*/} 
-        <Map google={this.props.google}
-        style={{ width: '100%',
-                 height: '8%'}}
-            initialCenter={{
-                lat:this.state.mapCenter.lat,
-                lng:this.state.mapCenter.lng}}
-            cente={{
-                lat:this.state.mapCenter.lat,
-                lng:this.state.mapCenter.lng  }}>
-          <Marker position={{
-                lat:this.state.mapCenter.lat,
-                lng:this.state.mapCenter.lng 
-          }}/>
-        </Map>
+        </PlacesAutocomplete> 
       </div>
       )
     }
 }
 
 export default GoogleApiWrapper({
-    apiKey: (process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
-  })(MapContainer)
+///בשביל שזה יעבוד אני צריכה לקחת את המחרוזת עצמה !!!!!!!!!!!
+    apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
+  })(AutoCompleteSearch)

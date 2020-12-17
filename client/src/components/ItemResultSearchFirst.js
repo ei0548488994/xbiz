@@ -34,4 +34,3 @@ function ItemResultSearchFirst(props) {
     )
 }
 export default withRouter(ItemResultSearchFirst)
-

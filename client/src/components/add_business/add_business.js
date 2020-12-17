@@ -1,16 +1,77 @@
-import React from "react";
+
 import Navigator from "../navigtor/Navigator";
 import "../../css/style.css";
 import "../../css/main-color.css";
-import "./dist/add_buisness.css";
+import React, { useState, useEffect, useRef } from 'react';
+import { withRouter } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
+// import "./dist/add_buisness.css";
+import '../add_business/add_business.css';
+import {
+  getAllCategories,
+} from '../../redux/actions/category.action';
+import { createNewBusiness } from '../../redux/actions/business.action';
+function Add_buisness(props) {
 
-export default function Add_buisness() {
+  //A statement of variables for a new business
+  const [businessName, setBusinessName] = useState("");
+  const [category, setCategory] = useState("");
+  const [keyWords, setKeyWords] = useState("");
+  const [description, setDescription] = useState("");
+  const [adress, setAdress] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [country, setCountry] = useState("");
+  const [website, setWebsite] = useState("");
+  const [elevator, setElevator] = useState("");
+  const [InstantBook, setInstantBook] = useState("");
+  const [FriendlyWorkspace, setFriendlyWorkspace] = useState("");
+  const [WirelessInternet, setWirelessInternet] = useState("");
+  const [freeParkingOnPremises, setFreeParkingOnPremises] = useState("");
+
+  // freeParkingOnStreet: { type: Boolean },
+  // smokingAllowed: { type: Boolean },
+  // events: { type: Boolean },
+  // website: { type: String, maxlength: 35 },
+  // facebook: { type: String, maxlength: 35 },
+  // twitter: { type: String, maxlength: 35 },
+  // googleplus: 
+  //get mainCategory from state to props
+  var mainCategoriesArr = [];
+  if (props.category != undefined) {
+    Object.keys(props.category).forEach(key => mainCategoriesArr.push({ name: key, value: props.category[key] }))
+    console.log("if", mainCategoriesArr)
+  }
+  //
+  function create() {
+    debugger
+    const newBusiness = {
+      user: "",
+      businessName: businessName,
+      categoryList: category,
+      description: description,
+      adress: adress,
+      location: "",
+      email: email,
+      phone: phone,
+    };
+    debugger
+    props.createNewBusiness(newBusiness);
+  }
+  useEffect(() => {
+    { props.getAllCategories() }
+    console.log("out", props.category)
+  }, [])
+
   return (
     <>
       {/* Wrapper */}
       <div className="wrapper d-flex justify-content-between">
         <div className="wrapper_Navigator">
-          <Navigator />
+          {/* <Navigator /> */}
         </div>
         {/* Dashboard */}
         <div className="dashboard">
@@ -21,7 +82,7 @@ export default function Add_buisness() {
             <div id="titlebar">
               <div className="row">
                 <div className="col-md-12 d-flex justify-content-between">
-                          <h2 className="">הוסף עסק</h2>
+                  <h2 className="">הוסף עסק</h2>
                   {/* Breadcrumbs */}
                   <div id="breadcrumbs">
                     <nav className="">
@@ -64,24 +125,25 @@ export default function Add_buisness() {
                         <input
                           className="search-field"
                           type="text"
-                          defaultValue
+                          onChange={(e) => { setBusinessName(e.target.value) }}
                         />
                       </div>
                     </div>
                     {/* Row */}
                     <div className="row with-forms">
                       {/* Status */}
-                      <div className="col-md-6">
+                      <div className="main-search-input-item">
                         <h5>קטגוריה</h5>
-                        <select className="chosen-select-no-single">
-                          <option label="blank">בחר קטגוריה</option>
-                          <option>אוכל ושתיה</option>
-                          <option>חנויות</option>
-                          <option>מלונות</option>
-                          <option>מסעדות</option>
-                          <option>כושר</option>
-                          <option>אירועים</option>
-                        </select>
+                        <div className="checkboxes in-row margin-bottom-20">
+                          {mainCategoriesArr ?
+                            mainCategoriesArr.map((option, i) => (
+                              <div key={i}>
+                                <input id={i} type="checkbox" name="check" />
+                                <label htmlFor={i}> {option.value.mainCategoryName}</label>
+                              </div>
+                            ))
+                            : ""}
+                        </div>
                       </div>
                       {/* Type */}
                       <div className="col-md-6">
@@ -95,6 +157,7 @@ export default function Add_buisness() {
                         <input
                           type="text"
                           placeholder="Keywords should be separated by commas"
+                          onChange={(e) => { setKeyWords(e.target.value) }}
                         />
                       </div>
                     </div>
@@ -115,7 +178,7 @@ export default function Add_buisness() {
                         {/* City */}
                         <div className="col-md-6">
                           <h5>עיר</h5>
-                          <select className="chosen-select-no-single">
+                          <select onChange={(e) => { setCity(e.target.value) }} className="chosen-select-no-single">
                             <option label="blank">בחר עיר</option>
                             <option>בני ברק</option>
                             <option>ירושלים</option>
@@ -132,17 +195,22 @@ export default function Add_buisness() {
                           <input
                             type="text"
                             placeholder="e.g. 964 School Street"
+                            onChange={(e) => { setAdress(e.target.value) }}
                           />
                         </div>
                         {/* City */}
                         <div className="col-md-6">
                           <h5>מדינה</h5>
-                          <input type="text" />
+                          <input type="text"
+                            onChange={(e) => { setCountry(e.target.value) }}
+                          />
                         </div>
                         {/* Zip-Code */}
                         <div className="col-md-6">
                           <h5>מיקוד</h5>
-                          <input type="text" />
+                          <input type="text"
+                            onChange={(e) => { setPostalCode(e.target.value) }}
+                          />
                         </div>
                       </div>
                       {/* Row / End */}
@@ -182,30 +250,33 @@ export default function Add_buisness() {
                         id="summary"
                         spellCheck="true"
                         defaultValue={""}
+                        onChange={(e) => { setDescription(e.target.value) }}
                       />
                     </div>
                     {/* Row */}
+
+                    {/* try */}
                     <div className="row with-forms">
                       {/* Phone */}
                       <div className="col-md-4">
                         <h5>
                           טלפון <span>(אופציונאלי)</span>
                         </h5>
-                        <input type="text" />
+                        <input onChange={(e) => { setPhone(e.target.value) }} type="text" />
                       </div>
                       {/* Website */}
                       <div className="col-md-4">
                         <h5>
                           אתר <span>(אופציונאלי)</span>
                         </h5>
-                        <input type="text" />
+                        <input onChange={(e) => { setWebsite(e.target.value) }} type="text" />
                       </div>
                       {/* Email Address */}
                       <div className="col-md-4">
                         <h5>
                           מייל <span>(אופציונאלי)</span>
                         </h5>
-                        <input type="text" />
+                        <input onChange={(e) => { setEmail(e.target.value) }} type="text" />
                       </div>
                     </div>
                     {/* Row / End */}
@@ -1414,10 +1485,10 @@ export default function Add_buisness() {
                             </tbody>
                           </table>
                           <div className="wrapper-pricing-button d-flex justify-content-end p-3">
-                          <a href="#" className="button add-pricing-list-item">
-הוסף מוצר                          </a>
-                          <a href="#" className="button add-pricing-submenu">
-הוסף קטגוריה                          </a></div>
+                            <a href="#" className="button add-pricing-list-item">
+                              הוסף מוצר                          </a>
+                            <a href="#" className="button add-pricing-submenu">
+                              הוסף קטגוריה                          </a></div>
                         </div>
                       </div>
                     </div>
@@ -1425,10 +1496,14 @@ export default function Add_buisness() {
                   </div>
                   {/* Section / End */}
                   <div className="wrapper-preview-button d-flex justify-content-end pl-4">
-                  <a href="#" className="button preview">
-                    תצוגה מקדימה <i className="fa fa-arrow-circle-right" />
-                  </a></div>
+                    <a href="#" className="button preview">
+                      תצוגה מקדימה <i className="fa fa-arrow-circle-right" />
+                    </a></div>
                 </div>
+                <div className="wrapper-preview-button d-flex justify-content-end pl-4 ">
+                  <button className="button preview" onChange={create}>
+                    יצירת קשר <i className="fa fa-arrow-circle-right" />
+                  </button></div>
               </div>
               {/* Copyrights */}
               <div className="col-md-12">
@@ -1447,3 +1522,33 @@ export default function Add_buisness() {
     </>
   );
 }
+export default connect(
+  (state) => {
+    return {
+      category: state.category.category,
+      // selectedCategoryId: state.category.selectedCategoryId
+    }
+  },
+  (disatch) => {
+
+    return {
+      getAllCategories: function () {
+        disatch(getAllCategories())
+      },
+
+      createNewBusiness: function (business) {
+        disatch(createNewBusiness(business));
+      },
+      // setSelectedCategory: function (id) {
+      //     disatch(setSelectedCategoryId(id))
+      // },
+      // getResultOfSearchBYCategory: function (text) {
+      //     disatch(getResultOfSearchByCategory(text))
+      // },
+      // getResultosSearchBYText: function (text) {
+      //     disatch(getResultofSearchByText(text))
+      // }
+    }
+  }
+  // withRouter
+)((Add_buisness))

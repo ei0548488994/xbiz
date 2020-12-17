@@ -4,20 +4,34 @@ import ItemResultSearchFirst from './ItemResultSearchFirst';
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import Footer from './Footer';
+// import from bootstrap-icons
 import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory } from '../redux/actions/category.action';
-
+import { setSelectedBusinessDetails } from '../redux/actions/business.action'
 const ResoltSearckListFirst = (props) => {
+    const dispatch = useDispatch();
     // const resultOfSearch = useSelector((state) => state.resultOfSearch)
     // console.log(resultOfSearch)
     var arr2 = [];
-    // debugger;
-    if (props.category.length > 0) {
-        Object.keys(props.category).forEach(key => arr2.push({ name: key, value: props.category[key] }))
-        console.log("if", arr2)
-    }
+    var arr3;
+    var arr4;
+    var arrResultOfSearch = [];
+    //  Object.keys(props.category).forEach(key => arr2.push({ name: key, value: props.category[key] }))
+    //  if(arr2!=undefined){
+    //      arr3=arr2[0].value;}
+    // console.log("if", arr2)
+    // debugger
+    // console.log("props resultofsearch", props.resultOfSearch);
+    // console.log("props arr", props.category);
+    // debugger
+    Object.keys(props.resultOfSearch).forEach(key => arrResultOfSearch.push({ name: key, value: props.resultOfSearch[key] }))
+    // if(arrResultOfSearch)
+    // {
+    //     arr4=arrResultOfSearch[0].value;
+    // }
+    console.log("ifarrResult", arrResultOfSearch)
     useEffect(() => {
-        { props.getAllCategories() }
-        console.log("out", props.category)
+        // { props.getAllCategories() }
+        // console.log("out", props.category)
     }, [])
 
     return (
@@ -42,53 +56,62 @@ const ResoltSearckListFirst = (props) => {
                     <div className="col-lg-12 col-md-12" onClick={() => {
                         props.history.push('/BusinessDetails')
                     }}>
-                        <div className="listing-item-container list-layout">
-                            <a
-                                className="listing-item">
-                                <div className="listing-item-image">
-                                    <img src="images/listing-item-01.jpg" alt />
-                                    <span className="tag">אוכל  &amp; שתיה</span>
-                                </div>
-                                <div className="listing-item-content">
-                                    <div className="listing-badge now-open">עכשיו פתוח</div>
-                                    <div className="listing-item-inner">
-                                        <h3>מסעדת טום <i className="verified-icon" /></h3>
-                                        <span>דיזנגוף 8, תל אביב</span>
-                                        <div className="star-rating" data-rating="3.5">
-                                            <div className="rating-counter">(12 תגובות)</div>
-                                        </div>
+
+                        {arrResultOfSearch ?
+                            arrResultOfSearch.map((option, i) => (
+                                option.value.map((val, i) => (
+                                    <div key={i} className="col-lg-6 col-md-12">
+                                        <a
+                                            //  href="listings-single-page.html"
+                                            className="listing-item-container">
+                                            <div onClick={() => {
+                                                props.history.push('/BusinessDetails')
+                                                props.setBusinessSelectedDetails(val)
+                                            }} className="listing-item">
+                                                <img src="images/listing-item-01.jpg" alt />
+                                                <div className="listing-badge now-open">OPEN NOW</div>
+                                                <div className="listing-item-content">
+                                                    {/* <span className="tag">Eat &amp; Drink</span> */}
+                                                    <span className="tag">{val.description}</span>
+                                                    <h3>{val.businessName}<i className="verified-icon" /></h3>
+                                                    {val.adress ?
+                                                        <span>{val.adress.street + " " + val.adress.city + " " + val.adress.state}</span>
+                                                        : ""}</div>
+                                                <span className="like-icon" />
+                                            </div>
+                                            <div className="star-rating" data-rating="3.5">
+                                                <div className="rating-counter">(12 reviews)</div>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <span className="like-icon" />
-                                </div>
-                            </a>
-                        </div>
+                                ))
+                                // <div key={i} className="col-lg-6 col-md-12">
+                                //     <a
+                                //         //  href="listings-single-page.html"
+                                //         className="listing-item-container">
+                                //         <div onClick={() => {
+                                //             props.history.push('/BusinessDetails')
+                                //             props.setBusinessSelectedDetails(option)
+                                //         }} className="listing-item">
+                                //             <img src="images/listing-item-01.jpg" alt />
+                                //             <div className="listing-badge now-open">OPEN NOW</div>
+                                //             <div className="listing-item-content">
+                                //                 {/* <span className="tag">Eat &amp; Drink</span> */}
+                                //                 <span className="tag">{option.value.description}</span>
+                                //                 <h3>{option.value.businessName}<i className="verified-icon" /></h3>
+                                //                 {option.value.adress ?
+                                //                     <span>{option.value.adress.street + " " + option.value.adress.city + " " + option.value.adress.state}</span>
+                                //                     : ""}</div>
+                                //             <span className="like-icon" />
+                                //         </div>
+                                //         <div className="star-rating" data-rating="3.5">
+                                //             <div className="rating-counter">(12 reviews)</div>
+                                //         </div>
+                                //     </a>
+                                // </div>
+                            ))
+                            : ""}
                     </div>
-                    <div className="col-lg-12 col-md-12">
-                        <div className="listing-item-container list-layout">
-                            <a
-                                className="listing-item">
-                                <div className="listing-item-image">
-                                    <img src="images/listing-item-02.jpg" alt />
-                                    <span className="tag">אירועים</span>
-                                </div>
-                                <div className="listing-item-content">
-                                    <div className="listing-item-inner">
-                                        <h3>להקה דביקה</h3>
-                                        <span>החשמונים 5 חיפה</span>
-                                        <div className="star-rating" data-rating={5.0}>
-                                            <div className="rating-counter">(23 תגובות)</div>
-                                        </div>
-                                    </div>
-                                    <span className="like-icon" />
-                                    <div className="listing-item-details">שישי, אוגוסט 10</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <ItemResultSearchFirst />
-                    <ItemResultSearchFirst />
-                    <ItemResultSearchFirst />
-                    <ItemResultSearchFirst />
                 </div>
                 <div className="clearfix" />
                 <div className="row">
@@ -115,22 +138,22 @@ const ResoltSearckListFirst = (props) => {
                                 <input type="text" placeholder="מה אתה מחפש?" defaultValue />
                             </div>
                         </div>
-                         <div className="row with-forms">
+                        {/* <div className="row with-forms">
                             <div className="col-md-12">
-                               <select 
-                            // onChange={(e) => { setSelectedCatgory(e.target.value) }}
-                             data-placeholder="All Categories" className="chosen-select">
-                                {arr2 ?
-                                    arr2.map((option, i) => (
-                                        <option key={i} >
+                                <select
+                                    // onChange={(e) => { setSelectedCatgory(e.target.value) }}
+                                    data-placeholder="All Categories" className="chosen-select">
+                                    {arr2 ?
+                                        arr2.map((option, i) => (
+                                            <option key={i} >
 
-                                            {option.value.categoryName}
-                                        </option>
-                                    ))
-                                    : ""}
-                            </select>
+                                                {option.value.categoryName}
+                                            </option>
+                                        ))
+                                        : ""}
+                                </select>
                             </div>
-                        </div> 
+                        </div> */}
                         {/* <div className="main-search-input-item">
                            
                         </div> */}
@@ -180,12 +203,16 @@ const ResoltSearckListFirst = (props) => {
 export default connect(
     (state) => {
         return {
+            resultOfSearch: state.category.resultOfSearch,
             category: state.category.category,
             selectedCategoryId: state.category.selectedCategoryId
         }
     },
     (disatch) => {
         return {
+            setBusinessSelectedDetails: function (business) {
+                disatch(setSelectedBusinessDetails(business))
+            },
             getAllCategories: function () {
                 disatch(getAllCategories())
             },
