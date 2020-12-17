@@ -112,7 +112,7 @@ const searchBuisnessByParentCategory = async (req, res) => {
       const getALL = await MainCategory.findById(req.params.id).populate({
         path: "categories",
         populate: {
-          path: "business",
+          path: "business"
         },
       });
       return res.json({ MainCategories: getALL });
@@ -162,7 +162,7 @@ const getBuisnessByText = async (req, res) => {
         }).populate({
           path: "category",
           populate: {
-            path: "mainCategories",
+            path: "mainCategories"
           },
         });
         console.log(getAllBuisness);

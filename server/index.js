@@ -10,9 +10,9 @@ const path = require("path");
 // const buisnessRouter=require("./routs/api")
 const router = require("./routs/api");
 var bodyParser = require("body-parser");
-const cors =require("cors");
+const cors = require("cors");
 app.use(cors())
-const port = 3000;
+const port = 3003;
 var nodemailer = require("nodemailer");
 dotenv.config();
 
@@ -39,16 +39,14 @@ mongoose.connect(
   }
 );
 
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-//   if (req.method === "OPTIONS") {
-//       res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-//       return res.status(200).json({});
-//   }
-//   next();
-// });‏‏
-
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  if (req.method === "OPTIONS") {
+      res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+      return res.status(200).json({});
+  }next();
+})
 
 app.use("/api", router);
 
@@ -56,14 +54,7 @@ app.listen(port, () => {
   console.log("listening");
 });
 
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
-
 // mongoose.connection.on('connected',()=>{
 //     console.log('mongoDB connected!')
 // });
+

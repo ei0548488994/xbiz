@@ -35,7 +35,7 @@ function App(props) {
   return (
     <>
 
-      {/* <Router>
+      <Router>
         <Header></Header>
         <Switch>
           <Route path="/HomePage">
@@ -51,8 +51,8 @@ function App(props) {
             <HomePage />
           </Route>
         </Switch>
-      </Router> */}
-<Add_buisness/>
+      </Router>
+{/* <Add_buisness/> */}
     </>
   );
 }

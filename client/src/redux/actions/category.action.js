@@ -4,7 +4,7 @@ export const SET_CATEGORY = "[category] SET_CATEGORY";
 export const SET_SELECTED_CATEGORY_ID="[category] SET_SELECTED_CATEGORY_ID"
 export const SET_RESULT_OF_SEARCH_BY_CATEROTY="[category] SET_RESULT_OF_SEARCH_BY_CATEROTY"
 export const SET_RESULT_OF_SEARCH_BY_TEXT="[category] SET_RESULT_OF_SEARCH_BY_TEXT"
-
+export const SET_POPULAR_CATEGORIES="[category] SET_POPULAR_CATEGORIES"
 export function setCategory(category) {
     return {
         type: SET_CATEGORY,
