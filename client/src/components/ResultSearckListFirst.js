@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom';
 import ItemResultSearchFirst from './ItemResultSearchFirst';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +7,12 @@ import Footer from './Footer';
 // import from bootstrap-icons
 import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory } from '../redux/actions/category.action';
 import { setSelectedBusinessDetails } from '../redux/actions/business.action'
+import GeolocationService from './../services/geolocation.service';
+
+
 const ResoltSearckListFirst = (props) => {
+
+
     const dispatch = useDispatch();
     // const resultOfSearch = useSelector((state) => state.resultOfSearch)
     // console.log(resultOfSearch)
@@ -15,6 +20,8 @@ const ResoltSearckListFirst = (props) => {
     var arr3;
     var arr4;
     var arrResultOfSearch = [];
+
+    const [arrToSortInFunc, setArrToSortFunc] = useState([])
     //  Object.keys(props.category).forEach(key => arr2.push({ name: key, value: props.category[key] }))
     //  if(arr2!=undefined){
     //      arr3=arr2[0].value;}
@@ -29,13 +36,33 @@ const ResoltSearckListFirst = (props) => {
     //     arr4=arrResultOfSearch[0].value;
     // }
     console.log("ifarrResult", arrResultOfSearch)
-    useEffect(() => {
+
+    function setArrSortByDif(sortIndex) {
+        const arrToSortInFunc1 = []
+        for (let i = 0; i < props.resultOfSearch.length; i++) {
+            // debugger
+            arrToSortInFunc1[i] = props.resultOfSearch[sortIndex[i].index]
+        }
+        setArrToSortFunc([...arrToSortInFunc1])
+        debugger;
+        // Object.keys(arrToSortInFunc).forEach(key => arrResultOfSearch.push({ name: key, value: props.resultOfSearch[key] }))
+
+
+    }
+    useEffect(async () => {
+        if (props.latitude && props.longitude && props.resultOfSearch) {
+            const sortIndex = await GeolocationService.beginSort(props.latitude, props.longitude, props.resultOfSearch)
+            console.log('sortIndex', sortIndex);
+            setArrSortByDif(sortIndex)
+        }
         // { props.getAllCategories() }
         // console.log("out", props.category)
     }, [])
 
     return (
         <>
+
+            {/* <button onClick={()=>{setArrSortByDif(0,2,1);}}/> */}
             <div className="col-lg-9 col-md-8 padding-right-30">
                 <div className="row margin-bottom-25">
                     <div className="col-md-6 col-xs-6">
@@ -54,16 +81,22 @@ const ResoltSearckListFirst = (props) => {
                 </div>
                 <div className="row">
                     <div className="col-lg-12 col-md-12" onClick={() => {
-                        props.history.push('/BusinessDetails')
+                        // props.history.push('/BusinessDetails')
                     }}>
+                        {arrToSortInFunc.length > 0 ?
+                            arrToSortInFunc.map((item, index) =>
 
-                        {arrResultOfSearch ?
-                            arrResultOfSearch.map((option, i) => (
+                                <h1>{item.location}</h1>
+                            )
+                            : <li>no</li>
+                        }
+
+                        {/* //////////////////// */}
+                        {/* {arrToSortInFunc ?
+                            arrToSortInFunc.map((option, i) => (
                                 option.value.map((val, i) => (
                                     <div key={i} className="col-lg-6 col-md-12">
-                                        <a
-                                            //  href="listings-single-page.html"
-                                            className="listing-item-container">
+                                        <a  className="listing-item-container">
                                             <div onClick={() => {
                                                 props.history.push('/BusinessDetails')
                                                 props.setBusinessSelectedDetails(val)
@@ -71,12 +104,12 @@ const ResoltSearckListFirst = (props) => {
                                                 <img src="images/listing-item-01.jpg" alt />
                                                 <div className="listing-badge now-open">OPEN NOW</div>
                                                 <div className="listing-item-content">
-                                                    {/* <span className="tag">Eat &amp; Drink</span> */}
-                                                    <span className="tag">{val.description}</span>
-                                                    <h3>{val.businessName}<i className="verified-icon" /></h3>
+                                                    <span className="tag">{val.location}</span> */}
+                                                    {/* <h3>{val.businessName}<i className="verified-icon" /></h3>
                                                     {val.adress ?
                                                         <span>{val.adress.street + " " + val.adress.city + " " + val.adress.state}</span>
-                                                        : ""}</div>
+                                                        : ""} */}
+                                                {/* </div>
                                                 <span className="like-icon" />
                                             </div>
                                             <div className="star-rating" data-rating="3.5">
@@ -85,32 +118,14 @@ const ResoltSearckListFirst = (props) => {
                                         </a>
                                     </div>
                                 ))
-                                // <div key={i} className="col-lg-6 col-md-12">
-                                //     <a
-                                //         //  href="listings-single-page.html"
-                                //         className="listing-item-container">
-                                //         <div onClick={() => {
-                                //             props.history.push('/BusinessDetails')
-                                //             props.setBusinessSelectedDetails(option)
-                                //         }} className="listing-item">
-                                //             <img src="images/listing-item-01.jpg" alt />
-                                //             <div className="listing-badge now-open">OPEN NOW</div>
-                                //             <div className="listing-item-content">
-                                //                 {/* <span className="tag">Eat &amp; Drink</span> */}
-                                //                 <span className="tag">{option.value.description}</span>
-                                //                 <h3>{option.value.businessName}<i className="verified-icon" /></h3>
-                                //                 {option.value.adress ?
-                                //                     <span>{option.value.adress.street + " " + option.value.adress.city + " " + option.value.adress.state}</span>
-                                //                     : ""}</div>
-                                //             <span className="like-icon" />
-                                //         </div>
-                                //         <div className="star-rating" data-rating="3.5">
-                                //             <div className="rating-counter">(12 reviews)</div>
-                                //         </div>
-                                //     </a>
-                                // </div>
+
                             ))
-                            : ""}
+                            : ""} */}
+                        {/* /////////// */}
+
+
+
+                 
                     </div>
                 </div>
                 <div className="clearfix" />
@@ -205,7 +220,9 @@ export default connect(
         return {
             resultOfSearch: state.category.resultOfSearch,
             category: state.category.category,
-            selectedCategoryId: state.category.selectedCategoryId
+            selectedCategoryId: state.category.selectedCategoryId,
+            latitude: state.location.currentUserLocation.latitude,
+            longitude: state.location.currentUserLocation.longitude
         }
     },
     (disatch) => {

@@ -21,7 +21,8 @@ import ResultOfSearchList from './ResultOfSearchList'
 import { searchByCategory } from '../actions/Busieness';
 import Contact from './Contact'
 import Add_buisness from "./add_business/add_business";
-
+import ResoltSearckListFirst from './ResultSearckListFirst'
+import MapContainer from './MapContainer'
 function App(props) {
   // const [allCategories, setAllCategories] = useState()
   const [currentCategoryId, setCurrentCategoryId] = useState(null);
@@ -37,6 +38,7 @@ function App(props) {
 
       <Router>
         <Header></Header>
+        {/* <ResoltSearckListFirst/> */}
         <Switch>
           <Route path="/HomePage">
             <HomePage/>

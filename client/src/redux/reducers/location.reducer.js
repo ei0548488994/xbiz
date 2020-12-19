@@ -3,7 +3,10 @@ import {
 } from '../actions/location.action';
 
 const initialState = {
-    currentUserLocation: {},
+    currentUserLocation: {
+        latitude: 32.0919695,
+        longitude: 34.8240924
+    },
 }
 
 export default function locationReducer(state = initialState, action) {
@@ -12,7 +15,7 @@ export default function locationReducer(state = initialState, action) {
             {
                 debugger
                 console.log(action.payload)
-                return {...state,currentUserLocation:action.payload}
+                return { ...state, currentUserLocation: action.payload }
             }
         default:
             return state

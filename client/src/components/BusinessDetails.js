@@ -31,6 +31,7 @@ const BusinessDetails = (props) => {
             <a href="images/single-listing-03.jpg" data-background-image="images/single-listing-03.jpg" className="item mfp-gallery" title="Title 2" />
             <a href="images/single-listing-04.jpg" data-background-image="images/single-listing-04.jpg" className="item mfp-gallery" title="Title 4" />
           </div>
+          <h1>ghghghg</h1>
           <div className="container">
             <div className="row sticky-wrapper">
               <div className="col-lg-8 col-md-8 padding-right-30">

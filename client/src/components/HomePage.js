@@ -134,7 +134,6 @@ function HomePage(props) {
             }}>
                 press
       </button> */}
-      <h1>jjjj</h1>
             <div id="wrapper">
                 {/* <img className="imgBackGroung" src="category-box-06.jpg" alt="Second slide"/> */}
                 {/* Header Container================================================== */}
@@ -167,7 +166,6 @@ function HomePage(props) {
                                         <div className="main-search-input-item location">
                                             <div id="autocomplete-container">
                                                 {/* <input id="autocomplete-input" type="text" placeholder="Location" /> */}
-                                                <UserLocation />
                                                 <AutoCompleteSearch />
                                             </div>
                                             <a href="#"><i className="fa fa-map-marker" /></a>
