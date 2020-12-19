@@ -5,8 +5,8 @@ import '../css/style.css';
 import Header from './Header';
 import UserLocation from './UserLocation'
 import AutoCompleteSearch from './AutoCompleteSearch'
-
-import { withRouter } from 'react-router-dom';
+import ResultOfSearchListFirst from "./ResultSearckListFirst"
+import { withRouter, Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import Footer from './Footer';
@@ -93,6 +93,7 @@ function HomePage(props) {
                 props.getResultOfSearchBYCategory(selectedCategory)
             }
             if (selectedText != "") {
+                debugger
                 props.getResultosSearchBYText(selectedText)
             }
 
@@ -161,16 +162,18 @@ function HomePage(props) {
                                     <h4>את האטרקציות הכי שוות, עסקים ועוד</h4>
                                     <div className="main-search-input">
                                         <div className="main-search-input-item">
+                                            {/* <AutoCompleteSearch /> */}
                                             <input type="text" onChange={(e) => flagSearchByText(e.target.value)} placeholder="מה אתה מחפש?" />
                                         </div>
                                         <div className="main-search-input-item location">
                                             <div id="autocomplete-container">
                                                 {/* <input id="autocomplete-input" type="text" placeholder="Location" /> */}
+                                                <UserLocation />
                                                 <AutoCompleteSearch />
                                             </div>
                                             <a href="#"><i className="fa fa-map-marker" /></a>
                                         </div>
-                                        <div className="main-search-input-item" >
+                                        {/* <div className="main-search-input-item" >
                                             <select data-placeholder="All Categories" className="chosen-select" onClick={(e) => { setSelectedCatgory(e.target.value) }}>
                                                 {mainCategoriesArr ?
                                                     mainCategoriesArr.map((option, i) => (
@@ -181,7 +184,7 @@ function HomePage(props) {
                                                     ))
                                                     : ""}
                                             </select>
-                                        </div>
+                                        </div> */}
                                         <button className="button"
                                             onClick={searchClick}
                                         >Search</button>
@@ -189,6 +192,7 @@ function HomePage(props) {
                                 </div>
                             </div>
                             {/* Features Categories */}
+                            {/* onClick={(e) => { setSelectedCatgory(option.value.mainCategoryName) },searchClick}  */}
                             <div className="row">
                                 <div className="col-md-12">
                                     <h5 className="highlighted-categories-headline">או עיין בקטגוריות מוצגות:</h5>
@@ -196,16 +200,27 @@ function HomePage(props) {
                                         {mainCategoriesArr ?
                                             mainCategoriesArr.map((option, i) => (
                                                 option.value.icons ?
-                                                    <a key={i} href="listings-list-with-sidebar.html" className="highlighted-category">
+                                                    <Link to="/ResultOfSearchList" key={i}
+                                                        onClick={() => {
+                                                            props.getResultosSearchBYText(option.value.mainCategoryName)
+                                                        }}
+                                                        // href="listings-list-with-sidebar.html" 
+                                                        className="highlighted-category">
                                                         <i className={option.value.icons} />
                                                         <h4>{option.value.mainCategoryName}</h4>
-
-                                                    </a>
+                                                    </Link>
                                                     : ""))
                                             : ""}
                                     </div>
                                 </div>
                             </div>
+                            <Router>
+                                <Switch>
+                                    <Route path="/ResultOfSearchList">
+                                        <ResultOfSearchListFirst />
+                                    </Route>
+                                </Switch>
+                            </Router>
                             {/* Featured Categories - End */}
                         </div>
                     </div>
@@ -223,11 +238,15 @@ function HomePage(props) {
                             <div className="categories-boxes-container margin-top-5 margin-bottom-30">
                                 {props.popularCategories ?
                                     props.popularCategories.map((category, i) => (
-                                        <a key={i} href="listings-list-with-sidebar.html" className="category-small-box">
-                                            <i className={category.value.icons}  />
+                                        <Link key={i} to="/ResultOfSearchList"
+                                            onClick={() => {
+                                                props.getResultosSearchBYText(category.value.mainCategoryName)
+                                            }}
+                                            className="category-small-box">
+                                            <i className={category.value.icons} />
                                             <h4>{category.value.mainCategoryName}</h4>
                                             <span className="category-box-counter">{category.value.countBusiness}</span>
-                                        </a>
+                                        </Link>
                                     ))
                                     : ""}
                                 {/* Box

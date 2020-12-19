@@ -103,16 +103,19 @@ const updateBuisness = async (req, res) => {
 //searchBuisnessByParentCategory
 const searchBuisnessByParentCategory = async (req, res) => {
   console.log(req.params.id);
+  id = req.params.id
+  console.log("mainnnnnnnn")
+  console.log(id);
   try {
-    const getMainCategories = await MainCategory.findById(req.params.id);
+    const getMainCategories = await MainCategory.findById(id);
     if (getMainCategories == null) {
       res.send("can't find what you look for");
     } else {
       console.log(getMainCategories);
-      const getALL = await MainCategory.findById(req.params.id).populate({
+      const getALL = await MainCategory.findById(id).populate({
         path: "categories",
         populate: {
-          path: "business"
+          path: "business",
         },
       });
       return res.json({ MainCategories: getALL });
@@ -149,24 +152,52 @@ const getBuisnessByText = async (req, res) => {
   try {
     //בדיקה אם המשתמש הכניס טקסט
     if (text != null) {
-      //בדיקה אם טקסט קיים בקטגוריות
-      var getCategoryName = await Categories.find({ categoryName: text });
-      if (getCategoryName.length > 0) {
-        var getCategoryName = await Categories.find({
-          categoryName: text,
-        }).populate({ path: "business" });
-        res.json({ categories: getCategoryName });
-      } else {
-        var getAllBuisness = await Business.find({
-          businessName: text,
-        }).populate({
-          path: "category",
+      //בדיקה האם הטקסט  קיים בקטגוריות הראשיות
+      const getMAinCategoryName = await MainCategory.findOne({ mainCategoryName: text });
+      if (getMAinCategoryName != null) {
+        const getMainCategories = await MainCategory.findById(getMAinCategoryName._id);
+        console.log(getMAinCategoryName)
+        // if (getMainCategories != null) 
+        console.log("mainc")
+        const getALL = await MainCategory.findById(getMAinCategoryName._id).populate({
+          path: "categories",
           populate: {
-            path: "mainCategories"
+            path: "business"
           },
         });
-        console.log(getAllBuisness);
-        res.status(200).json({ business: getAllBuisness });
+        var allBusiness = []
+        getALL.categories.forEach((element) => {
+          console.log("1", element)
+          element.business.forEach((item) => {
+            allBusiness.push(item)
+            console.log(item)
+          })
+        });
+        return res.json({ MainCategories: allBusiness });
+      }
+      else {
+        console.log("else")
+        //בדיקה אם טקסט קיים בקטגוריות
+        var getCategoryName = await Categories.find({ categoryName: text });
+        if (getCategoryName.length > 0) {
+          console.log("c")
+          var getCategoryName = await Categories.find({
+            categoryName: text,
+          }).populate({ path: "business" });
+          res.json({ categories: getCategoryName });
+        } else {
+          console.log("hiiiiiiiiiiiiii")
+          var getAllBuisness = await Business.find({
+            businessName: text,
+          }).populate({
+            path: "category",
+            populate: {
+              path: "mainCategories",
+            },
+          });
+          console.log(getAllBuisness);
+          res.status(200).json({ business: getAllBuisness });
+        }
       }
     } else {
       res.json("enter your text");
@@ -268,6 +299,19 @@ const getBuisnessById = async (req, res) => {
     return res.status(500).json({ msg: err.message });
   }
 };
+const addClicksToBusiness = async (req, res) => {
+  console.log("id ")
+  console.log(req.params.id)
+  try {
+    const business = await Business.findById(req.params.id);
+    console.log(business)
+    business.totalClicks = business.totalClicks + 1
+    console.log("business")
+    console.log(business)
+  } catch (error) {
+    return res.status(500).json({ msg: error.message });
+  }
+}
 
 module.exports = {
   // createBusiness,
@@ -280,5 +324,6 @@ module.exports = {
   getBuisnessByText,
   getAllBusinessPerUser,
   createBusinessPerUser,
-  deleteBussinesByUser
+  deleteBussinesByUser,
+  addClicksToBusiness
 };

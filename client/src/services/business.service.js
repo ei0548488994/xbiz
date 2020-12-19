@@ -12,6 +12,15 @@ class BusinnesService {
              console.log(o); });
              debugger
     }
+    addClicksToBusiness(businessId){
+        debugger
+        return axios.get(url +`/addClicksToBusiness/${businessId}`).then(response => {
+            console.log(response)
+            return response.data
+        }).catch(o => {
+             console.log(o); });
+             debugger
+    }
   
 }
 
