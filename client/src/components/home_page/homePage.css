@@ -1,0 +1,35 @@
+
+
+.main-search-container {
+    background: linear-gradient(to right, rgba(51, 51, 51, 0.85), rgba(51, 51, 51, 0.85)) !important;
+    background-color: rgba(51, 51, 51, 0.85);
+  }
+  .main-search-container h2,
+  .main-search-container h5 {
+    color: white;
+  }
+  .main-search-container h4 {
+    color: rgba(255, 255, 255, 0.65);
+  }
+  .main-search-container .main-search-input-item {
+    border: none;
+  }
+  .main-search-container .main-search-input-item #autocomplete-input {
+    padding-right: 60px;
+    border-right: 1px solid #d2cccc;
+    border-radius: unset;
+  }
+  .main-search-container .highlighted-categories i {
+    padding-left: 10px;
+  }
+  
+  #googleMap {
+    padding-right: 60px;
+    border-right: 1px solid #d2cccc;
+    border-radius: unset;
+  }
+  
+  .fa-map-marker {
+    font-size: 20px;
+  }
+  

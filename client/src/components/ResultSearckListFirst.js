@@ -34,13 +34,13 @@ const ResoltSearckListFirst = (props) => {
     console.log("ifarrResult", arrResultOfSearch)
     if (arrResultOfSearch.length > 0 && !arrAfterSort) {
         debugger
-        aa()
+        sortbynerlest()
     }
     // aa();
     useEffect(() => {
 
     }, [])
-    async function aa() {
+    async function sortbynerlest() {
         let myarr = []
         let scoundArr = []
         myarr = await GeolocationService.beginSort(props.lat, props.lon, arrResultOfSearch)

@@ -7,7 +7,6 @@
 //     pass: "jbhdrhbcuho",
 //   },
 // });
-
 // var mailOptions = {
 //   from: "ei0548488994@gmail.com",
 //   to: "chanik3151@gmail.com",

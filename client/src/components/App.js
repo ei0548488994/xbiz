@@ -10,7 +10,7 @@ import {
   Link
 } from "react-router-dom";
 import React from 'react';
-import HomePage from './HomePage.js';
+import HomePage from './home_page/HomePage';
 import { getCategory } from '../actions/Home'
 import Header from './Header'
 import { useSelector, useDispatch } from 'react-redux';
@@ -44,7 +44,8 @@ function App(props) {
             <HomePage />
           </Route>
           <Route path="/ResultOfSearchList">
-            <ResultOfSearchListFirst />
+            {/* <ResultOfSearchListFirst /> */}
+            <ResultOfSearchList/>
           </Route>
           <Route path="/BusinessDetails">
             <BusinessDetails />

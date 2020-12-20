@@ -1938,8 +1938,8 @@ body .typed-cursor.typed-cursor--blink.typed-fade-out{
 	height: 100%;
 	width: 100%;
 	display: block;
-	background: linear-gradient(to right, rgba(255,255,255,0.99) 20%, rgba(255,255,255,0.7) 70%, rgba(255,255,255,0) 95%);
-}
+	/*background: linear-gradient(to right, rgba(255,255,255,0.99) 20%, rgba(255,255,255,0.7) 70%, rgba(255,255,255,0) 95%);
+*/}
 
 .main-search-container h2 {
 	font-size: 42px;
@@ -18143,7 +18143,7 @@ body .category-box-btn:hover {
 	    line-height: 32px;
 	}
 
-	.main-search-container:before { background: rgba(255,255,255,0.92); }
+	/*.main-search-container:before { background: rgba(255,255,255,0.92); }*/
 
 }
 

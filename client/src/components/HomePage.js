@@ -19,7 +19,7 @@ import {
 function HomePage(props) {
     // const { allCategories } = useSelector(state => ({
     //     allCategories: state.allCategories,
-    // }));
+    // }));s
     const dispatch = useDispatch();
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedText, setSelectedText] = useState("");

@@ -43,7 +43,7 @@ const getPopularCategories = async (req, res) => {
   var popularCategories = []
   ////בהמשך שיהיה נתונים לשנות את זה ליותר גדול מ2
   try {
-    while (popularCategories.length != 1) {
+    while (popularCategories.length != 2) {
       categories.forEach((element) => {
         if (element.countBusiness > max) {
           popularCategories.push(element)

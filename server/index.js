@@ -14,7 +14,7 @@ const router = require("./routs/api");
 const mailRouter=require('./routs/mailRoutes');
 var bodyParser = require("body-parser");
 const port = 3003;
-var nodemailer = require("nodemailer");
+//var nodemailer = require("nodemailer");
 dotenv.config();
 
 app.use(cors());

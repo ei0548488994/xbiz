@@ -1,22 +1,15 @@
 // 
 
-
-
-
 class GeolocationService {
-
-
     // Callback function for asynchronous call to HTML5 geolocation
     // UserLocation(position) {
     // console.log("cncdjncdnjc" + position.coords.latitude, position.coords.longitude)
     // NearestCity(position.coords.latitude, position.coords.longitude);
     // }
-
     // Convert Degress to Radians
     Deg2Rad(deg) {
         return deg * Math.PI / 180;
     }
-
     PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
         console.log(lat1, lat2 + "user locationbbb")
         let lat1Temp = this.Deg2Rad(lat1);
@@ -80,10 +73,6 @@ class GeolocationService {
         debugger
         return this.sortAlpha(copyCity);
     }
-
-
-
-
 }
 
 export default new GeolocationService()
