@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import Footer from './Footer';
 // import from bootstrap-icons
-import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory } from '../redux/actions/category.action';
+import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory ,getResultofSearchByText} from '../redux/actions/category.action';
 import { setSelectedBusinessDetails, addClicksToBusiness } from '../redux/actions/business.action'
 import GeolocationService from './../services/geolocation.service'
 const ResoltSearckListFirst = (props) => {
     const dispatch = useDispatch();
     const [arrAfterSort, setArrAfterSort] = useState([]);
+    const [selectedText, setSelectedText] = useState("");
     // const resultOfSearch = useSelector((state) => state.resultOfSearch)
     // console.log(resultOfSearch)
     var arr2 = [];
@@ -37,6 +38,21 @@ const ResoltSearckListFirst = (props) => {
         sortbynerlest()
     }
     // aa();
+    function flagSearchByText(e) {
+        setSelectedText(e);
+        console.log(e)
+    }
+////change
+    function searchClick() {
+        {
+            debugger
+            if (selectedText != "") {
+                debugger
+                props.getResultosSearchBYText(selectedText)
+            }
+
+        }
+    }
     useEffect(() => {
 
     }, [])
@@ -214,7 +230,7 @@ const ResoltSearckListFirst = (props) => {
                                 <label htmlFor="check-h">Events</label>
                             </div>
                         </div>
-                        <button className="button fullwidth margin-top-25">עדכן</button>
+                        <button className="button fullwidth margin-top-25" onClick={searchClick}>עדכן</button>
                     </div>
                 </div>
             </div>
@@ -249,6 +265,9 @@ export default connect(
             },
             getResultOfSearchBYCategory: function (text) {
                 disatch(getResultOfSearchByCategory(text))
+            },
+            getResultosSearchBYText: function (text) {
+                disatch(getResultofSearchByText(text))
             }
         }
     }

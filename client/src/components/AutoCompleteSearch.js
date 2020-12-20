@@ -36,6 +36,17 @@ export class AutoCompleteSearch extends Component {
         })
         .catch(error => console.error('Error', error));
     };
+    componentDidUpdate() {
+      /////////////////שמירת מיקום של user 
+      debugger
+      localStorage.setItem('CurrentUserLocationLat', this.state.mapCenter.lat);
+      localStorage.setItem('CurrentUserLocationLng', this.state.mapCenter.lng);
+      if (localStorage.getItem('CurrentUserLocationLat') != "51.507351" &&
+        localStorage.getItem('CurrentUserLocationLng') != "-0.127758") {
+        localStorage.setItem('changedLocation', "true");
+      }
+  
+    }
     render() {
       return (
        <div id="googleMap"> 

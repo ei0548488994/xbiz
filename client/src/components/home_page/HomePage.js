@@ -6,6 +6,7 @@ import backgroundImage from '../../images/main-search-background-01.jpg'
 import Header from "../Header";
 import UserLocation from "../UserLocation";
 import AutoCompleteSearch from "../AutoCompleteSearch";
+import { setUserLocation } from '../redux/actions/location.action'
 import ResultOfSearchListFirst from "../ResultSearckListFirst";
 import {
   withRouter,
@@ -36,6 +37,8 @@ function HomePage(props) {
   const dispatch = useDispatch();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedText, setSelectedText] = useState("");
+  const [CurrentUserLocation, setCurrentUserLocationLng] = useState({ "lat": 0, "lng": 0 });
+    const [ChangedUserLocation, setChangedUserLocation] = useState(false);
   console.log("vhbjnk");
   console.log(props.popularCategories);
   //const home = useSelector((state) => state.home)
@@ -100,7 +103,15 @@ function HomePage(props) {
   }
   function searchClick() {
     {
-      debugger;
+      if (localStorage.getItem('changedLocation') == "false") {
+        debugger
+        setChangedUserLocation(true)
+        console.log("change")
+        console.log(ChangedUserLocation)
+    }
+    setCurrentUserLocationLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
+    props.setUserLocation(CurrentUserLocation) 
+    debugger;
       props.history.push("/ResultOfSearchList");
       if (selectedCategory != "") {
         props.setSelectedCategory(selectedCategory);
@@ -113,13 +124,19 @@ function HomePage(props) {
       }
     }
   }
+  function userLocation() {
+    debugger
+    setCurrentUserLocationLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
+    props.setUserLocation(CurrentUserLocation)
+}
+
   useEffect(() => {
     {
       props.getAllCategories();
     }
     console.log("out", props.category);
     props.PopularCategories();
-
+    userLocation()
     // dispatch(getAllCategoriesAction(2));
     // if (allCategories.length > 0) {
     //     Object.keys(allCategories).forEach(key => mainCategoriesArr.push({ name: key, value: allCategories[key] }))
@@ -140,7 +157,7 @@ function HomePage(props) {
     // css.type = "text/css";
     // css.innerHTML = ".text-rotate > .wrap { border-right: 0.08em solid #666 }";
     // document.body.appendChild(css);
-  }, []);
+  }, [ChangedUserLocation]);
 
   return (
     <div>
@@ -205,6 +222,7 @@ function HomePage(props) {
                       <div id="autocomplete-container">
                         {/* <input id="autocomplete-input" type="text" placeholder="Location" /> */}
                         {/* <UserLocation /> */}
+                        {ChangedUserLocation? <UserLocation />:"" }
                         <AutoCompleteSearch />
                       </div>
                       
@@ -753,6 +771,10 @@ export default connect(
       getResultosSearchBYText: function (text) {
         disatch(getResultofSearchByText(text));
       },
+      setUserLocation: function (CurrentUserLocation) {
+          debugger
+          disatch(setUserLocation(CurrentUserLocation))
+      }
     };
   }
 )(withRouter(HomePage));
