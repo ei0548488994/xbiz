@@ -50,6 +50,9 @@ function App(props) {
           <Route path="/BusinessDetails">
             <BusinessDetails />
           </Route>
+           <Route path="/Contact">
+            <ContactPage/>
+          </Route>
           <Route path="/">
             <HomePage />
           </Route>

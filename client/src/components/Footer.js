@@ -1,7 +1,16 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {EmailShareButton} from "react-share";
-export default function Footer() {
+import { EmailShareButton } from "react-share";
+import ContactPage from './ContactPage'
+import { connect } from 'react-redux';
+import { withRouter, Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+function Footer(props) {
+    function contact() {
+        debugger;
+        localStorage.setItem('lat', 32.0920019);
+        localStorage.setItem('lng', 34.8262947);
+        props.history.push('/Contact')
+    }
     return (
         <>
             <div id="footer" className="sticky-footer">
@@ -15,7 +24,7 @@ export default function Footer() {
                         <div className="col-md-4 col-sm-6 ">
                             <h4>לינקים שימושיים</h4>
                             <ul className="footer-links">
-                                
+
                                 <li><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
                                 </svg><a href="#">הרשמה</a></li>
@@ -37,9 +46,9 @@ export default function Footer() {
                                 <li><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
                                 </svg><a href="#">איך זה עובד</a></li>
-                                <li><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <li onClick={contact}><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-                                </svg><a href="#">צור קשר</a></li>
+                                </svg>צור קשר</li>
                             </ul>
                             <div className="clearfix" />
                         </div>
@@ -48,13 +57,7 @@ export default function Footer() {
                             <div className="text-widget">
                                 <span>בר כוכבא 4 קומה 6</span> <br />
                                 טלפון: <span>(123) 123-456 </span><br />
-                                אמייל:<span>
-                                <EmailShareButton subject="פניה לפלייסס"
-                                                  body="מה אתה רוצה לומר לנו?:)"
-                                                  url="office@example.com">
-                                     <a href="#">office@example.com</a>
-                                </EmailShareButton>
-                                     </span><br />
+                                אמייל:<span> <a href="#">office@example.com</a> </span><br />
                             </div>
                             <ul className="social-icons margin-top-20">
                                 <li><a className="facebook" href="#"><i className="icon-facebook" /></a></li>
@@ -75,3 +78,16 @@ export default function Footer() {
         </>
     )
 }
+export default connect(
+    (state) => {
+        return {
+
+        }
+    },
+    (disatch) => {
+        return {
+
+        }
+    }
+)(withRouter(Footer))
+

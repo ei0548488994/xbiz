@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import "../css/style.css";
 import "../css/main-color.css";
+import MapContainer from './MapContainer'
 import "../fonts/fontawesome-webfont.eot";
 import {
   sendMailTOContact,
@@ -498,6 +499,7 @@ function ContactPage(props) {
         {/* Content
 ================================================== */}
         {/* Map Container */}
+        <MapContainer/>
         <div className="contact-map margin-bottom-60">
           {/* Google Maps */}
           <div id="singleListingMap-container">
@@ -519,11 +521,11 @@ function ContactPage(props) {
               data-background-image="images/our-office.jpg"
             >
               <div className="office-address">
-                <h3>Our Office</h3>
+                <h3>המשרד שלנו</h3>
                 <ul>
-                  <li>John Street 304</li>
-                  <li>New York</li>
-                  <li>Phone (123) 123-456 </li>
+                  <li>רחוב בר ככובא 4</li>
+                  <li>בני ברק</li>
+                  <li>טלפון (123) 123-456 </li>
                 </ul>
               </div>
             </div>
@@ -537,14 +539,14 @@ function ContactPage(props) {
           <div className="row">
             {/* Contact Details */}
             <div className="col-md-4">
-              <h4 className="headline margin-bottom-30">Find Us There</h4>
+              <h4 className="headline margin-bottom-30">מצא אותנו:</h4>
               {/* Contact Details */}
               <div className="sidebar-textbox">
-                <p>
+                {/* <p>
                   Collaboratively administrate channels whereas virtual.
                   Objectively seize scalable metrics whereas proactive
                   e-services.
-                </p>
+                </p> */}
                 <ul className="contact-details">
                   <li>
                     <i className="im im-icon-Phone-2" /> <strong>טלפון:</strong>{" "}
