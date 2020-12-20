@@ -7,7 +7,7 @@ import '../css/style.css'
 import '../css/main-color.css'
 import LogIn from './LogIn';
 import { Button, Modal } from 'react-bootstrap';
-import HomePage from "./HomePage";
+import HomePage from "./home_page/HomePage";
 import MyModal from "./MyModal";
 import { connect } from 'react-redux';
 import { getAllCategories } from '../redux/actions/category.action';

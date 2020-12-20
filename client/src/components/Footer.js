@@ -1,10 +1,10 @@
 import React from 'react'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {EmailShareButton} from "react-share";
 export default function Footer() {
     return (
         <>
             <div id="footer" className="sticky-footer">
-                {/* Main */}
                 <div className="container">
                     <div className="row">
                         <div className="col-md-5 col-sm-6">
@@ -48,7 +48,13 @@ export default function Footer() {
                             <div className="text-widget">
                                 <span>בר כוכבא 4 קומה 6</span> <br />
                                 טלפון: <span>(123) 123-456 </span><br />
-                                אמייל:<span> <a href="#">office@example.com</a> </span><br />
+                                אמייל:<span>
+                                <EmailShareButton subject="פניה לפלייסס"
+                                                  body="מה אתה רוצה לומר לנו?:)"
+                                                  url="office@example.com">
+                                     <a href="#">office@example.com</a>
+                                </EmailShareButton>
+                                     </span><br />
                             </div>
                             <ul className="social-icons margin-top-20">
                                 <li><a className="facebook" href="#"><i className="icon-facebook" /></a></li>
@@ -61,7 +67,7 @@ export default function Footer() {
                     {/* Copyright */}
                     <div className="row">
                         <div className="col-md-12">
-                            <div className="copyrights">© 2019 Listeo. All Rights Reserved.</div>
+                            <div className="copyrights">© 2020 Places. כל הזכויות שמורות.</div>
                         </div>
                     </div>
                 </div>
