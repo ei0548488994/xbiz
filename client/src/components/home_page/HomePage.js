@@ -189,7 +189,7 @@ function HomePage(props) {
                   </h2>
                   <h4>את האטרקציות הכי שוות, עסקים ועוד</h4>
                   <div className="main-search-input">
-                    <div className="main-search-input-item">
+                    <div className="main-search-input-item text">
                       {/* <AutoCompleteSearch /> */}
                       <input
                         type="text"
@@ -198,15 +198,16 @@ function HomePage(props) {
                         className="col-6"
                       />
                     </div>
-                    <div className="main-search-input-item location">
+                    <div className="main-search-input-item location d-flex align-content-center">
+                        <a href="#">
+                        <i className="fa fa-map-marker"  />
+                      </a>
                       <div id="autocomplete-container">
                         {/* <input id="autocomplete-input" type="text" placeholder="Location" /> */}
                         {/* <UserLocation /> */}
                         <AutoCompleteSearch />
                       </div>
-                      <a href="#">
-                        <i className="fa fa-map-marker" />
-                      </a>
+                      
                     </div>
                     {/* <div className="main-search-input-item" >
                                             <select data-placeholder="All Categories" className="chosen-select" onClick={(e) => { setSelectedCatgory(e.target.value) }}>
