@@ -16,7 +16,7 @@ function Add_buisness(props) {
 
   //A statement of variables for a new business
   const [businessName, setBusinessName] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState([]);
   const [keyWords, setKeyWords] = useState("");
   const [description, setDescription] = useState("");
   const [adress, setAdress] = useState("");
@@ -31,7 +31,9 @@ function Add_buisness(props) {
   const [FriendlyWorkspace, setFriendlyWorkspace] = useState("");
   const [WirelessInternet, setWirelessInternet] = useState("");
   const [freeParkingOnPremises, setFreeParkingOnPremises] = useState("");
-
+  //category check box
+  const [isSelected, setIsSelected] = useState();
+  var selected = false;
   // freeParkingOnStreet: { type: Boolean },
   // smokingAllowed: { type: Boolean },
   // events: { type: Boolean },
@@ -45,7 +47,41 @@ function Add_buisness(props) {
     Object.keys(props.category).forEach(key => mainCategoriesArr.push({ name: key, value: props.category[key] }))
     console.log("if", mainCategoriesArr)
   }
-  //
+  //functions:
+
+  //this function push and slice 
+  //the categories of the new business 
+  //according to the business owner's settings
+  function setOfCategory(categoryName) {
+    debugger
+    var arrCategory = category;
+    if (arrCategory.length == 0) {
+      selected = true;
+      //לבדוק למה UNDIFINE
+      setIsSelected(selected);
+    }
+    else {
+      arrCategory.map((item, i) => (
+        <div key={i} >
+          {item}
+          {item == categoryName ? selected == false : selected == true}
+        </div>
+
+      ))
+      console.log(selected);
+
+      setIsSelected(selected);
+    }
+    if (selected == true) {
+      arrCategory.push(categoryName);
+      setCategory(u => arrCategory);
+    }
+    else {
+      var index = arrCategory.indexOf(categoryName);
+      arrCategory.slice(index,1);
+      setCategory(u => arrCategory);
+    }
+  }
   function create() {
     debugger
     const newBusiness = {
@@ -137,9 +173,11 @@ function Add_buisness(props) {
                         <div className="checkboxes in-row margin-bottom-20">
                           {mainCategoriesArr ?
                             mainCategoriesArr.map((option, i) => (
-                              <div key={i}>
-                                <input id={i} type="checkbox" name="check" />
-                                <label htmlFor={i}> {option.value.mainCategoryName}</label>
+                              <div key={i} >
+                                <input id={i} type="checkbox"
+                                  onChange={() => { setOfCategory(option.value.mainCategoryName) }}
+                                  name="check" />
+                                <label htmlFor={i}>{option.value.mainCategoryName}</label>
                               </div>
                             ))
                             : ""}

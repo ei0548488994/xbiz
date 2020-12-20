@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
 import "../css/style.css";
 import "../css/main-color.css";
 import "../fonts/fontawesome-webfont.eot";
+import {
+  sendMailTOContact,
+} from '../redux/actions/business.action';
+function ContactPage(props) {
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [subject, setSubject] = useState();
+  const [massage, setMassage] = useState();
+  var t=false;
+  function send() {
+    if (name == undefined || email == undefined || subject == undefined || massage == undefined) {
+      console.error("עליך להזין שדות חובה");
+    }
+    else {
+      const contact = {
+        name: name,
+        email: email,
+        subject: subject,
+        massage: massage,
+      };
+      props.sentMailToContact(contact);
+       t=true;
+    }
+  }
 
-export default function ContactPage() {
   return (
     <div>
       {/* Wrapper */}
@@ -350,7 +374,7 @@ export default function ContactPage() {
                       id="tab1"
                       style={{ display: "none" }}
                     >
-                      <form method="post" className="login">
+                      <form className="login">
                         <p className="form-row form-row-wide">
                           <label htmlFor="username">
                             שם משתמש:
@@ -403,7 +427,7 @@ export default function ContactPage() {
                       id="tab2"
                       style={{ display: "none" }}
                     >
-                      <form method="post" className="register">
+                      <form className="register">
                         <p className="form-row form-row-wide">
                           <label htmlFor="username2">
                             Username:
@@ -413,7 +437,6 @@ export default function ContactPage() {
                               className="input-text"
                               name="username"
                               id="username2"
-                              defaultValue
                             />
                           </label>
                         </p>
@@ -426,7 +449,7 @@ export default function ContactPage() {
                               className="input-text"
                               name="email"
                               id="email2"
-                              defaultValue
+
                             />
                           </label>
                         </p>
@@ -524,22 +547,22 @@ export default function ContactPage() {
                 </p>
                 <ul className="contact-details">
                   <li>
-                    <i className="im im-icon-Phone-2" /> <strong>Phone:</strong>{" "}
+                    <i className="im im-icon-Phone-2" /> <strong>טלפון:</strong>{" "}
                     <span>(123) 123-456 </span>
                   </li>
                   <li>
-                    <i className="im im-icon-Fax" /> <strong>Fax:</strong>{" "}
+                    <i className="im im-icon-Fax" /> <strong>פקס:</strong>{" "}
                     <span>(123) 123-456 </span>
                   </li>
                   <li>
-                    <i className="im im-icon-Globe" /> <strong>Web:</strong>{" "}
+                    <i className="im im-icon-Globe" /> <strong>אתר:</strong>{" "}
                     <span>
                       <a href="#">www.example.com</a>
                     </span>
                   </li>
                   <li>
                     <i className="im im-icon-Envelope" />{" "}
-                    <strong>E-Mail:</strong>{" "}
+                    <strong>אימייל:</strong>{" "}
                     <span>
                       <a href="#">office@example.com</a>
                     </span>
@@ -550,14 +573,15 @@ export default function ContactPage() {
             {/* Contact Form */}
             <div className="col-md-8">
               <section id="contact">
-                <h4 className="headline margin-bottom-35">Contact Form</h4>
+                <h4 className="headline margin-bottom-35">צור קשר</h4>
                 <div id="contact-message" />
                 <form
-                  method="post"
-                  action="contact.php"
-                  name="contactform"
-                  id="contactform"
-                  autoComplete="on"
+                // method="post"
+                // action="contact.php"
+                // name="contactform"
+                // id="contactform"חה
+
+                // autoComplete="on"
                 >
                   <div className="row">
                     <div className="col-md-6">
@@ -566,8 +590,9 @@ export default function ContactPage() {
                           name="name"
                           type="text"
                           id="name"
-                          placeholder="Your Name"
+                          placeholder="שם"
                           required="required"
+                          onChange={(e) => setName(e.target.value)}
                         />
                       </div>
                     </div>
@@ -577,7 +602,8 @@ export default function ContactPage() {
                           name="email"
                           type="email"
                           id="email"
-                          placeholder="Email Address"
+                          placeholder="כתובת אימייל"
+                          onChange={(e) => setEmail(e.target.value)}
                           pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$"
                           required="required"
                         />
@@ -589,8 +615,9 @@ export default function ContactPage() {
                       name="subject"
                       type="text"
                       id="subject"
-                      placeholder="Subject"
+                      placeholder="נושא"
                       required="required"
+                      onChange={(e) => setSubject(e.target.value)}
                     />
                   </div>
                   <div>
@@ -599,10 +626,11 @@ export default function ContactPage() {
                       cols={40}
                       rows={3}
                       id="comments"
-                      placeholder="Message"
+                      placeholder="הודעה"
                       spellCheck="true"
                       required="required"
                       defaultValue={""}
+                      onChange={(e) => setMassage(e.target.value)}
                     />
                   </div>
                   <input
@@ -610,8 +638,11 @@ export default function ContactPage() {
                     className="submit button"
                     id="submit"
                     defaultValue="Submit Message"
-                  />
+                    onClick={send}
+                  /> 
+                  <p>{t==true?"נשלח בהצלחה":""}</p>
                 </form>
+               
               </section>
             </div>
             {/* Contact Form / End */}
@@ -797,3 +828,19 @@ export default function ContactPage() {
     </div>
   );
 }
+export default connect(
+  (state) => {
+    return {
+
+    }
+  },
+  (disatch) => {
+
+    return {
+      sentMailToContact: function (contact) {
+        disatch(sendMailTOContact(contact))
+      },
+    }
+  }
+  // withRouter
+)((ContactPage))

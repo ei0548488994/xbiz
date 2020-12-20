@@ -1,7 +1,7 @@
 // import BusinessDetails from './BusinessDetails.js/index.js.js';
 import LogIn from './LogIn'
 import { Button } from 'react-bootstrap';
-
+ import ContactPage from "./ContactPage"
 import BusinessDetails from './BusinessDetails'
 import {
   BrowserRouter as Router,
@@ -53,6 +53,7 @@ function App(props) {
         </Switch>
       </Router>
       {/* <Add_buisness/> */}
+      {/*<ContactPage/> */}
     </>
   );
 }
