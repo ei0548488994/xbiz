@@ -22,6 +22,7 @@ import { searchByCategory } from '../actions/Busieness';
 import Contact from './Contact'
 import Add_buisness from "./add_business/add_business";
 import ResultOfSearchListFirst from "./ResultSearckListFirst"
+import GoogleMap from './GoogleMap';
 function App(props) {
   // const [allCategories, setAllCategories] = useState()
   const [currentCategoryId, setCurrentCategoryId] = useState(null);
@@ -37,6 +38,7 @@ function App(props) {
 
       <Router>
         <Header></Header>
+        {/* <GoogleMap/> */}
         <Switch>
           <Route path="/HomePage">
             <HomePage />

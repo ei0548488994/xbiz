@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom';
 import ItemResultSearchFirst from './ItemResultSearchFirst';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,9 +6,11 @@ import { connect } from 'react-redux';
 import Footer from './Footer';
 // import from bootstrap-icons
 import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory } from '../redux/actions/category.action';
-import { setSelectedBusinessDetails,addClicksToBusiness } from '../redux/actions/business.action'
+import { setSelectedBusinessDetails, addClicksToBusiness } from '../redux/actions/business.action'
+import GeolocationService from './../services/geolocation.service'
 const ResoltSearckListFirst = (props) => {
     const dispatch = useDispatch();
+    const [arrAfterSort, setArrAfterSort] = useState([]);
     // const resultOfSearch = useSelector((state) => state.resultOfSearch)
     // console.log(resultOfSearch)
     var arr2 = [];
@@ -23,17 +25,34 @@ const ResoltSearckListFirst = (props) => {
     // console.log("props resultofsearch", props.resultOfSearch);
     // console.log("props arr", props.category);
     // debugger
-    Object.keys(props.resultOfSearch).forEach(key => arrResultOfSearch.push({ name: key, value: props.resultOfSearch[key] }))
     // if(arrResultOfSearch)
     // {
     //     arr4=arrResultOfSearch[0].value;
     // }
+    debugger;
+    Object.keys(props.resultOfSearch).forEach(key => arrResultOfSearch.push({ name: key, value: props.resultOfSearch[key] }))
     console.log("ifarrResult", arrResultOfSearch)
+    if (arrResultOfSearch.length > 0 && !arrAfterSort) {
+        debugger
+        aa()
+    }
+    // aa();
     useEffect(() => {
-        // { props.getAllCategories() }
-        // console.log("out", props.category)
-    }, [])
 
+    }, [])
+    async function aa() {
+        let myarr = []
+        let scoundArr = []
+        myarr = await GeolocationService.beginSort(props.lat, props.lon, arrResultOfSearch)
+        console.log(myarr, "uyuyuyuyyyyyyyyyyyyyyyyyy")
+        for (let i = 0; i < myarr.length; i++) {
+            scoundArr[myarr[i].index] = props.resultOfSearch["MainCategories"][i]
+        }
+        setArrAfterSort([...scoundArr]);
+        arrResultOfSearch = arrAfterSort
+        debugger
+        console.log(arrAfterSort, "fgfgfgfgfgfgfgfgfgfgfg")
+    }
     return (
         <>
             <div className="col-lg-9 col-md-8 padding-right-30">
@@ -53,7 +72,7 @@ const ResoltSearckListFirst = (props) => {
                     </div>
                 </div>
                 <div className="row">
-                  
+
                     <div className="col-lg-12 col-md-12" onClick={() => {
                         props.history.push('/BusinessDetails')
                     }}>
@@ -62,9 +81,8 @@ const ResoltSearckListFirst = (props) => {
                             arrResultOfSearch.map((option, i) => (
                                 option.value.map((val, i) => (
                                     <div key={i} className="col-lg-6 col-md-12">
-                                         
+
                                         <a
-//  href="listings-single-page.html"
                                             className="listing-item-container">
                                             <div onClick={() => {
                                                 props.addClicks(val._id)
@@ -114,6 +132,7 @@ const ResoltSearckListFirst = (props) => {
                                 // </div>
                             ))
                             : ""}
+                        {arrAfterSort.length > 0 ? <h1>yes</h1> : <h1>no</h1>}
                     </div>
                 </div>
                 <div className="clearfix" />
@@ -208,12 +227,14 @@ export default connect(
         return {
             resultOfSearch: state.category.resultOfSearch,
             category: state.category.category,
-            selectedCategoryId: state.category.selectedCategoryId
+            selectedCategoryId: state.category.selectedCategoryId,
+            lat: state.location.currentUserLocation.latitude,
+            lon: state.location.currentUserLocation.longitude
         }
     },
     (disatch) => {
         return {
-            addClicks:function(businessId){
+            addClicks: function (businessId) {
                 debugger
                 disatch(addClicksToBusiness(businessId))
             },

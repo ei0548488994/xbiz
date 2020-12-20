@@ -70,7 +70,6 @@ function HomePage(props) {
     // };
     function setSelectedCatgory(e) {
         var SelectedCategoryId;
-        debugger
         mainCategoriesArr.forEach(element => {
             if (element.value.mainCategoryName == e) {
                 var SelectedCategoryId = element.value._id

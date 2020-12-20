@@ -53,7 +53,6 @@ function Add_buisness(props) {
   //the categories of the new business 
   //according to the business owner's settings
   function setOfCategory(categoryName) {
-    debugger
     var arrCategory = category;
     if (arrCategory.length == 0) {
       selected = true;

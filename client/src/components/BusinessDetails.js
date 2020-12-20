@@ -12,9 +12,16 @@ import Booking from "./Booking";
 import { connect } from 'react-redux';
 import Contact from './Contact';
 import { withRouter } from 'react-router-dom';
+import MapContainer from './MapContainer'
+
 // import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory } from '../redux/actions/category.action';
 const BusinessDetails = (props) => {
+  debugger
   console.log(props.CheckedBusinessDetails)
+  debugger;
+  localStorage.setItem('lat', props.CheckedBusinessDetails["location"]["lat"]);
+  localStorage.setItem('lng', props.CheckedBusinessDetails["location"]["lng"]);
+
   return (
     <>
       <div>
@@ -106,7 +113,15 @@ const BusinessDetails = (props) => {
                 <Pricing />
                 {/* Food Menu / End */}
                 {/* Location */}
-                <Location />
+                {/* <Location /> */}
+                <div id="listing-location" className="listing-section">
+                  <h3 className="listing-desc-headline margin-top-60 margin-bottom-30">Location</h3>
+                  <div id="singleListingMap-container">
+                    <div id="singleListingMap" />
+                    <a href="#" id="streetView">Street View</a>
+                  </div>
+                </div>
+                <MapContainer />
                 {/* Reviews */}
                 <div id="listing-reviews" className="listing-section">
                   <h3 className="listing-desc-headline margin-top-75 margin-bottom-20">תגובות <span>(12)</span></h3>
