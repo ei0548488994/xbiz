@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../css/style.css'
 import '../css/main-color.css'
-import Header from "./header/Header";
+import Header from "./Header";
 import Location from './Location'
 import Pricing from "./Pricing";
 import Footer from "./Footer";
