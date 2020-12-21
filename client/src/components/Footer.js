@@ -4,6 +4,7 @@ import { EmailShareButton } from "react-share";
 import ContactPage from './ContactPage'
 import { connect } from 'react-redux';
 import { withRouter, Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import logo from '../images/logo.png';
 function Footer(props) {
     function contact() {
         debugger;
@@ -17,7 +18,7 @@ function Footer(props) {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-5 col-sm-6">
-                            <img className="footer-logo" src="Your-Logo-here.png" alt />
+                            <img className="footer-logo" src={logo} alt />
                             <br /><br />
                             <p>אני יברר מה אני צריכה לכתוב אודותינו אחרי  שאני ידע את הפונקציונליות שלאנחנו צריכות לבנות וזה אודותינו</p>
                         </div>
