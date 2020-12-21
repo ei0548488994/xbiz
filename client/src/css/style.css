@@ -1761,7 +1761,6 @@ em.mm-counter+a.mm-fullsubopen+span {
 
 	.header-widget {
 		padding: 20px 0;
-		border-top: 1px solid #eee;
 		display: flex;
 		flex-wrap: wrap;
 		align-items: flex-start;
@@ -1972,8 +1971,7 @@ body .typed-cursor.typed-cursor--blink.typed-fade-out{
 .main-search-inner {
 	position: relative;
 	display: block;
-	top: 50%;
-    transform: translate(0, -50%);
+	top: 17%;
 	padding-bottom: 30px;
 }
 
@@ -17626,7 +17624,7 @@ body .category-box-btn:hover {
 	}
 
 	header.fullwidth.dashboard .container {  padding: 0 5%; }
-	.main-search-inner { transform: translate(0, -51%); }
+	/* .main-search-inner { transform: translate(0, -51%); } */
 
 	/* Trigger */
 	a.dashboard-responsive-nav-trigger {

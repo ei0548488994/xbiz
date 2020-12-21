@@ -179,11 +179,16 @@ function HomePage(props) {
 ================================================== */}
         <div
           className="main-search-container centered"
+<<<<<<< HEAD
           data-background-image={backgroundImage}
           style={{ backgroundImage: { backgroundImage } }}  >
+=======
+          data-background-image={backgroundImge}
+          style ={ { backgroundImage:`url(${backgroundImge})` } }  >
+>>>>>>> a3104e3aded293e5e0be6a227d864e6cbd744c8e
           <div className="main-search-inner">
             <div className="container">
-              <div className="row">
+              <div>
                 <div className="col-md-12">
                   <h2>
                     מצא קרוב&nbsp;

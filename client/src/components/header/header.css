@@ -1,7 +1,9 @@
 #header-container{
     background-color: transparent;
     box-shadow:3px 3px 10px #c6c4c4 ;
-
+position: absolute;
+z-index: 100;
+width: 100%;
 }
 
 .sign-in{
@@ -15,4 +17,11 @@
 }
 .sign-in:hover{
     text-decoration: none;
+}
+.darkHeader{
+    background-color: white;
+}
+.transParentHeader{
+    background-color: transparent;
+
 }
