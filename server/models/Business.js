@@ -8,15 +8,17 @@ const businessSchema = mongoose.Schema({
   businessName: {
     type: String,
   },
-  totalClicks:{
-    type:Number,
-    default:0
+  totalClicks: {
+    type: Number,
+    default: 0,
   },
-  category: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Categories",
-    // required: true,
-  }],
+  category: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Categories",
+      // required: true,
+    },
+  ],
   description: {
     type: String,
     minlength: 4,
@@ -39,16 +41,15 @@ const businessSchema = mongoose.Schema({
   //   mon: { open: 570, close: 1080 },
   //   tue: { open: 570, close: 1050 },
   // }
-  adress:{
+  adress: {
     state: { type: String },
     city: { type: String },
     street: { type: String },
-    zipCode: { type: String }
-
+    zipCode: { type: String },
   },
   location: {
-    lat: { type: String },
-    lng: { type: String },
+    lat: { type: Number },
+    lng: { type: Number },
   },
   elevator: { type: Boolean },
   FriendlyWorkspace: { type: Boolean },

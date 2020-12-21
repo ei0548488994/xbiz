@@ -1,4 +1,3 @@
-
 const http = require("http");
 const express = require("express");
 const app = express();
@@ -9,14 +8,13 @@ const path = require("path");
 // var path = require('path');
 // const router=require('express').Router;
 // const buisnessRouter=require("./routs/api")
-const cors =require("cors");
+const cors = require("cors");
 const router = require("./routs/api");
-const mailRouter=require('./routs/mailRoutes');
+const mailRouter = require("./routs/mailRoutes");
 var bodyParser = require("body-parser");
 const port = 3003;
 var nodemailer = require("nodemailer");
 dotenv.config();
-
 app.use(cors());
 
 // const server= http.createServer((req,res)=>{
@@ -43,17 +41,21 @@ mongoose.connect(
 );
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
   if (req.method === "OPTIONS") {
-      res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-      return res.status(200).json({});
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
   }
   next();
-})
+});
+
+app.use(express.static(path.join((__dirname, "./build"))));
 
 app.use("/api", router);
-app.use('/sendMail',mailRouter);
-
+app.use("/sendMail", mailRouter);
 
 app.listen(port, () => {
   console.log("listening");
