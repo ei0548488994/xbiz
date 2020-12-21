@@ -6,7 +6,7 @@ import backgroundImage from '../../images/main-search-background-01.jpg'
 import Header from "../Header";
 import UserLocation from "../UserLocation";
 import AutoCompleteSearch from "../AutoCompleteSearch";
-import { setUserLocation } from '../redux/actions/location.action'
+import { setUserLocation } from '../../redux/actions/location.action'
 import ResultOfSearchListFirst from "../ResultSearckListFirst";
 import {
   withRouter,
