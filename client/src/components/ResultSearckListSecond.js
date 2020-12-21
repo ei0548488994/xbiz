@@ -426,8 +426,8 @@ export default connect(
             getResultOfSearchBYCategory: function (text) {
                 disatch(getResultOfSearchByCategory(text))
             },
-            setBusinessSelectedDetails: function (business) {
-                disatch(setSelectedBusinessDetails(business))
+            setBusinessSelectedDetails: function (businessId) {
+                disatch(setSelectedBusinessDetails(businessId))
             },
         }
     }

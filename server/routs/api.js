@@ -11,14 +11,14 @@ const {
   updateBuisness,
   deleteBusiness,
   searchBuisnessByParentCategory,
-  getBusinessByCategory,
-  getBusinessByText,
+  getBuisnessByCategory,
+  getBuisnessByText,
   getAllBusinessPerUser,
   createBusinessPerUser,
   deleteBussinesByUser,
   updateBussinesByUser,
-  getBuisnessById,
-  addClicksToBusiness,
+  getAllBusinessId,
+  getBuisnessById
 } = require("../controllers/business");
 const {
   createCategory,
@@ -43,14 +43,18 @@ const {
   createMainCategory,
   getMainCategory,
   getPopularCategories,
-  getAllMainCategories,
+  getAllMainCategories
 } = require("../controllers/mainCategory");
 
-const { search } = require("../controllers/search");
+
+const {
+ search 
+} = require('../controllers/search'); 
 // router.get("/", ()=>{
 //     console.log("hello get")
 // });
 // router.route("/remove").delete(function(req, res) {});
+
 
 //mainCategory
 router.post("/createMainCategory", createMainCategory);
@@ -58,19 +62,21 @@ router.get("/getMainCategory/:id", getMainCategory);
 router.get("/getPopularCategories", getPopularCategories);
 router.get("/getAllMainCategories", getAllMainCategories);
 
+
 // buisness
 // router.post("/createBusiness", createBusiness);
-router.get("/searchBuisnessByMainCategory/:id", searchBuisnessByParentCategory);
-router.get("/getBuisnessById/:id", getBuisness);
+router.get("/searchBuisnessByParentCategory/:id",searchBuisnessByParentCategory);
+router.get("/BusinessDetails/:id", getBuisness);
 router.post("/updateBuisness/:name", updateBuisness);
 router.post("/deleteBusiness/:id", deleteBusiness);
-router.get("/getBusinessByCategory/:idCategory", getBusinessByCategory);
-router.get("/getBusinessByText", getBusinessByText);
+router.get("/getBuisnessByCategory/:idCategory", getBuisnessByCategory);
+router.post("/getBuisnessByText", getBuisnessByText);
 router.post("/createBusinessPerUser", createBusinessPerUser);
 router.get("/getAllBusinessPerUser/:id", getAllBusinessPerUser);
-router.get("/addClicksToBusiness/:id", addClicksToBusiness);
-// router.post("/updateBussinesByUser/:id", createBusinessPerUser);
+router.get("/getAllBusinessId",getAllBusinessId);
 
+// router.post("/updateBussinesByUser/:id", createBusinessPerUser);
+ 
 //user
 router.post("/createUser", createUser);
 router.get("/getUser/:id", getUser);
@@ -88,11 +94,6 @@ router.post("/createCategory", createCategory);
 router.post("/updateCategory/:id", updateCategory);
 router.post("/deleteCategory/:id", deleteCategory);
 
-router.get("/", (req, res) => {
-  console.log("inside");
-  res.sendFile(path.join(__dirname, "../build/index.html"));
-});
-
 //search
-router.get("/search", search);
+router.get('/search',search)
 module.exports = router;

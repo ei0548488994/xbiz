@@ -1,7 +1,7 @@
 // import BusinessDetails from './BusinessDetails.js/index.js.js';
 import LogIn from './LogIn'
 import { Button } from 'react-bootstrap';
- import ContactPage from "./ContactPage"
+import ContactPage from "./ContactPage"
 import BusinessDetails from './BusinessDetails'
 import {
   BrowserRouter as Router,
@@ -43,15 +43,21 @@ function App(props) {
           <Route path="/HomePage">
             <HomePage />
           </Route>
-          <Route path="/ResultOfSearchList">
-            {/* <ResultOfSearchListFirst /> */}
-            <ResultOfSearchList/>
-          </Route>
-          <Route path="/BusinessDetails">
+          <Route  path="/business/:id">
             <BusinessDetails />
           </Route>
-           <Route path="/Contact">
-            <ContactPage/>
+          <Route path="/ResultOfSearchList">
+            {/* <ResultOfSearchListFirst /> */}
+            <ResultOfSearchList />
+          </Route>
+    
+          {/* <Route path="/BusinessDetails" component={BusinessDetails}>
+            <BusinessDetails />
+          </Route> */}
+          {/* /:id */}
+
+          <Route path="/Contact">
+            <ContactPage />
           </Route>
           <Route path="/">
             <HomePage />

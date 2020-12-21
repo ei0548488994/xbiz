@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { withRouter } from 'react-router-dom';
+import React, { useEffect, useState,useParams } from 'react'
+import { withRouter, Link } from 'react-router-dom';
 import ItemResultSearchFirst from './ItemResultSearchFirst';
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import Footer from './Footer';
 // import from bootstrap-icons
-import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory ,getResultofSearchByText} from '../redux/actions/category.action';
-import { setSelectedBusinessDetails, addClicksToBusiness } from '../redux/actions/business.action'
+import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory, getResultofSearchByText } from '../redux/actions/category.action';
+import { setSelectedBusinessDetails, addClicksToBusiness, getBusinessBybId } from '../redux/actions/business.action'
 import GeolocationService from './../services/geolocation.service'
+
 const ResoltSearckListFirst = (props) => {
     const dispatch = useDispatch();
     const [arrAfterSort, setArrAfterSort] = useState([]);
@@ -42,7 +43,7 @@ const ResoltSearckListFirst = (props) => {
         setSelectedText(e);
         console.log(e)
     }
-////change
+    ////change
     function searchClick() {
         {
             debugger
@@ -89,8 +90,9 @@ const ResoltSearckListFirst = (props) => {
                 </div>
                 <div className="row">
 
+
+
                     <div className="col-lg-12 col-md-12" onClick={() => {
-                        props.history.push('/BusinessDetails')
                     }}>
 
                         {arrResultOfSearch ?
@@ -101,9 +103,14 @@ const ResoltSearckListFirst = (props) => {
                                         <a
                                             className="listing-item-container">
                                             <div onClick={() => {
+                                                  props.history.push(`/business/${val._id}`)
                                                 props.addClicks(val._id)
-                                                props.history.push('/BusinessDetails')
+                                                debugger
+                                                //<Link to='/BusinessDetails' params={{id: val._id}} />
                                                 props.setBusinessSelectedDetails(val)
+                                                // props.history.push('/BusinessDetails')
+
+
                                             }} className="listing-item">
                                                 <img src="images/listing-item-01.jpg" alt />
                                                 <div className="listing-badge now-open">OPEN NOW</div>
@@ -147,7 +154,10 @@ const ResoltSearckListFirst = (props) => {
                                 //     </a>
                                 // </div>
                             ))
-                            : ""}
+                            : 
+                            //props.getBusinessById(id)
+                            props.history.push(`/BusinessDetails`)
+                            }
                         {arrAfterSort.length > 0 ? <h1>yes</h1> : <h1>no</h1>}
                     </div>
                 </div>
@@ -268,6 +278,10 @@ export default connect(
             },
             getResultosSearchBYText: function (text) {
                 disatch(getResultofSearchByText(text))
+            },
+            getBusinessById: function (id) {
+                debugger
+                disatch(getBusinessBybId(id))
             }
         }
     }

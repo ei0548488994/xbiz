@@ -7,6 +7,7 @@ const initialState = {
 export default function bisinessReducer(state = initialState, action) {
     switch (action.type) {
         case SET_SELECTED_BUSINESS_DETAILS:
+            console.log(action.payload)
             return { ...state, CheckedBusinessDetails: action.payload }
         case CREATE_BUSINESS:
         // return { ...state, CheckedBusinessDetails: action.payload }

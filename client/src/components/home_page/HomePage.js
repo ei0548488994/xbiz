@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../css/main-color.css";
 import "../../css/style.css";
-import backgroundImge from '../../images/main-search-background-01.jpg'
-import Header from "../header/Header";
+import backgroundImage from '../../images/main-search-background-01.jpg'
+//import Header from "../Header";
 import UserLocation from "../UserLocation";
 import AutoCompleteSearch from "../AutoCompleteSearch";
-import { setUserLocation } from '../../redux/actions/location.action';
+import { setUserLocation } from '../../redux/actions/location.action'
 import ResultOfSearchListFirst from "../ResultSearckListFirst";
 import {
   withRouter,
@@ -26,9 +26,9 @@ import {
   getResultOfSearchByCategory,
   PopularCategories,
 } from "../../redux/actions/category.action";
+import { getBusinessBybId } from '../../redux/actions/business.action'
 import Typed from "react-typed";
 import "./homePage.css";
-
 // import { getAllCategoriesAction } from '../actions/index'
 function HomePage(props) {
   // const { allCategories } = useSelector(state => ({
@@ -38,7 +38,7 @@ function HomePage(props) {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedText, setSelectedText] = useState("");
   const [CurrentUserLocation, setCurrentUserLocationLng] = useState({ "lat": 0, "lng": 0 });
-    const [ChangedUserLocation, setChangedUserLocation] = useState(false);
+  const [ChangedUserLocation, setChangedUserLocation] = useState(false);
   console.log("vhbjnk");
   console.log(props.popularCategories);
   //const home = useSelector((state) => state.home)
@@ -108,10 +108,10 @@ function HomePage(props) {
         setChangedUserLocation(true)
         console.log("change")
         console.log(ChangedUserLocation)
-    }
-    setCurrentUserLocationLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
-    props.setUserLocation(CurrentUserLocation) 
-    debugger;
+      }
+      setCurrentUserLocationLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
+      props.setUserLocation(CurrentUserLocation)
+      debugger;
       props.history.push("/ResultOfSearchList");
       if (selectedCategory != "") {
         props.setSelectedCategory(selectedCategory);
@@ -123,43 +123,45 @@ function HomePage(props) {
         props.getResultosSearchBYText(selectedText);
       }
     }
-  } 
+  }
   function userLocation() {
     debugger
     setCurrentUserLocationLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
     props.setUserLocation(CurrentUserLocation)
-}
-useEffect(() => {
-  {
-    props.getAllCategories();
   }
-  console.log("out", props.category);
-  props.PopularCategories();
-  userLocation()
-  // dispatch(getAllCategoriesAction(2));
-  // if (allCategories.length > 0) {
-  //     Object.keys(allCategories).forEach(key => mainCategoriesArr.push({ name: key, value: allCategories[key] }))
-  //     debugger;
-  //     console.log(allCategories);
-  //     console.log(mainCategoriesArr)
-  // }
-  // let elements = document.getElementsByClassName('text-rotate');
-  // for (let i = 0; i < elements.length; i++) {
-  //     let toRotate = elements[i].getAttribute('data-rotate');
-  //     let period = elements[i].getAttribute('data-period');
-  //     if (toRotate) {
-  //         new textRotate(elements[i], JSON.parse(toRotate), period);
-  //     }
-  // }
-  // // INJECT CSS
-  // let css = document.createElement("style");
-  // css.type = "text/css";
-  // css.innerHTML = ".text-rotate > .wrap { border-right: 0.08em solid #666 }";
-  // document.body.appendChild(css);
-}, [ChangedUserLocation]);
+
+  useEffect(() => {
+    {
+      props.getAllCategories();
+    }
+    console.log("out", props.category);
+    props.PopularCategories();
+    userLocation()
+    // dispatch(getAllCategoriesAction(2));
+    // if (allCategories.length > 0) {
+    //     Object.keys(allCategories).forEach(key => mainCategoriesArr.push({ name: key, value: allCategories[key] }))
+    //     debugger;
+    //     console.log(allCategories);
+    //     console.log(mainCategoriesArr)
+    // }
+    // let elements = document.getElementsByClassName('text-rotate');
+    // for (let i = 0; i < elements.length; i++) {
+    //     let toRotate = elements[i].getAttribute('data-rotate');
+    //     let period = elements[i].getAttribute('data-period');
+    //     if (toRotate) {
+    //         new textRotate(elements[i], JSON.parse(toRotate), period);
+    //     }
+    // }
+    // // INJECT CSS
+    // let css = document.createElement("style");
+    // css.type = "text/css";
+    // css.innerHTML = ".text-rotate > .wrap { border-right: 0.08em solid #666 }";
+    // document.body.appendChild(css);
+  }, [ChangedUserLocation]);
 
   return (
     <div>
+     
       {/* <button onClick={() => {
                 props.getAllCategories();
             }}>
@@ -177,8 +179,8 @@ useEffect(() => {
 ================================================== */}
         <div
           className="main-search-container centered"
-          data-background-image={backgroundImge}
-          style ={ { backgroundImage: {backgroundImge} } }  >
+          data-background-image={backgroundImage}
+          style={{ backgroundImage: { backgroundImage } }}  >
           <div className="main-search-inner">
             <div className="container">
               <div className="row">
@@ -215,16 +217,16 @@ useEffect(() => {
                       />
                     </div>
                     <div className="main-search-input-item location d-flex align-content-center">
-                        <a href="#" className="d-flex justify-content-center pt-4">
-                        <i className="fa fa-map-marker"  />
+                      <a href="#">
+                        <i className="fa fa-map-marker" />
                       </a>
-                      <div id="autocomplete-container" className="p-0">
+                      <div id="autocomplete-container">
                         {/* <input id="autocomplete-input" type="text" placeholder="Location" /> */}
                         {/* <UserLocation /> */}
-                        {ChangedUserLocation? <UserLocation />:"" }
+                        {ChangedUserLocation ? <UserLocation /> : ""}
                         <AutoCompleteSearch />
                       </div>
-                      
+
                     </div>
                     {/* <div className="main-search-input-item" >
                                             <select data-placeholder="All Categories" className="chosen-select" onClick={(e) => { setSelectedCatgory(e.target.value) }}>
@@ -245,7 +247,6 @@ useEffect(() => {
                 </div>
               </div>
               {/* Features Categories */}
-              {/* Features Categories */}
               {/* onClick={(e) => { setSelectedCatgory(option.value.mainCategoryName) },searchClick}  */}
               <div className="row">
                 <div className="col-md-12">
@@ -255,25 +256,25 @@ useEffect(() => {
                   <div className="highlighted-categories">
                     {mainCategoriesArr
                       ? mainCategoriesArr.map((option, i) =>
-                          option.value.icons ? (
-                            <Link
-                              to="/ResultOfSearchList"
-                              key={i}
-                              onClick={() => {
-                                props.getResultosSearchBYText(
-                                  option.value.mainCategoryName
-                                );
-                              }}
-                              // href="listings-list-with-sidebar.html"
-                              className="highlighted-category"
-                            >
-                              <i className={option.value.icons} />
-                              <h4>{option.value.mainCategoryName}</h4>
-                            </Link>
-                          ) : (
+                        option.value.icons ? (
+                          <Link
+                            to="/ResultOfSearchList"
+                            key={i}
+                            onClick={() => {
+                              props.getResultosSearchBYText(
+                                option.value.mainCategoryName
+                              );
+                            }}
+                            // href="listings-list-with-sidebar.html"
+                            className="highlighted-category"
+                          >
+                            <i className={option.value.icons} />
+                            <h4>{option.value.mainCategoryName}</h4>
+                          </Link>
+                        ) : (
                             ""
                           )
-                        )
+                      )
                       : ""}
                   </div>
                 </div>
@@ -304,23 +305,23 @@ useEffect(() => {
               <div className="categories-boxes-container margin-top-5 margin-bottom-30 d-flex justify-content-center">
                 {props.popularCategories
                   ? props.popularCategories.map((category, i) => (
-                      <Link
-                        key={i}
-                        to="/ResultOfSearchList"
-                        onClick={() => {
-                          props.getResultosSearchBYText(
-                            category.value.mainCategoryName
-                          );
-                        }}
-                        className="category-small-box"
-                      >
-                        <i className={category.value.icons} />
-                        <h4>{category.value.mainCategoryName}</h4>
-                        <span className="category-box-counter">
-                          {category.value.countBusiness}
-                        </span>
-                      </Link>
-                    ))
+                    <Link
+                      key={i}
+                      to="/ResultOfSearchList"
+                      onClick={() => {
+                        props.getResultosSearchBYText(
+                          category.value.mainCategoryName
+                        );
+                      }}
+                      className="category-small-box"
+                    >
+                      <i className={category.value.icons} />
+                      <h4>{category.value.mainCategoryName}</h4>
+                      <span className="category-box-counter">
+                        {category.value.countBusiness}
+                      </span>
+                    </Link>
+                  ))
                   : ""}
                 {/* Box
                                 <a href="listings-list-with-sidebar.html" className="category-small-box">
@@ -772,9 +773,13 @@ export default connect(
         disatch(getResultofSearchByText(text));
       },
       setUserLocation: function (CurrentUserLocation) {
-          debugger
-          disatch(setUserLocation(CurrentUserLocation))
-      }
+        debugger
+        disatch(setUserLocation(CurrentUserLocation))
+      },
+      setUserLocation: function (CurrentUserLocation) {
+        debugger
+        disatch(setUserLocation(CurrentUserLocation))
+      },
     };
   }
 )(withRouter(HomePage));

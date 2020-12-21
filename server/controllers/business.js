@@ -53,7 +53,7 @@ const createBusiness = async (req, res) => {
   }
 };
 
-//read(work and Documentation)
+//read(can delete)
 const getBuisness = async (req, res) => {
   console.log(req.params.id);
   let readBuisness;
@@ -62,11 +62,11 @@ const getBuisness = async (req, res) => {
     if (readBuisness == null) {
       res.send("coudnt have a buisness");
     }
-    return res.json({ status: 200, myBuisness: readBuisness });
+    return res.json( readBuisness );
   } catch (error) {
     res.status(400).json({ massage: error.maasage });
   }
-  return res.json({ myBuisness: readBuisness });
+  return res.json( readBuisness );
 };
 //update
 const updateBuisness = async (req, res) => {
@@ -103,12 +103,15 @@ const updateBuisness = async (req, res) => {
 //searchBuisnessByParentCategory
 const searchBuisnessByParentCategory = async (req, res) => {
   console.log(req.params.id);
-  id = req.params.id;
+  id = req.params.id
+  console.log("mainnnnnnnn")
+  console.log(id);
   try {
     const getMainCategories = await MainCategory.findById(id);
     if (getMainCategories == null) {
       res.send("can't find what you look for");
     } else {
+      console.log(getMainCategories);
       const getALL = await MainCategory.findById(id).populate({
         path: "categories",
         populate: {
@@ -130,8 +133,8 @@ const deleteBusiness = async (req, res) => {
     res.status(400).json({ error });
   }
 };
-//getBuisnessByCategory(work and Documentation)
-const getBusinessByCategory = async (req, res) => {
+//getBuisnessByCategory
+const getBuisnessByCategory = async (req, res) => {
   var getCategory = req.params.idCategory;
   console.log(getCategory);
   try {
@@ -142,53 +145,48 @@ const getBusinessByCategory = async (req, res) => {
     res.status(400).json(error);
   }
 };
-//getBuisnessByText(work and Documentation)
-const getBusinessByText = async (req, res) => {
+//getBuisnessByText(work)
+const getBuisnessByText = async (req, res) => {
   var text = req.body.text;
   console.log(text);
   try {
     //בדיקה אם המשתמש הכניס טקסט
     if (text != null) {
       //בדיקה האם הטקסט  קיים בקטגוריות הראשיות
-      const getMAinCategoryName = await MainCategory.findOne({
-        mainCategoryName: text,
-      });
+      const getMAinCategoryName = await MainCategory.findOne({ mainCategoryName: text });
       if (getMAinCategoryName != null) {
-        const getMainCategories = await MainCategory.findById(
-          getMAinCategoryName._id
-        );
-        console.log(getMAinCategoryName);
-        // if (getMainCategories != null)
-        console.log("mainc");
-        const getALL = await MainCategory.findById(
-          getMAinCategoryName._id
-        ).populate({
+        const getMainCategories = await MainCategory.findById(getMAinCategoryName._id);
+        console.log(getMAinCategoryName)
+        // if (getMainCategories != null) 
+        console.log("mainc")
+        const getALL = await MainCategory.findById(getMAinCategoryName._id).populate({
           path: "categories",
           populate: {
-            path: "business",
+            path: "business"
           },
         });
-        var allBusiness = [];
+        var allBusiness = []
         getALL.categories.forEach((element) => {
-          console.log("1", element);
+          console.log("1", element)
           element.business.forEach((item) => {
-            allBusiness.push(item);
-            console.log(item);
-          });
+            allBusiness.push(item)
+            console.log(item)
+          })
         });
         return res.json({ MainCategories: allBusiness });
-      } else {
-        console.log("else");
+      }
+      else {
+        console.log("else")
         //בדיקה אם טקסט קיים בקטגוריות
         var getCategoryName = await Categories.find({ categoryName: text });
         if (getCategoryName.length > 0) {
-          console.log("c");
+          console.log("c")
           var getCategoryName = await Categories.find({
             categoryName: text,
           }).populate({ path: "business" });
           res.json({ categories: getCategoryName });
         } else {
-          console.log("hiiiiiiiiiiiiii");
+          console.log("hiiiiiiiiiiiiii")
           var getAllBuisness = await Business.find({
             businessName: text,
           }).populate({
@@ -208,7 +206,7 @@ const getBusinessByText = async (req, res) => {
     res.status(400).json({ error: error });
   }
 };
-//getAllBusinessPerUser (work and Documentation)
+//getAllBusinessPerUser (work)
 const getAllBusinessPerUser = async (req, res) => {
   try {
     const bussinesByUser = await Business.find({ user: req.params.id });
@@ -217,95 +215,48 @@ const getAllBusinessPerUser = async (req, res) => {
     return res.status(500).json({ msg: err.message });
   }
 };
-// const createBusinessPerUser = async (req, res) => {
-//   try {
-//     const {
-//       user,
-//       businessName,
-//       totalClicks,
-//       categoryList,
-//       description,
-//       adress,
-//       location,
-//       email,
-//       phone,
-//       elevator,
-//       FriendlyWorkspace,
-//     } = req.body;
-//     const myCategory = await Categories.find({
-//       categoryName: categoryList,
-//     });
-//     console.log(myCategory);
-//     const newBuisness = new Business({
-//       user,
-//       businessName,
-//       totalClicks,
-//       categoryList,
-//       description,
-//       adress,
-//       location,
-//       email,
-//       phone,
-//       elevator,
-//       FriendlyWorkspace,
-//     });
-//     console.log(newBuisness);
-//     await newBuisness.save();
-//     category.forEach(async (element) => {
-//       await Categories.findByIdAndUpdate(element, {
-//         $push: { business: newBusiness._id },
-//       });
-//     });
-//     console.log(newBuisness);
-//     const findCategory = await Categories.findOne({
-//       categoryName: category,
-//     });
-//     await findCategory.business.push(newBuisness);
-//     await findCategory.save();
-//     res.json({ msg: "Created a bussines" });
-//   } catch (err) {
-//     return res.status(500).json(err);
-//   }
-// };
-
+const getAllBusinessId= async (req, res) => {
+  try {
+    const businessId = await  Business.findById()._id;
+    res.json(bussinesByUser);
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+};
 const createBusinessPerUser = async (req, res) => {
   try {
     const {
       user,
       businessName,
-      category,
+      categoryList,
       description,
       adress,
       location,
       email,
       phone,
     } = req.body;
-    console.log(category);
-    const myCategory = await Categories.findOne({
-      categoryName: category,
-    });
-    // category.forEach(element => {
-    //   const myCategory = await Categories.findOne({
-    //     categoryName: category,
-    //   });
-    // });
+    console.log(categoryList, "!!!!!!!!");
 
-    console.log(myCategory);
+    // const myCategory = await Categories.find({
+    //   categoryName: category,
+    // });
+    // console.log(myCategory);
     const newBuisness = new Business({
-      user: user,
+      user,
       businessName,
-      category: myCategory._id,
       description,
       adress,
-      //   adress.state :adress.state,
-      // city:
-      // street:
-      // zipCode:
       location,
       email,
       phone,
     });
+
     await newBuisness.save();
+    category.forEach(async (element) => {
+      await Categories.findByIdAndUpdate(element, {
+        $push: { business: newBusiness._id },
+      });
+    });
     console.log(newBuisness);
 
     const findCategory = await Categories.findOne({
@@ -315,7 +266,7 @@ const createBusinessPerUser = async (req, res) => {
     await findCategory.save();
     res.json({ msg: "Created a bussines" });
   } catch (err) {
-    return res.status(500).json({ error: err });
+    return res.status(500).json(err);
   }
 };
 const deleteBussinesByUser = async (req, res) => {
@@ -345,29 +296,30 @@ const deleteBussinesByUser = async (req, res) => {
 const getBuisnessById = async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);
-    console.log(business);
+    console.log(business)
     if (business == null) {
       res.send("This business does'nt exist");
-    } else {
+    }
+    else {
       res.json(business);
     }
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
 };
-//addClicksToBusiness (work)
 const addClicksToBusiness = async (req, res) => {
-  console.log("id ");
-  console.log(req.params.id);
+  console.log("id ")
+  console.log(req.params.id)
   try {
     const business = await Business.findById(req.params.id);
-    console.log(business);
-    business.totalClicks = business.totalClicks + 1;
-    await business.save();
+    console.log(business)
+    business.totalClicks = business.totalClicks + 1
+    console.log("business")
+    console.log(business)
   } catch (error) {
     return res.status(500).json({ msg: error.message });
   }
-};
+}
 
 module.exports = {
   // createBusiness,
@@ -376,10 +328,11 @@ module.exports = {
   deleteBusiness,
   getBuisnessById,
   searchBuisnessByParentCategory,
-  getBusinessByCategory,
-  getBusinessByText,
+  getBuisnessByCategory,
+  getBuisnessByText,
   getAllBusinessPerUser,
   createBusinessPerUser,
   deleteBussinesByUser,
   addClicksToBusiness,
+  getAllBusinessId,
 };

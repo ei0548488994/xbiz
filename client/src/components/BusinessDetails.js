@@ -11,19 +11,29 @@ import OpenHours from "./OpenHours";
 import Booking from "./Booking";
 import { connect } from 'react-redux';
 import Contact from './Contact';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useParams } from 'react-router-dom';
 import MapContainer from './MapContainer'
+import { setSelectedBusinessDetails, addClicksToBusiness, getBusinessBybId } from '../redux/actions/business.action'
 
 // import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory } from '../redux/actions/category.action';
 const BusinessDetails = (props) => {
   debugger
+  let { id } = useParams();
+  console.log(id);
   console.log(props.CheckedBusinessDetails)
-  debugger;
-  localStorage.setItem('lat', props.CheckedBusinessDetails["location"]["lat"]);
-  localStorage.setItem('lng', props.CheckedBusinessDetails["location"]["lng"]);
-
+  // debugger;
+  //localStorage.setItem('lat', props.CheckedBusinessDetails["location"]["lat"]);
+  //localStorage.setItem('lng', props.CheckedBusinessDetails["location"]["lng"]);
+  useEffect(() => {
+    if (id) {
+      debugger
+      props.getBusinessById(id)
+      console.log(props.CheckedBusinessDetails)
+    }
+  }, []);
   return (
     <>
+      {/* {id ? props.getBusinessById(id) : ""} */}
       <div>
         <title>Listeo</title>
         <meta charSet="utf-8" />
@@ -38,28 +48,32 @@ const BusinessDetails = (props) => {
             <a href="images/single-listing-03.jpg" data-background-image="images/single-listing-03.jpg" className="item mfp-gallery" title="Title 2" />
             <a href="images/single-listing-04.jpg" data-background-image="images/single-listing-04.jpg" className="item mfp-gallery" title="Title 4" />
           </div>
-          <h1>ghghghg</h1>
+          {/* <h1>{props.CheckedBusinessDetails}</h1> */}
+
           <div className="container">
             <div className="row sticky-wrapper">
+{/* <p>{props.CheckedBusinessDetails}</p> */}
               <div className="col-lg-8 col-md-8 padding-right-30">
                 {/* Titlebar */}
                 <div id="titlebar" className="listing-titlebar">
-                  <div className="listing-titlebar-title">
-                    <h2>{props.CheckedBusinessDetails.businessName}<span className="listing-tag">{props.CheckedBusinessDetails.description}</span></h2>
-                    <span>
-                      <a href="#listing-location" className="listing-address">
-                        <i className="fa fa-map-marker" />
-                        {props.CheckedBusinessDetails.adress ?
-                          props.CheckedBusinessDetails.adress.street +
-                          " " + props.CheckedBusinessDetails.adress.city
-                          + " " + props.CheckedBusinessDetails.adress.state : ""}
-                      </a>
-                    </span>
-                    <div className="star-rating" data-rating={5}>
-                      <div className="rating-counter"><a href="#listing-reviews">(31 תגובות)</a></div>
+                  {props.CheckedBusinessDetails?
+                    <div className="listing-titlebar-title">
+                      <h2>{props.CheckedBusinessDetails.businessName}<span className="listing-tag">{props.CheckedBusinessDetails.description}</span></h2>
+                      <span>
+                        <a href="#listing-location" className="listing-address">
+                          <i className="fa fa-map-marker" />
+                          {props.CheckedBusinessDetails.adress ?
+                            props.CheckedBusinessDetails.adress.street +
+                            " " + props.CheckedBusinessDetails.adress.city
+                            + " " + props.CheckedBusinessDetails.adress.state : ""}
+                        </a>
+                      </span>
+                      <div className="star-rating" data-rating={5}>
+                        <div className="rating-counter"><a href="#listing-reviews">(31 תגובות)</a></div>
+                      </div>
                     </div>
-                  </div>
-                </div>
+                  :""}</div>
+                
                 {/* Listing Nav */}
                 <div id="listing-nav" className="listing-nav-container">
                   <ul className="listing-nav">
@@ -311,6 +325,10 @@ export default connect(
       // getResultOfSearchBYCategory: function (text) {
       //   disatch(getResultOfSearchByCategory(text))
       // }
+      getBusinessById: function (id) {
+        debugger
+        disatch(getBusinessBybId(id))
+      }
     }
   }
 )(withRouter(BusinessDetails));
