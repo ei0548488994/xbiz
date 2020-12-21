@@ -178,10 +178,10 @@ useEffect(() => {
         <div
           className="main-search-container centered"
           data-background-image={backgroundImge}
-          style ={ { backgroundImage: {backgroundImge} } }  >
+          style ={ { backgroundImage:`url(${backgroundImge})` } }  >
           <div className="main-search-inner">
             <div className="container">
-              <div className="row">
+              <div>
                 <div className="col-md-12">
                   <h2>
                     מצא קרוב&nbsp;
