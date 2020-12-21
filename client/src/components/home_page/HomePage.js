@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../css/main-color.css";
 import "../../css/style.css";
-import backgroundImage from '../../images/main-search-background-01.jpg'
-import Header from "../Header";
+import backgroundImge from '../../images/main-search-background-01.jpg'
+import Header from "../header/Header";
 import UserLocation from "../UserLocation";
 import AutoCompleteSearch from "../AutoCompleteSearch";
 import { setUserLocation } from '../../redux/actions/location.action';
@@ -177,8 +177,8 @@ useEffect(() => {
 ================================================== */}
         <div
           className="main-search-container centered"
-          data-background-image={backgroundImage}
-          style ={ { backgroundImage: {backgroundImage} } }  >
+          data-background-image={backgroundImge}
+          style ={ { backgroundImage: {backgroundImge} } }  >
           <div className="main-search-inner">
             <div className="container">
               <div className="row">

@@ -1,0 +1,18 @@
+#header-container{
+    background-color: transparent;
+    box-shadow:3px 3px 10px #c6c4c4 ;
+
+}
+
+.sign-in{
+    font-size: larger;
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.fa-sign-in{
+    margin-right: 7px;
+    font-size: large;
+    text-decoration: none;
+}
+.sign-in:hover{
+    text-decoration: none;
+}

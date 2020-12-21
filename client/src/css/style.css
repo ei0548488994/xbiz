@@ -233,7 +233,7 @@ img { max-width: 100%; }
 /* ---------------------------------- */
 /* Header
 ------------------------------------- */
-#logo { display: inline-block; margin-top: 3px; }
+/* #logo { display: inline-block; margin-top: 3px; } */
 
 #logo img { max-height: 38px; width: auto; transform: translate3d(0,0,0); }
 img.footer-logo { max-height: 38px; width: auto; }
@@ -272,15 +272,13 @@ img.footer-logo { max-height: 38px; width: auto; }
 }
 
 .header-widget .sign-in {
-	position: relative;
+	position: unset;
 	color: #333;
-	margin-right: 25px;
 	top: 10px;
 	display: inline-block;
-	vertical-align: top;
 }
 
-.header-widget .sign-in i { padding-right: 4px; font-size: 15px; }
+.header-widget .sign-in i { padding-right: 4px; }
 .header-widget .sign-in:hover { color: #66676b; }
 
 
@@ -291,22 +289,9 @@ header.fullwidth .container {
 	padding: 0 40px;
 }
 
-.left-side {
-	float: left;
-	width: 65%;
-	display: inline-block;
-
-}
-
-.right-side {
-	float: right;
-	width: 35%;
-	display: inline-block;
-}
-
 /* mobile fix */
 @media (min-width: 1025px) and (max-width: 1239px)  {
-	.right-side {
+	/* .right-side {
 		width: auto;
 		display: inline-block;
 		margin-top: -126px;
@@ -316,13 +301,13 @@ header.fullwidth .container {
 	.left-side {
 		width: 100%;
 		display: inline-block;
-	}
+	} */
 }
 
 #logo,
-#navigation { float: left; }
+/* #navigation { float: left; } */
 
-#logo { margin-right: 50px; }
+/* #logo { margin-right: 50px; } */
 
 .header-widget { text-align: right; }
 
@@ -1764,11 +1749,11 @@ em.mm-counter+a.mm-fullsubopen+span {
 	.mmenu-trigger { display: inline-block !important; }
 
 	#logo {
-	    position: absolute;
+	    /* position: absolute; */
 	    width: 100%;
 	    margin: 0 auto;
-	    margin-top: 5px;
-	    width: 35%;
+	    /* margin-top: 5px; */
+	    /* width: 35%; */
 	    text-align: center;
 	    left: 0;
 	    right: 0;
@@ -1795,17 +1780,15 @@ em.mm-counter+a.mm-fullsubopen+span {
 
 	.header-widget .sign-in { top: 9px; }
 
-	#header-container.header-style-2 .left-side,
-	#header-container.header-style-2 .right-side,
-	.right-side,
-	.left-side { width: 100%; }
+	#header-container.header-style-2 ,
+	#header-container.header-style-2 
+	 { width: 100%; }
 
 	#top-bar .right-side .social-icons { float: left; position: relative; z-index: 9; }
 
 	#header-container.header-style-2 .header-widget { float: left; margin-top: 35px; margin-bottom: -5px }
 
 	.header-widget { text-align: left; }
-	#header { padding-bottom: 0; }
 
 	ul.top-bar-menu { z-index: 99; position: relative; }
 
@@ -17563,9 +17546,9 @@ body .category-box-btn:hover {
 
 
 	.mmenu-trigger { float: right; }
-	body #dashboard #logo,
-	body #logo {
-	    position: relative;
+	body #dashboard #logo
+	{
+	    
 	    margin: 0 !important;
 	    margin-top: 5px !important;
 	    width: calc(100% - 70px);

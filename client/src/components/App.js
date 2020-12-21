@@ -12,7 +12,7 @@ import {
 import React from 'react';
 import HomePage from './home_page/HomePage';
 import { getCategory } from '../actions/Home'
-import Header from './Header'
+import Header from './header/Header'
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import ResultSearch from './ResultSearch';
