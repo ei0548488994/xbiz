@@ -1,10 +1,19 @@
 import React from 'react'
-
-export default function Footer() {
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { EmailShareButton } from "react-share";
+import ContactPage from './ContactPage'
+import { connect } from 'react-redux';
+import { withRouter, Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+function Footer(props) {
+    function contact() {
+        debugger;
+        localStorage.setItem('lat', 32.0920019);
+        localStorage.setItem('lng', 34.8262947);
+        props.history.push('/Contact')
+    }
     return (
         <>
             <div id="footer" className="sticky-footer">
-                {/* Main */}
                 <div className="container">
                     <div className="row">
                         <div className="col-md-5 col-sm-6">
@@ -15,7 +24,7 @@ export default function Footer() {
                         <div className="col-md-4 col-sm-6 ">
                             <h4>לינקים שימושיים</h4>
                             <ul className="footer-links">
-                                
+
                                 <li><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
                                 </svg><a href="#">הרשמה</a></li>
@@ -37,9 +46,9 @@ export default function Footer() {
                                 <li><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
                                 </svg><a href="#">איך זה עובד</a></li>
-                                <li><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <li onClick={contact}><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-                                </svg><a href="#">צור קשר</a></li>
+                                </svg>צור קשר</li>
                             </ul>
                             <div className="clearfix" />
                         </div>
@@ -61,7 +70,7 @@ export default function Footer() {
                     {/* Copyright */}
                     <div className="row">
                         <div className="col-md-12">
-                            <div className="copyrights">© 2019 Listeo. All Rights Reserved.</div>
+                            <div className="copyrights">© 2020 Places. כל הזכויות שמורות.</div>
                         </div>
                     </div>
                 </div>
@@ -69,3 +78,16 @@ export default function Footer() {
         </>
     )
 }
+export default connect(
+    (state) => {
+        return {
+
+        }
+    },
+    (disatch) => {
+        return {
+
+        }
+    }
+)(withRouter(Footer))
+

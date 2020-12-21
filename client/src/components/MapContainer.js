@@ -5,7 +5,14 @@ import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
     getLatLng,
   } from 'react-places-autocomplete'; */
 export class MapContainer extends Component {
+  componentDidMount(){
+    debugger
+// let lat= localStorage.getItem('lat');
+// let lng= localStorage.getItem('lng');
+ // console.log('lat'+"myllllat");
+  }
   constructor(props) {
+    debugger;
     super(props);
     this.state = { 
       /*address: '',*/
@@ -13,8 +20,10 @@ export class MapContainer extends Component {
       activeMarker: {},
       selectedPlace: {},
       mapCenter: {
-        lat: 51.507351,
-        lng: -0.127758
+        //london
+        lat: localStorage.getItem('lat'),
+        lng: localStorage.getItem('lng')
+       
       } 
     }
   }

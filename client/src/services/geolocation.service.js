@@ -1,22 +1,15 @@
 // 
 
-
-
-
 class GeolocationService {
-
-
     // Callback function for asynchronous call to HTML5 geolocation
     // UserLocation(position) {
     // console.log("cncdjncdnjc" + position.coords.latitude, position.coords.longitude)
     // NearestCity(position.coords.latitude, position.coords.longitude);
     // }
-
     // Convert Degress to Radians
     Deg2Rad(deg) {
         return deg * Math.PI / 180;
     }
-
     PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
         console.log(lat1, lat2 + "user locationbbb")
         let lat1Temp = this.Deg2Rad(lat1);
@@ -49,6 +42,7 @@ class GeolocationService {
             return 0;
         });
         console.log("arry sorted ", breweries)
+        debugger
         return breweries;
         // this.setState({ breweries: breweries });
     }
@@ -60,9 +54,9 @@ class GeolocationService {
 
 
         let copyCity = []
-
-        for (let index = 0; index < cities.length; ++index) {
-            const dif = await this.PythagorasEquirectangular(latitude, longitude, cities[index]["lat"], cities[index]["len"]);
+        debugger
+        for (let index = 0; index < cities[0]["value"].length; ++index) {
+            const dif = await this.PythagorasEquirectangular(latitude, longitude, cities[0]["value"][index]["location"]["lat"], cities[0]["value"][index]["location"]["lng"]);
             //copyCity.push({ dif, index })
             if (dif < minDif) {
                 closest = index;
@@ -76,12 +70,9 @@ class GeolocationService {
             copyCity[index] = { "dif": dif, "index": index }
             console.log(copyCity[index] + "jckj")
         }
+        debugger
         return this.sortAlpha(copyCity);
     }
-
-
-
-
 }
 
 export default new GeolocationService()

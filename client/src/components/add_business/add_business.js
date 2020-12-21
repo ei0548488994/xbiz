@@ -6,6 +6,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
+import AutoCompleteSearch from '../AutoCompleteSearch'
 // import "./dist/add_buisness.css";
 import '../add_business/add_business.css';
 import {
@@ -14,89 +15,106 @@ import {
 import { createNewBusiness } from '../../redux/actions/business.action';
 function Add_buisness(props) {
 
-  //A statement of variables for a new business
-  const [businessName, setBusinessName] = useState("");
-  const [category, setCategory] = useState([]);
-  const [keyWords, setKeyWords] = useState("");
-  const [description, setDescription] = useState("");
-  const [adress, setAdress] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [city, setCity] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [country, setCountry] = useState("");
-  const [website, setWebsite] = useState("");
-  const [elevator, setElevator] = useState("");
-  const [InstantBook, setInstantBook] = useState("");
-  const [FriendlyWorkspace, setFriendlyWorkspace] = useState("");
-  const [WirelessInternet, setWirelessInternet] = useState("");
-  const [freeParkingOnPremises, setFreeParkingOnPremises] = useState("");
-  //category check box
-  const [isSelected, setIsSelected] = useState();
-  var selected = false;
-  // freeParkingOnStreet: { type: Boolean },
-  // smokingAllowed: { type: Boolean },
-  // events: { type: Boolean },
-  // website: { type: String, maxlength: 35 },
-  // facebook: { type: String, maxlength: 35 },
-  // twitter: { type: String, maxlength: 35 },
-  // googleplus: 
-  //get mainCategory from state to props
-  var mainCategoriesArr = [];
-  if (props.category != undefined) {
-    Object.keys(props.category).forEach(key => mainCategoriesArr.push({ name: key, value: props.category[key] }))
-    console.log("if", mainCategoriesArr)
-  }
-  //functions:
+ //A statement of variables for a new business
+ const [businessName, setBusinessName] = useState("");
+ const [categoryy, setCategory] = useState([]);
+ const [keyWords, setKeyWords] = useState("");
+ const [description, setDescription] = useState("");
+ const [adress, setAdress] = useState("");
+ const [state, setState] = useState("");
+ const [city, setCity] = useState("");
+ const [zipCode, setZipCode] = useState("");
+ const [street, setStreet] = useState("");
+ const [email, setEmail] = useState("");
+ const [phone, setPhone] = useState("");
+ const [country, setCountry] = useState("");
+ const [website, setWebsite] = useState("");
+ const [elevator, setElevator] = useState("");
+ const [InstantBook, setInstantBook] = useState("");
+ const [FriendlyWorkspace, setFriendlyWorkspace] = useState("");
+ const [WirelessInternet, setWirelessInternet] = useState("");
+ const [freeParkingOnPremises, setFreeParkingOnPremises] = useState("");
+ //category check box
+ const [isSelected, setIsSelected] = useState("");
+ var selected = isSelected;
+ var arrCategory = [];
+ // freeParkingOnStreet: { type: Boolean },
+ // smokingAllowed: { type: Boolean },
+ // events: { type: Boolean },
+ // website: { type: String, maxlength: 35 },
+ // facebook: { type: String, maxlength: 35 },
+ // twitter: { type: String, maxlength: 35 },
+ // googleplus: 
+ //get mainCategory from state to props
+ var mainCategoriesArr = [];
+ if (props.category != undefined) {
+   Object.keys(props.category).forEach(key => mainCategoriesArr.push({ name: key, value: props.category[key] }))
+   console.log("if", mainCategoriesArr)
+ }
+ //functions:
 
-  //this function push and slice 
-  //the categories of the new business 
-  //according to the business owner's settings
-  function setOfCategory(categoryName) {
-    debugger
-    var arrCategory = category;
-    if (arrCategory.length == 0) {
-      selected = true;
-      //לבדוק למה UNDIFINE
-      setIsSelected(selected);
-    }
-    else {
-      arrCategory.map((item, i) => (
-        <div key={i} >
-          {item}
-          {item == categoryName ? selected == false : selected == true}
-        </div>
+ //this function push and slice 
+ //the categories of the new business 
+ //according to the business owner's settings
+ function setOfCategory(categoryName) {
+   debugger
+   arrCategory = categoryy;
+   if (arrCategory.length == 0) {
+     selected = true
+     setIsSelected(selected);
+     //לבדוק למה UNDIFINE
+     console.log(isSelected);
+     // setIsSelected(selected);
+   }
+   else {
+     arrCategory.map((item, i) => (
+       <div key={i} >
+         {item}
+         {item == categoryName ? selected = false : selected = true}
+       </div>
 
-      ))
-      console.log(selected);
-
-      setIsSelected(selected);
-    }
-    if (selected == true) {
-      arrCategory.push(categoryName);
-      setCategory(u => arrCategory);
-    }
-    else {
-      var index = arrCategory.indexOf(categoryName);
-      arrCategory.slice(index,1);
-      setCategory(u => arrCategory);
-    }
-  }
-  function create() {
-    debugger
-    const newBusiness = {
-      user: "",
-      businessName: businessName,
-      categoryList: category,
-      description: description,
-      adress: adress,
-      location: "",
-      email: email,
-      phone: phone,
-    };
-    debugger
-    props.createNewBusiness(newBusiness);
-  }
+     ))
+     console.log(isSelected);
+     setIsSelected(selected);
+   }
+   if (selected == true) {
+     arrCategory.push(categoryName);
+     setCategory(u => arrCategory);
+     console.log(arrCategory)
+   }
+   else {
+     var index = arrCategory.indexOf(categoryName);
+     arrCategory.splice(index-1,1);
+     console.log(index,arrCategory.length)
+     console.log(arrCategory+"arrCategory")
+     setCategory(u => arrCategory);
+   }
+ }
+ function create() {
+   debugger
+   var p = props.adressObj;
+   setAdress(p);
+   var adressObject = adress.split(",")
+   var s = adressObject[0];
+   setStreet(s);
+   var c = adressObject[1];
+   setCity(c);
+   var st = adressObject[2];
+   setState(st);
+   const newBusiness = {
+     user: "5fcf996bac4f690d946e7efa",
+     businessName: businessName,
+     categoryList: arrCategory,
+     description: description,
+     adress: { state: st, city: c, sreet: s, zipCode: zipCode },
+     location: "",
+     email: email,
+     phone: phone,
+   };
+   debugger
+   console.log(newBusiness)
+   props.createNewBusiness(newBusiness);
+ }
   useEffect(() => {
     { props.getAllCategories() }
     console.log("out", props.category)
@@ -214,7 +232,7 @@ function Add_buisness(props) {
                       {/* Row */}
                       <div className="row with-forms">
                         {/* City */}
-                        <div className="col-md-6">
+                        {/* <div className="col-md-6">
                           <h5>עיר</h5>
                           <select onChange={(e) => { setCity(e.target.value) }} className="chosen-select-no-single">
                             <option label="blank">בחר עיר</option>
@@ -226,28 +244,30 @@ function Add_buisness(props) {
                             <option>אלעד</option>
                             <option>אשדוד</option>
                           </select>
-                        </div>
+                        </div> */}
                         {/* Address */}
-                        <div className="col-md-6">
+                        <div className="col-md-6" onChange={(e) => { setAdress(e.target.value) }} >
                           <h5>כתובת</h5>
-                          <input
+                          <div id="autocomplete-container" onChange={(e) => { setAdress(e.target.value) }} >
+                            <AutoCompleteSearch />
+                          </div>
+                          {/* <input
                             type="text"
                             placeholder="e.g. 964 School Street"
-                            onChange={(e) => { setAdress(e.target.value) }}
-                          />
+                          /> */}
                         </div>
                         {/* City */}
-                        <div className="col-md-6">
+                        {/* <div className="col-md-6">
                           <h5>מדינה</h5>
                           <input type="text"
                             onChange={(e) => { setCountry(e.target.value) }}
                           />
-                        </div>
+                        </div> */}
                         {/* Zip-Code */}
                         <div className="col-md-6">
                           <h5>מיקוד</h5>
                           <input type="text"
-                            onChange={(e) => { setPostalCode(e.target.value) }}
+                            onChange={(e) => { setZipCode(e.target.value) }}
                           />
                         </div>
                       </div>

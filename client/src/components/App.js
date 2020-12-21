@@ -10,7 +10,7 @@ import {
   Link
 } from "react-router-dom";
 import React from 'react';
-import HomePage from './HomePage.js';
+import HomePage from './home_page/HomePage';
 import { getCategory } from '../actions/Home'
 import Header from './Header'
 import { useSelector, useDispatch } from 'react-redux';
@@ -22,6 +22,7 @@ import { searchByCategory } from '../actions/Busieness';
 import Contact from './Contact'
 import Add_buisness from "./add_business/add_business";
 import ResultOfSearchListFirst from "./ResultSearckListFirst"
+import GoogleMap from './GoogleMap';
 function App(props) {
   // const [allCategories, setAllCategories] = useState()
   const [currentCategoryId, setCurrentCategoryId] = useState(null);
@@ -37,15 +38,20 @@ function App(props) {
 
       <Router>
         <Header></Header>
+        {/* <GoogleMap/> */}
         <Switch>
           <Route path="/HomePage">
             <HomePage />
           </Route>
           <Route path="/ResultOfSearchList">
-            <ResultOfSearchListFirst />
+            {/* <ResultOfSearchListFirst /> */}
+            <ResultOfSearchList/>
           </Route>
           <Route path="/BusinessDetails">
             <BusinessDetails />
+          </Route>
+           <Route path="/Contact">
+            <ContactPage/>
           </Route>
           <Route path="/">
             <HomePage />

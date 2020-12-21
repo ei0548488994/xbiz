@@ -1,6 +1,4 @@
-import {
-    SET_CURRENT_USER_LOCATION
-} from '../actions/location.action';
+import {SET_CURRENT_USER_LOCATION} from '../actions/location.action';
 
 const initialState = {
     currentUserLocation: {

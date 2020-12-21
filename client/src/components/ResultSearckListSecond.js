@@ -6,8 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory } from '../redux/actions/category.action';
 import { setSelectedBusinessDetails } from '../redux/actions/business.action'
+import GeolocationService from './../services/geolocation.service'
+
 const ResultSearckListSecond = (props) => {
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [arrAfterSort, setArrAfterSort] = useState([]);
+
     var mainCategoriesArr = [];
     // debugger;
     if (props.category != undefined) {
@@ -16,6 +20,10 @@ const ResultSearckListSecond = (props) => {
     }
     var arrResultOfSearch = [];
     Object.keys(props.resultOfSearch).forEach(key => arrResultOfSearch.push({ name: key, value: props.resultOfSearch[key] }))
+    if (arrResultOfSearch.length > 0 && !arrAfterSort) {
+        debugger
+        sortbynerlest()
+    }
     var arr2 = [];
     // debugger;
     if (props.category.length > 0) {
@@ -23,7 +31,17 @@ const ResultSearckListSecond = (props) => {
         console.log("if", arr2)
     }
 
-
+    async function sortbynerlest() {
+        let myarr = []
+        let scoundArr = []
+        myarr = await GeolocationService.beginSort(props.lat, props.lon, arrResultOfSearch)
+        for (let i = 0; i < myarr.length; i++) {
+            scoundArr[myarr[i].index] = props.resultOfSearch["MainCategories"][i]
+        }
+        setArrAfterSort([...scoundArr]);
+        arrResultOfSearch = arrAfterSort
+        debugger
+    }
     function setSelectedCatgory(e) {
         var SelectedCategoryId;
         debugger

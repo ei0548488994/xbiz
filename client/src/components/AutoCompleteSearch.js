@@ -5,6 +5,8 @@ import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
   } from 'react-places-autocomplete'; 
+import './home_page/homePage.css'
+
 export class AutoCompleteSearch extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +36,17 @@ export class AutoCompleteSearch extends Component {
         })
         .catch(error => console.error('Error', error));
     };
+    componentDidUpdate() {
+      /////////////////שמירת מיקום של user 
+      debugger
+      localStorage.setItem('CurrentUserLocationLat', this.state.mapCenter.lat);
+      localStorage.setItem('CurrentUserLocationLng', this.state.mapCenter.lng);
+      if (localStorage.getItem('CurrentUserLocationLat') != "51.507351" &&
+        localStorage.getItem('CurrentUserLocationLng') != "-0.127758") {
+        localStorage.setItem('changedLocation', "true");
+      }
+  
+    }
     render() {
       return (
        <div id="googleMap"> 
@@ -45,8 +58,8 @@ export class AutoCompleteSearch extends Component {
           <div>
             <input
               {...getInputProps({
-                placeholder: 'Search Places ...',
-                className: 'location-search-input',
+                placeholder: 'מיקום',
+                className: 'location-search-input col-6',
               })}
             />
             <div className="autocomplete-dropdown-container">
@@ -80,6 +93,5 @@ export class AutoCompleteSearch extends Component {
 }
 
 export default GoogleApiWrapper({
-///בשביל שזה יעבוד אני צריכה לקחת את המחרוזת עצמה !!!!!!!!!!!
     apiKey: (process.env.REACT_APP_GOOGLE_API_KEY)
   })(AutoCompleteSearch)

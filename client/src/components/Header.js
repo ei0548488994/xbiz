@@ -7,27 +7,21 @@ import '../css/style.css'
 import '../css/main-color.css'
 import LogIn from './LogIn';
 import { Button, Modal } from 'react-bootstrap';
-import HomePage from "./HomePage";
+import HomePage from "./home_page/HomePage";
 import MyModal from "./MyModal";
 import { connect } from 'react-redux';
 import { getAllCategories } from '../redux/actions/category.action';
-
+import logo from '../images/logo.png'
 function Header(props) {
   const [modalShow, setModalShow] = React.useState(false);
   return (
     <>
-      {/* <button onClick={() => {
-        props.getAllCategories();
-      }}>
-        press
-      </button> */}
       <header id="header-container">
         <div id="header" className="not-sticky">
           <div className="container">
             <div className="left-side">
-
               <div id="logo">
-                <Link to="/HomePage" class="nav-link"> <a href="index.html"><img src="Your-Logo-here.png" alt /></a></Link>
+                <Link to="/" class="nav-link"><img src={logo} alt /></Link>
               </div>
               <div className="mmenu-trigger">
                 <button className="hamburger hamburger--collapse" type="button">

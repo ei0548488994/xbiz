@@ -1,4 +1,4 @@
-import { SET_SELECTED_BUSINESS_DETAILS, CREATE_BUSINESS, SEND_MAIL,ADD_CLICK_TO_BUSINESS  } from '../actions/business.action'
+import { SET_SELECTED_BUSINESS_DETAILS, CREATE_BUSINESS, SEND_MAIL, ADD_CLICK_TO_BUSINESS } from '../actions/business.action'
 const initialState = {
     CheckedBusinessDetails: "",
 }
