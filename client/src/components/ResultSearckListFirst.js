@@ -12,6 +12,7 @@ import GeolocationService from './../services/geolocation.service'
 const ResoltSearckListFirst = (props) => {
     const dispatch = useDispatch();
     const [arrAfterSort, setArrAfterSort] = useState([]);
+    const [CurrentUserLocation, setCurrentUserLocationLatLng] = useState({ "lat": 0, "lng": 0 });
     const [selectedText, setSelectedText] = useState("");
     // const resultOfSearch = useSelector((state) => state.resultOfSearch)
     // console.log(resultOfSearch)
@@ -55,7 +56,9 @@ const ResoltSearckListFirst = (props) => {
         }
     }
     useEffect(() => {
-
+        debugger
+        setCurrentUserLocationLatLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
+        props.setUserLocation(CurrentUserLocation)
     }, [])
     async function sortbynerlest() {
         let myarr = []
@@ -282,7 +285,11 @@ export default connect(
             getBusinessById: function (id) {
                 debugger
                 disatch(getBusinessBybId(id))
-            }
+            },       
+            setUserLocation: function (CurrentUserLocation) {
+                debugger
+                disatch(setUserLocation(CurrentUserLocation))
+              }
         }
     }
 )(withRouter(ResoltSearckListFirst))

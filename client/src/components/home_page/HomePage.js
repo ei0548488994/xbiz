@@ -41,6 +41,7 @@ function HomePage(props) {
   const [ChangedUserLocation, setChangedUserLocation] = useState(false);
   console.log("vhbjnk");
   console.log(props.popularCategories);
+  localStorage.setItem('flag', "false");
   //const home = useSelector((state) => state.home)
   // console.log(allCategories);
   var mainCategoriesArr = [];
@@ -105,14 +106,17 @@ function HomePage(props) {
     {
       if (localStorage.getItem('changedLocation') == "false") {
         debugger
-        setChangedUserLocation(true)
+        var change = "true"
+        setChangedUserLocation(change);
         console.log("change")
         console.log(ChangedUserLocation)
       }
       setCurrentUserLocationLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
       props.setUserLocation(CurrentUserLocation)
       debugger;
-      props.history.push("/ResultOfSearchList");
+      if (localStorage.getItem('changedLocation') == "true") {
+        props.history.push("/ResultOfSearchList");
+      }
       if (selectedCategory != "") {
         props.setSelectedCategory(selectedCategory);
         debugger;
@@ -134,9 +138,10 @@ function HomePage(props) {
     {
       props.getAllCategories();
     }
+    localStorage.setItem('changedLocation', "false");
     console.log("out", props.category);
     props.PopularCategories();
-    userLocation()
+
     // dispatch(getAllCategoriesAction(2));
     // if (allCategories.length > 0) {
     //     Object.keys(allCategories).forEach(key => mainCategoriesArr.push({ name: key, value: allCategories[key] }))
@@ -157,11 +162,11 @@ function HomePage(props) {
     // css.type = "text/css";
     // css.innerHTML = ".text-rotate > .wrap { border-right: 0.08em solid #666 }";
     // document.body.appendChild(css);
-  }, [ChangedUserLocation]);
+  }, []);
 
   return (
     <div>
-     
+
       {/* <button onClick={() => {
                 props.getAllCategories();
             }}>
@@ -179,13 +184,14 @@ function HomePage(props) {
 ================================================== */}
         <div
           className="main-search-container centered"
-<<<<<<< HEAD
-          data-background-image={backgroundImage}
-          style={{ backgroundImage: { backgroundImage } }}  >
-=======
-          data-background-image={backgroundImge}
-          style ={ { backgroundImage:`url(${backgroundImge})` } }  >
->>>>>>> a3104e3aded293e5e0be6a227d864e6cbd744c8e
+
+        //data-background-image={backgroundImage}
+        //style={{ backgroundImage: { backgroundImage } }}  >
+
+        // data-background-image={backgroundImge}
+        // style ={ { backgroundImage:`url(${backgroundImge})` } } 
+        >
+          {/* a3104e3aded293e5e0be6a227d864e6cbd744c8e */}
           <div className="main-search-inner">
             <div className="container">
               <div>
@@ -226,10 +232,8 @@ function HomePage(props) {
                         <i className="fa fa-map-marker" />
                       </a>
                       <div id="autocomplete-container">
-                        {/* <input id="autocomplete-input" type="text" placeholder="Location" /> */}
-                        {/* <UserLocation /> */}
-                        {ChangedUserLocation ? <UserLocation /> : ""}
                         <AutoCompleteSearch />
+                        {ChangedUserLocation == "true" ? <UserLocation /> : ""}
                       </div>
 
                     </div>
@@ -245,7 +249,7 @@ function HomePage(props) {
                                                     : ""}
                                             </select>
                                         </div> */}
-                    <button className="button" onClick={searchClick}>
+                    <button className="button" onClick={searchClick} disabled={selectedText==''}>
                       חפש
                     </button>
                   </div>
