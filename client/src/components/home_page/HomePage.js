@@ -6,7 +6,7 @@ import backgroundImage from '../../images/main-search-background-01.jpg'
 import Header from "../Header";
 import UserLocation from "../UserLocation";
 import AutoCompleteSearch from "../AutoCompleteSearch";
-import { setUserLocation } from '../../redux/actions/location.action'
+import { setUserLocation } from '../../redux/actions/location.action';
 import ResultOfSearchListFirst from "../ResultSearckListFirst";
 import {
   withRouter,
@@ -123,41 +123,40 @@ function HomePage(props) {
         props.getResultosSearchBYText(selectedText);
       }
     }
-  }
+  } 
   function userLocation() {
     debugger
     setCurrentUserLocationLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
     props.setUserLocation(CurrentUserLocation)
 }
-
-  useEffect(() => {
-    {
-      props.getAllCategories();
-    }
-    console.log("out", props.category);
-    props.PopularCategories();
-    userLocation()
-    // dispatch(getAllCategoriesAction(2));
-    // if (allCategories.length > 0) {
-    //     Object.keys(allCategories).forEach(key => mainCategoriesArr.push({ name: key, value: allCategories[key] }))
-    //     debugger;
-    //     console.log(allCategories);
-    //     console.log(mainCategoriesArr)
-    // }
-    // let elements = document.getElementsByClassName('text-rotate');
-    // for (let i = 0; i < elements.length; i++) {
-    //     let toRotate = elements[i].getAttribute('data-rotate');
-    //     let period = elements[i].getAttribute('data-period');
-    //     if (toRotate) {
-    //         new textRotate(elements[i], JSON.parse(toRotate), period);
-    //     }
-    // }
-    // // INJECT CSS
-    // let css = document.createElement("style");
-    // css.type = "text/css";
-    // css.innerHTML = ".text-rotate > .wrap { border-right: 0.08em solid #666 }";
-    // document.body.appendChild(css);
-  }, [ChangedUserLocation]);
+useEffect(() => {
+  {
+    props.getAllCategories();
+  }
+  console.log("out", props.category);
+  props.PopularCategories();
+  userLocation()
+  // dispatch(getAllCategoriesAction(2));
+  // if (allCategories.length > 0) {
+  //     Object.keys(allCategories).forEach(key => mainCategoriesArr.push({ name: key, value: allCategories[key] }))
+  //     debugger;
+  //     console.log(allCategories);
+  //     console.log(mainCategoriesArr)
+  // }
+  // let elements = document.getElementsByClassName('text-rotate');
+  // for (let i = 0; i < elements.length; i++) {
+  //     let toRotate = elements[i].getAttribute('data-rotate');
+  //     let period = elements[i].getAttribute('data-period');
+  //     if (toRotate) {
+  //         new textRotate(elements[i], JSON.parse(toRotate), period);
+  //     }
+  // }
+  // // INJECT CSS
+  // let css = document.createElement("style");
+  // css.type = "text/css";
+  // css.innerHTML = ".text-rotate > .wrap { border-right: 0.08em solid #666 }";
+  // document.body.appendChild(css);
+}, [ChangedUserLocation]);
 
   return (
     <div>
@@ -216,10 +215,10 @@ function HomePage(props) {
                       />
                     </div>
                     <div className="main-search-input-item location d-flex align-content-center">
-                        <a href="#">
+                        <a href="#" className="d-flex justify-content-center pt-4">
                         <i className="fa fa-map-marker"  />
                       </a>
-                      <div id="autocomplete-container">
+                      <div id="autocomplete-container" className="p-0">
                         {/* <input id="autocomplete-input" type="text" placeholder="Location" /> */}
                         {/* <UserLocation /> */}
                         {ChangedUserLocation? <UserLocation />:"" }
@@ -245,6 +244,7 @@ function HomePage(props) {
                   </div>
                 </div>
               </div>
+              {/* Features Categories */}
               {/* Features Categories */}
               {/* onClick={(e) => { setSelectedCatgory(option.value.mainCategoryName) },searchClick}  */}
               <div className="row">

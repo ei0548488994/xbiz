@@ -23,7 +23,7 @@
   border-radius: unset;
 }
 .main-search-container #googleMap {
-  padding-right: 60px;
+  padding-right: 30px;
 }
 .main-search-container .highlighted-categories i {
   padding-left: 10px;
@@ -33,4 +33,56 @@
   font-size: 20px;
   position: fixed;
 }
-  
+
+.autocomplete-dropdown-container {
+  text-align: right;
+  font-size: 15px;
+  margin-left: 20px;
+  line-height: 2;
+  z-index: 100;
+}
+
+@media screen and (max-width: 1260px) {
+  .autocomplete-dropdown-container {
+    padding: 0px !important;
+    margin-left: 30px;
+  }
+}
+@media screen and (max-width: 991px) {
+  #googleMap {
+    padding-right: 0px !important;
+    margin-left: 20px;
+  }
+
+  #autocomplete-input .main-search-container {
+    border-right: none !important;
+  }
+
+  .location {
+    background-color: white;
+    border-radius: 3px;
+  }
+
+  .location-search-input {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  a {
+    z-index: 11;
+  }
+
+  .text {
+    border-left: none !important;
+  }
+}
+@media screen and (max-width: 577px) {
+  #googleMap {
+    padding-right: 0px !important;
+    margin: 0px;
+  }
+
+  .text {
+    border-left: none !important;
+  }
+}

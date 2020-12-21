@@ -1910,7 +1910,9 @@ body .typed-cursor.typed-cursor--blink.typed-fade-out{
 }
 
 @media (max-width: 768px) {
-    .typed-words { display: block; width: 100%; min-height: 46px; }  
+    .typed-words { 
+		/* display: block;  */
+		width: 100%; min-height: 46px; }  
     .typed-cursor { display: none; }
 }
 
@@ -2412,7 +2414,7 @@ body .pac-container {
 #autocomplete-container,
 #autocomplete-input {
     position: relative;
-    z-index: 101;
+    /* z-index: 101; */
 }
 
 .main-search-input.gray-style .main-search-input-item.location a,
