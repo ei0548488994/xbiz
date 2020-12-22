@@ -1,5 +1,5 @@
 // import BusinessDetails from './BusinessDetails.js/index.js.js';
-import LogIn from './LogIn'
+//import LogIn from './LogIn'
 import { Button } from 'react-bootstrap';
 import ContactPage from "./ContactPage"
 import BusinessDetails from './BusinessDetails'
@@ -23,6 +23,15 @@ import Contact from './Contact'
 import Add_buisness from "./add_business/add_business";
 import ResultOfSearchListFirst from "./ResultSearckListFirst"
 import GoogleMap from './GoogleMap';
+/*********** */
+import Signup from "./Signup";
+import { AuthProvider } from "../contexts/AuthContext";
+import Dashboard from "./Dashboard";
+import Login from "./Login";
+import PrivateRoute from "./PrivateRoute";
+import ForgotPassword from "./ForgotPassword";
+import UpdateProfile from "./UpdateProfile";
+
 function App(props) {
   // const [allCategories, setAllCategories] = useState()
   const [currentCategoryId, setCurrentCategoryId] = useState(null);
@@ -37,6 +46,7 @@ function App(props) {
     <>
 
       <Router>
+      <AuthProvider>
         <Header></Header>
         {/* <GoogleMap/> */}
         <Switch>
@@ -59,10 +69,17 @@ function App(props) {
           <Route path="/Contact">
             <ContactPage />
           </Route>
-          <Route path="/">
+          {/* <Route path="/">
             <HomePage />
-          </Route>
+          </Route> */}
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+         <PrivateRoute path="/update-profile" component={UpdateProfile} />
+         <Route path="/signup" component={Signup} />
+         <Route path="/login" component={Login} />
+         <Route path="/forgot-password" component={ForgotPassword} />
+         <Route path="/" component={HomePage} />
         </Switch>
+        </AuthProvider>
       </Router>
       {/* <Add_buisness/> */}
       {/*<ContactPage/> */}

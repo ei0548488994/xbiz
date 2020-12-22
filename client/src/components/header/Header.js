@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-/*import './business/Business.css';*/
+//import './business/Business.css';
 import BusinessDetails from "../BusinessDetails";
 import {
   BrowserRouter as Router,
@@ -11,10 +11,10 @@ import {
 } from "react-router-dom";
 import "../../css/style.css";
 import "../../css/main-color.css";
-import LogIn from "../LogIn";
+//import LogIn from "../LogIn";
 import { Button, Modal } from "react-bootstrap";
 import HomePage from "../home_page/HomePage";
-import MyModal from "../MyModal";
+//import MyModal from "../MyModal";
 import { connect } from "react-redux";
 import { getAllCategories } from "../../redux/actions/category.action";
 import logo from "../../images/logo.png";
@@ -65,7 +65,7 @@ function Header(props) {
                 >
                   כניסה<i class="fa fa-sign-in" aria-hidden="true"></i>
                 </a>
-                <MyModal show={modalShow} onHide={() => setModalShow(false)} />
+                {/* {/*<MyModal show={modalShow} onHide={() => setModalShow(false)} /> */}
               </div>
             </div>
             {/* <div id="sign-in-dialog" className="zoom-anim-dialog mfp-hide"> */}

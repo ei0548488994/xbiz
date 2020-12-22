@@ -1,48 +1,80 @@
-import React from 'react'
-import { Button, Modal } from 'react-bootstrap';
-// import { withRouter } from 'react-router-dom';
-export default function LogIn(props) {
+import React, { useRef, useState, useEffect } from "react";
+import { Form, Button, Card, Alert, Container } from "react-bootstrap";
+import { useAuth } from "../contexts/AuthContext";
+import { Link, useHistory } from "react-router-dom";
+//import firebase from "firebase";
+//import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+
+export default function Login() {
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const { login } = useAuth()
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
+  const history = useHistory()
+  /*let uiConfig = {
+    signInFlow: "popup",
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID
+    ],
+    callbacks: {
+      signInSuccess: () => false
+    }
+  };*/
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    try {
+      setError("")
+      setLoading(true)
+      await login(emailRef.current.value, passwordRef.current.value)
+      history.push("/")
+    } catch {
+      setError("Failed to log in")
+    }
+
+    setLoading(false)
+  }
+
   return (
     <>
-        <div id="sign-in-dialog" className="zoom-anim-dialog">
-          <div className="sign-in-form style-1">
-            <div className="tabs-container alt">
-              {/* Login */}
-              <div className="tab-content" id="tab1">
-                <form method="post" className="login">
-                  <p className="form-row form-row-wide">
-                    <label htmlFor="username">שם משתמש:
-                        <i className="im im-icon-Male" />
-                      <input type="text" className="input-text" name="username" id="username" defaultValue />
-                    </label>
-                  </p>
-                  <p className="form-row form-row-wide">
-                    <label htmlFor="password">סיסמא:
-                        <i className="im im-icon-Lock-2" />
-                      <input className="input-text" type="password" name="password" id="password" />
-                    </label>
-                    <span className="lost_password">
-                      <a href="#">שכחת סיסמא?</a>
-                    </span>
-                  </p>
-                  <div className="form-row">
-                    <input type="submit" className="button border margin-top-5" name="login" defaultValue="Login" />
-                    <div className="checkboxes margin-top-10">
-                      <input id="remember-me" type="checkbox" name="check" />
-                      <label htmlFor="remember-me">זיכרו אותי</label>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              {/* Register */}
-            </div>
+    <Container className="d-flex align-items-center justify-content-center"
+               style={{ minHeight: "100vh" }}>
+    <div className="w-100" 
+         style={{ maxWidth: "400px" }}>
+      <Card className="css-shadow">
+        <Card.Body>
+          <h2 className="css-text text-center mb-4">Log In</h2>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form onSubmit={handleSubmit}>
+            <Form.Group id="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control type="email" ref={emailRef} required />
+            </Form.Group>
+            <Form.Group id="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" ref={passwordRef} required />
+            </Form.Group>
+            <Button disabled={loading} className="w-100" type="submit">
+              Log In
+            </Button>
+            {/*<br/>
+            <StyledFirebaseAuth 
+              uiConfig={uiConfig}
+              firebaseAuth={firebase.auth()}
+            type="submit"/>*/}
+          </Form>
+          <div className="w-100 text-center mt-3">
+            <Link to="/forgot-password">Forgot Password?</Link>
           </div>
-        </div>
-        {/* Sign In Popup / End */}
-
-      {/* </Modal.Body>
-      <Button onClick={props.onHide}>Close</Button>
-    </Modal> */}
+        </Card.Body>
+      </Card>
+      <div className="w-100 text-center mt-2">
+        Need an account? <Link to="/signup">Sign Up</Link>
+      </div>
+    </div> 
+    </Container> 
     </>
-  );
+  )
 }
