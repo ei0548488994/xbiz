@@ -23,21 +23,18 @@ import Contact from './Contact'
 import Add_buisness from "./add_business/add_business";
 import ResultOfSearchListFirst from "./ResultSearckListFirst"
 import GoogleMap from './GoogleMap';
-<<<<<<< HEAD
 import WishList from './wishList/WishList';
-=======
 /*********** */
 import Signup from "./Signup";
 import { AuthProvider } from "../contexts/AuthContext";
 import Dashboard from "./Dashboard";
-import Login from "./Login";
+import Login from "./LogIn";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import AudioSearch from "./AudioSearch";
 
 
->>>>>>> 04d05f5f849ce5135a216ad1d2374cd965cc173b
 function App(props) {
   // const [allCategories, setAllCategories] = useState()
   const [currentCategoryId, setCurrentCategoryId] = useState(null);
