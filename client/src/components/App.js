@@ -31,6 +31,8 @@ import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
+import AudioSearch from "./AudioSearch";
+
 
 function App(props) {
   // const [allCategories, setAllCategories] = useState()
@@ -78,6 +80,7 @@ function App(props) {
          <Route path="/login" component={Login} />
          <Route path="/forgot-password" component={ForgotPassword} />
          <Route path="/" component={HomePage} />
+         <Route path="/try" component={AudioSearch} />
         </Switch>
         </AuthProvider>
       </Router>

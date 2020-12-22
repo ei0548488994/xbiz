@@ -58,7 +58,13 @@ function Footer(props) {
                             <div className="text-widget">
                                 <span>בר כוכבא 4 קומה 6</span> <br />
                                 טלפון: <span>(123) 123-456 </span><br />
-                                אמייל:<span> <a href="#">office@example.com</a> </span><br />
+                                אמייל:<span>
+                                <EmailShareButton subject="פניה לפלייסס"
+                                                  body="מה אתה רוצה לומר לנו?:)"
+                                                  url="office@example.com">
+                                     <a href="#">office@example.com</a>
+                                </EmailShareButton>        
+                            </span><br />
                             </div>
                             <ul className="social-icons margin-top-20">
                                 <li><a className="facebook" href="#"><i className="icon-facebook" /></a></li>
