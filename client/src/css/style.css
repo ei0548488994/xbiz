@@ -273,7 +273,7 @@ img.footer-logo { max-height: 38px; width: auto; }
 
 .header-widget .sign-in {
 	position: unset;
-	color: #333;
+	color: #212529;
 	top: 10px;
 	display: inline-block;
 }
@@ -891,10 +891,12 @@ body #navigation.style-1 ul ul li:hover ul li a:hover { color: #66676b; }
 	display: inline-block;
 	cursor: pointer;
 	margin-right: 25px;
-	top: 9px;
+	top: 15px;
 	vertical-align: top;
 	padding-left: 25px;
 	margin-left: 25px;
+	font-size: larger;
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .user-menu .user-name { transition: 0.2s; }
@@ -908,7 +910,7 @@ body #navigation.style-1 ul ul li:hover ul li a:hover { color: #66676b; }
     max-width: 130px;
 }*/
 
-.user-menu .user-name:after {
+.user-menu .user-name::before {
 	content: "\f107";
 	font-family: "FontAwesome";
 	transition: 0.2s;
@@ -918,8 +920,8 @@ body #navigation.style-1 ul ul li:hover ul li a:hover { color: #66676b; }
 	color: #aaa;
 }
 
-.user-menu.active .user-name:after,
-.user-menu:hover .user-name:after,
+.user-menu.active .user-name:before,
+.user-menu:hover .user-name:before,
 .user-menu.active .user-name,
 .user-menu:hover .user-name {
 	color: #66676b;
@@ -17666,7 +17668,8 @@ body .category-box-btn:hover {
 	    padding: 0;
 	    max-height: 100%;
 	    background-color: transparent;
-	    box-shadow: none;
+		box-shadow: none;
+	margin-right: -12px;
 	}
 
 	.gray-style.main-search-input { background-color: transparent; }

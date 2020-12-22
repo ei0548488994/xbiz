@@ -24,7 +24,7 @@ export default function categoryReducer(state = initialState, action) {
                 {
                     console.log("reducer")
                     var mainCategoriesArr = [];
-                    Object.keys(action.payload).forEach(key => mainCategoriesArr.push({ name: key, value: action.payload[key] }))
+                    // Object.keys(action.payload).forEach(key => mainCategoriesArr.push({ name: key, value: action.payload[key] }))
                     console.log(mainCategoriesArr)
                 return { ...state, popularCategories: mainCategoriesArr }
 

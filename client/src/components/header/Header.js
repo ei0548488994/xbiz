@@ -1,35 +1,44 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 /*import './business/Business.css';*/
 import BusinessDetails from "../BusinessDetails";
-import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
-import '../../css/style.css'
-import '../../css/main-color.css'
-import LogIn from '../LogIn';
-import { Button, Modal } from 'react-bootstrap';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  withRouter,
+} from "react-router-dom";
+import "../../css/style.css";
+import "../../css/main-color.css";
+import LogIn from "../LogIn";
+import { Button, Modal } from "react-bootstrap";
 import HomePage from "../home_page/HomePage";
 import MyModal from "../MyModal";
-import { connect } from 'react-redux';
-import { getAllCategories } from '../../redux/actions/category.action';
-import logo from '../../images/logo.png';
-import './header.css';
+import { connect } from "react-redux";
+import { getAllCategories } from "../../redux/actions/category.action";
+import logo from "../../images/logo.png";
+import img from "../../images/dashboard-avatar.jpg";
+import "./header.css";
 function Header(props) {
   const [modalShow, setModalShow] = React.useState(false);
-  const isdark=props;
-  const backgroundColor=isdark?'white':'transparent';
   return (
     <>
-      <header id="header-container" 
-      // className="transParentHeader"
-      // className={""+setIsHomePage===true?'darkHeader':'transParentHeader'}  
-      // style={{backgroundColor:backgroundColor}}
+      <header
+        id="header-container"
+        // className="transParentHeader"
+        // className={""+setIsHomePage===true?'darkHeader':'transParentHeader'}
+        // style={{backgroundColor:backgroundColor}}
       >
         <div id="header" className="not-sticky">
           <div className="container d-flex justify-content-between">
-            <div className="left-side">
+            <div className="left-side d-flex">
               <div id="logo">
-                <Link to="/" class="nav-link"><img src={logo} alt /></Link>
+                <Link to="/" class="nav-link">
+                  <img src={logo} alt />
+                </Link>
               </div>
+              
               {/* <div className="mmenu-trigger">
                 <button className="hamburger hamburger--collapse" type="button">
                   <span className="hamburger-box">
@@ -37,17 +46,26 @@ function Header(props) {
                   </span>
                 </button>
               </div> */}
-         
             </div>
-            <div className="right-side">
+            <div className="right-side d-flex">
+            <div className="user-menu">
+                <div className="user-name">
+                  <span>
+                    <img src={img} alt />
+                  </span>
+                  Hi, Tom!
+                </div>
+              </div>
               <div className="header-widget align-items-center justify-content-center d-flex m-0 p-3 pr-5 pl-5">
-                  <a href="#sign-in-dialog" class="nav-link" class="sign-in popup-with-zoom-anim"
-                    onClick={() => setModalShow(true)}>
-                    כניסה<i class="fa fa-sign-in" aria-hidden="true"></i></a>
-                <MyModal
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />
+                <a
+                  href="#sign-in-dialog"
+                  class="nav-link"
+                  class="sign-in popup-with-zoom-anim"
+                  onClick={() => setModalShow(true)}
+                >
+                  כניסה<i class="fa fa-sign-in" aria-hidden="true"></i>
+                </a>
+                <MyModal show={modalShow} onHide={() => setModalShow(false)} />
               </div>
             </div>
             {/* <div id="sign-in-dialog" className="zoom-anim-dialog mfp-hide"> */}
@@ -75,15 +93,14 @@ function Header(props) {
 export default connect(
   (state) => {
     return {
-      category: state.category.category
-    }
+      category: state.category.category,
+    };
   },
   (disatch) => {
     return {
       getAllCategories: function () {
-        disatch(getAllCategories())
-      }
-    }
+        disatch(getAllCategories());
+      },
+    };
   }
 )(Header);
-

@@ -7,6 +7,7 @@ import Footer from './Footer';
 // import from bootstrap-icons
 import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory, getResultofSearchByText } from '../redux/actions/category.action';
 import { setSelectedBusinessDetails, addClicksToBusiness, getBusinessBybId } from '../redux/actions/business.action'
+import {setUserLocation} from '../redux/actions/location.action'
 import GeolocationService from './../services/geolocation.service'
 
 const ResoltSearckListFirst = (props) => {
