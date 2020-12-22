@@ -16,7 +16,7 @@ export default function MyModal(props) {
                 <Modal.Body>
                     <div id="sign-in-dialog" className="zoom-anim-dialog">
                         <div className="small-dialog-header">
-                            <h3>Sign In</h3>
+                            <h3>כניסה</h3>
                         </div>
                         <div className="sign-in-form style-1">
                             <ul className="tabs-nav">

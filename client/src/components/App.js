@@ -23,6 +23,7 @@ import Contact from './Contact'
 import Add_buisness from "./add_business/add_business";
 import ResultOfSearchListFirst from "./ResultSearckListFirst"
 import GoogleMap from './GoogleMap';
+import WishList from './wishList/WishList';
 function App(props) {
   // const [allCategories, setAllCategories] = useState()
   const [currentCategoryId, setCurrentCategoryId] = useState(null);
@@ -36,20 +37,20 @@ function App(props) {
   return (
     <>
 
-      <Router>
+       <Router>
         <Header></Header>
         {/* <GoogleMap/> */}
         <Switch>
           <Route path="/HomePage">
             <HomePage />
-          </Route>
-          <Route  path="/business/:id">
+         </Route>
+           <Route  path="/business/:id">
             <BusinessDetails />
-          </Route>
-          <Route path="/ResultOfSearchList">
+           </Route>
+          <Route path="/ResultOfSearchList"> 
             {/* <ResultOfSearchListFirst /> */}
             <ResultOfSearchList />
-          </Route>
+          </Route> 
     
           {/* <Route path="/BusinessDetails" component={BusinessDetails}>
             <BusinessDetails />
@@ -63,9 +64,10 @@ function App(props) {
             <HomePage />
           </Route>
         </Switch>
-      </Router>
+      </Router> 
       {/* <Add_buisness/> */}
       {/*<ContactPage/> */}
+      {/* <WishList/> */}
     </>
   );
 }

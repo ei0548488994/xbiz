@@ -124,9 +124,9 @@ function Add_buisness(props) {
     <>
       {/* Wrapper */}
       <div className="wrapper d-flex justify-content-between">
-        <div className="wrapper_Navigator">
+        {/* <div className="wrapper_Navigator"> */}
           {/* <Navigator /> */}
-        </div>
+        {/* </div> */}
         {/* Dashboard */}
         <div className="dashboard">
           {/* Content

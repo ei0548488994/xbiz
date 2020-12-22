@@ -1,6 +1,5 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-/*import './business/Business.css';*/
 import BusinessDetails from "../BusinessDetails";
 import {
   BrowserRouter as Router,
@@ -26,9 +25,7 @@ function Header(props) {
     <>
       <header
         id="header-container"
-        // className="transParentHeader"
         // className={""+setIsHomePage===true?'darkHeader':'transParentHeader'}
-        // style={{backgroundColor:backgroundColor}}
       >
         <div id="header" className="not-sticky">
           <div className="container d-flex justify-content-between">

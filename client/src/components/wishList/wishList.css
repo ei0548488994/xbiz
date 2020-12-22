@@ -1,0 +1,22 @@
+.dashboard-content{
+    width: 100%;
+    margin: 0;
+
+}
+h2{
+    padding-right: 20px;;
+}
+#breadcrumbs{
+    left:20px;
+    
+} 
+.liIcon:before { 
+        content: "\f104" !important;
+        font-family: "FontAwesome";
+        font-size: 12px;
+        margin-right: 15px;
+        margin-left: 10px;
+        
+    }
+.list-box-listing{
+    width: -webkit-fill-available;}
