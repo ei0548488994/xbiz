@@ -11,6 +11,7 @@ import reducer from './reducers'
 
 import store from './redux/store';
 import Pricing from './components/Pricing';
+import './index.css'
 
 ReactDOM.render(
   // <Provider store={

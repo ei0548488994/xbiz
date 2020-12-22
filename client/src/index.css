@@ -1,0 +1,77 @@
+:root{
+    --first-color:  #06B4FE;
+    --second-color: #f8f9fa;
+    --third-color: #E8EAEC;
+    --fourth-color: #F8F8F8;
+    --fifth-color: rgb(0, 17, 110);
+    --sixth-color: #A66DFF;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+} 
+body{
+    width: 100%;
+    min-height: 100vh;
+    background: radial-gradient(
+      ellipse at left bottom,
+      var(--fourth-color) 0%,
+      var(--third-color) 59%,
+      var(--fourth-color)100%
+    );
+  }
+.css-text{
+    color: #384364;
+    opacity: 0.78;
+}
+
+.css-shadow{
+    box-shadow: 0px 2px 6px #0000001F;
+}
+
+.css-main{
+    width: 100%;
+    min-height: 100vh ;
+}
+
+.css-main nav {
+    background: white;
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 2px 6px #0000001F;
+    height: 80px;
+}
+
+.css-main nav h5 {
+    color: #384364;
+    opacity: 0.78;
+}
+  
+.css-main nav button {
+    width: 86px;
+    padding: 8px 0;
+}
+
+
+.css-btn {
+    margin: 1em;
+    padding: 0;
+    border: none;
+    background: none;
+    color: #384364;
+    opacity: 0.78;
+    font-size: 1.4em;
+    transition: color 0.7s;
+}
+.css-btn.css-btn--click, .css-btn:focus {
+    outline: none;
+    color: #3e4866;
+}
+.css-btn:hover {
+    color: black;
+}
