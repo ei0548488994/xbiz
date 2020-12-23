@@ -4,7 +4,6 @@ import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 //import firebase from "firebase";
 //import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
