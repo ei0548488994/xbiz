@@ -28,7 +28,7 @@ import WishList from './wishList/WishList';
 import Signup from "./Signup";
 import { AuthProvider } from "../contexts/AuthContext";
 import Dashboard from "./Dashboard";
-import Login from "./LogIn";
+import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
@@ -52,7 +52,6 @@ function App(props) {
       <Router>
       <AuthProvider>
         <Header></Header>
-        <GoogleMap/>
         <Switch>
           <Route path="/HomePage">
             <HomePage />
