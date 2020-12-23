@@ -9,8 +9,7 @@ const initialState = {
     resultOfSearch: [
         // { location: "petach tkava", lat: 32.0907852, len: 34.9222051, name: "blah" },
         // { location: "london", lat: 51.5285582, len: 0.0384839, name: "blah" },
-        // { location: "dimona", lat: 31.0187041, len: 35.1658003, name: "blah" }
-        
+        // { location: "dimona", lat: 31.0187041, len: 35.1658003, name: "blah" }    
     ],
     popularCategories: []
 

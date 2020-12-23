@@ -5,9 +5,6 @@ import '../css/main-color.css'
 export default function CommingSoon() {
   return (
     <div id="wrapper">
-      {/* Content
-  ================================================== */}
-      {/* Coming Soon Page */}
       <div
         className="coming-soon-page"
         style={{ backgroundImage: "url(images/main-search-background-01.jpg)" }}
@@ -40,14 +37,4 @@ export default function CommingSoon() {
       {/* Coming Soon Page / End */}
     </div>
   );
-  {
-    /* Wrapper / End */
-  }
-  {
-    /* Scripts
-  ================================================== */
-  }
-  {
-    /* Countdown Script */
-  }
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { EmailShareButton } from "react-share";
-import ContactPage from './ContactPage'
 import { connect } from 'react-redux';
 import { withRouter, Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import logo from '../images/logo.png';

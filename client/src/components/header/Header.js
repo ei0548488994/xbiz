@@ -1,7 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-//import './business/Business.css';
-import BusinessDetails from "../BusinessDetails";
+import { Button, Modal } from "react-bootstrap";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,10 +10,6 @@ import {
 } from "react-router-dom";
 import "../../css/style.css";
 import "../../css/main-color.css";
-//import LogIn from "../LogIn";
-import { Button, Modal } from "react-bootstrap";
-import HomePage from "../home_page/HomePage";
-//import MyModal from "../MyModal";
 import { connect } from "react-redux";
 import { getAllCategories } from "../../redux/actions/category.action";
 import logo from "../../images/logo.png";
@@ -51,7 +46,7 @@ function Header(props) {
                   <span>
                     <img src={img} alt />
                   </span>
-                  Hi, Tom!
+                  {/* Hi, Tom! */}
                 </div>
               </div>
               <div className="header-widget align-items-center justify-content-center d-flex m-0 p-3 pr-5 pl-5">
@@ -59,31 +54,14 @@ function Header(props) {
                   href="#sign-in-dialog"
                   class="nav-link"
                   class="sign-in popup-with-zoom-anim"
-                  onClick={() => setModalShow(true)}
-                >
+                  onClick={() => setModalShow(true)}>
                   כניסה<i class="fa fa-sign-in" aria-hidden="true"></i>
                 </a>
-                {/* {/*<MyModal show={modalShow} onHide={() => setModalShow(false)} /> */}
               </div>
             </div>
-            {/* <div id="sign-in-dialog" className="zoom-anim-dialog mfp-hide"> */}
-            {/* <div className="small-dialog-header">
-                  <h3>Sign In</h3>
-                </div> */}
-            {/* <div className="sign-in-form style-1">
-                  <ul className="tabs-nav">
-                    <li className><a href="#tab1">Log In</a></li>
-                    <li><a href="#tab2">Register</a></li>
-                  </ul>
-                  <div className="tabs-container alt">
-                  
-                  </div>
-                </div> */}
-            {/* </div> */}
           </div>
         </div>
       </header>
-      {/* <div className="clearfix" /> */}
     </>
   );
 }

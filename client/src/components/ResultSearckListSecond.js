@@ -96,8 +96,6 @@ const ResultSearckListSecond = (props) => {
                         </div>
                     </div>
                 </div>
-                {/* Content
-================================================== */}
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-9 col-md-8 padding-right-30">
