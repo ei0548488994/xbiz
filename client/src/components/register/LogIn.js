@@ -51,12 +51,12 @@ export default function Login() {
           <Form onSubmit={handleSubmit}>
           <Form.Label>אמייל</Form.Label>
             <Form.Group id="email" className="input-group">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <span class="input-group-addon"><i class="im im-icon-Male"></i></span>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
             <Form.Label>סיסמה</Form.Label>
             <Form.Group id="password" className="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <span class="input-group-addon"><i class="im im-icon-Lock-2"></i></span>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
             <div className="d-flex justify-content-end">

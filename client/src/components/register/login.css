@@ -5,18 +5,24 @@
 .container::after {
     content: none !important;
 }
-
+.input-group{
+    border: 1px solid #ccc !important;
+    border-radius: 3px !important;
+   box-shadow:  0 1px 3px 0px rgba(0, 0, 0, 0.06) !important;
+}
 .input-group-addon {
-    border-top-left-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-    border-left: none !important;
-    border-right: 1px solid #ccc !important;
-    border-top-right-radius: 3px !important;
-    border-bottom-right-radius: 3px !important;
+    
+    border: none !important;
+   border-radius: none !important;
+    background-color: white !important;
+    box-shadow: none !important;
 }
 .form-control{
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0!important;
+    border: none !important;
+    border-radius: none !important;
+     background-color: white !important;
+     box-shadow: none !important;
+
 }
 .submit{
     padding: 10px 30px !important;
@@ -26,10 +32,20 @@
     font-size:larger !important;
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
-a, .text{
-    font-size: large !important;
-}
-a:hover{
-    text-decoration: none !important;
+a{
+    font-size: 15px !important;
+    font-weight: normal !important;
     color:#f91942 !important;
+}
+.text{
+    font-size: 15px !important;
+    font-weight: normal !important;
+}
+i{
+    font-size: 21px;
+}
+label{
+    color: #666;
+    font-size: 15px;
+    font-weight: normal !important;
 }
