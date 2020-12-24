@@ -5,7 +5,6 @@ const initialState = {
     CheckedBusinessDetails: "",
 }
 
-
 export default function bisinessReducer(state = initialState, action) {
     switch (action.type) {
         case SET_SELECTED_BUSINESS_DETAILS:
@@ -37,6 +36,5 @@ export default function bisinessReducer(state = initialState, action) {
             }
         default:
             return state
-
     }
 }

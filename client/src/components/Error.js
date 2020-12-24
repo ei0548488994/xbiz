@@ -2,17 +2,11 @@ import React from "react";
 import "../css/style.css";
 import "../css/main-color.css";
 import "../fonts/fontawesome-webfont.eot";
-import logo2 from "../images/logo2.png";
-import dashboardAvatar from "../images/logo2.png";
-
 export default function Error() {
   return (
     <div>
       <div id="wrapper">
-        {/* Header Container
-================================================== */}
         <header id="header-container">
-          {/* Header */}
           <div id="header">
             <div className="container">
               {/* Left Side Content */}

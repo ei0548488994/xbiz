@@ -1,5 +1,3 @@
-////zvvvvvvv
-
 import BusinnesService from "../../services/business.service";
 export const ADD_CLICK_TO_BUSINESS="[business] ADD_CLICK_TO_BUSINESS"
 export const SET_SELECTED_BUSINESS_DETAILS="[business] SET_SELECTED_BUSINESS_DETAILS"

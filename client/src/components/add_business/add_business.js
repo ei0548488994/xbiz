@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { connect } from 'react-redux';
 import AutoCompleteSearch from '../AutoCompleteSearch'
-// import "./dist/add_buisness.css";
 import '../add_business/add_business.css';
 import {
   getAllCategories,
@@ -231,20 +230,6 @@ function Add_buisness(props) {
                     <div className="submit-section">
                       {/* Row */}
                       <div className="row with-forms">
-                        {/* City */}
-                        {/* <div className="col-md-6">
-                          <h5>עיר</h5>
-                          <select onChange={(e) => { setCity(e.target.value) }} className="chosen-select-no-single">
-                            <option label="blank">בחר עיר</option>
-                            <option>בני ברק</option>
-                            <option>ירושלים</option>
-                            <option>תל אביב</option>
-                            <option>חיפה</option>
-                            <option>ביתר</option>
-                            <option>אלעד</option>
-                            <option>אשדוד</option>
-                          </select>
-                        </div> */}
                         {/* Address */}
                         <div className="col-md-6" onChange={(e) => { setAdress(e.target.value) }} >
                           <h5>כתובת</h5>

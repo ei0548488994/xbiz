@@ -1,7 +1,6 @@
-import React, { useEffect, useState,useParams } from 'react'
-import { withRouter, Link } from 'react-router-dom';
-import ItemResultSearchFirst from './ItemResultSearchFirst';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import Footer from './Footer';
 // import from bootstrap-icons
@@ -12,16 +11,12 @@ import {setUserLocation} from '../redux/actions/location.action'
 import GeolocationService from './../services/geolocation.service'
 
 const ResoltSearckListFirst = (props) => {
-    const dispatch = useDispatch();
     const [arrAfterSort, setArrAfterSort] = useState([]);
     const [CurrentUserLocation, setCurrentUserLocationLatLng] = useState({ "lat": 0, "lng": 0 });
     const [selectedText, setSelectedText] = useState("");
     // const resultOfSearch = useSelector((state) => state.resultOfSearch)
-    // console.log(resultOfSearch)
-    var arr2 = [];
-    var arr3;
-    var arr4;
-    var arrResultOfSearch = [];
+    // console.log(resultOfSearch);
+    let arrResultOfSearch = [];
     //  Object.keys(props.category).forEach(key => arr2.push({ name: key, value: props.category[key] }))
     //  if(arr2!=undefined){
     //      arr3=arr2[0].value;}
@@ -301,5 +296,3 @@ export default connect(
         }
     }
 )(withRouter(ResoltSearckListFirst))
-
-// export default withRouter(ResoltSearckListFirst)

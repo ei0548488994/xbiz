@@ -10,52 +10,45 @@ class BusinnesService {
         }).catch(o => {
             console.log(o);
         });
-        debugger
+        //debugger
     }
     getBusiness(id) {
         return axios.get(url + `/BusinessDetails/${id}`).then(response => {
-            debugger
+            //debugger
             console.log(response)
             return response.data
         }).catch(o => {
             console.log(o);
         });
-        debugger
+        //debugger
     }
     sendMail(contact) {
-        debugger;
+        //debugger;
         var contact = contact;
-        // axios.get(`http://localhost:3003/sendMail/email=${email}`)
-        //     .then(response => {
-        //         debugger;
-        //         return response;
-        //         console.log("succsess" + email);
-        //         debugger
-        //     }).catch(response => console.log(response));
         return axios({
             method: 'post',
             url: 'http://localhost:3003/sendMail/send',
             data: { contact: contact }
         }).then(function (response) {
-            debugger
+            //debugger
             console.log("response")
             console.log(response);
-            debugger
+            //debugger
             return response.data
         }).catch(err => {
-            debugger
+            //debugger
             console.log(err)
         });
     }
     addClicksToBusiness(businessId) {
-        debugger
+        //debugger
         return axios.get(url + `/addClicksToBusiness/${businessId}`).then(response => {
             console.log(response)
             return response.data
         }).catch(o => {
             console.log(o);
         });
-        debugger
+        //debugger
     }
 
     addShareToBusiness(businessId, idUser) {
