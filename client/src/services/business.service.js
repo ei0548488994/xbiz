@@ -58,6 +58,58 @@ class BusinnesService {
         debugger
     }
 
+    addShareToBusiness(businessId, idUser) {
+        debugger
+        return axios({
+
+            method: 'post',
+            url: 'http://localhost:3003/api/addShareToBusiness',
+            data: {
+                businessId: businessId,
+                idUser: idUser
+            }
+        }).then(function (response) {
+            debugger
+            console.log("response" + response);
+            debugger
+            return response.data
+        }).catch(err => {
+            console.log(err)
+        });
+    }
+    getAllFavoraits(idUser) {
+        debugger
+        return axios({
+            method: 'post',
+            url: `http://localhost:3003/api/${idUser}/getAllFavoraits`,
+            // data: {
+            //     idUser: idUser
+            // }
+        }).then(function (response) {
+            debugger
+            console.log("response" + response);
+            debugger
+            return response.data
+        }).catch(err => {
+            console.log(err)
+        });
+    }
+
+    deleteFavoraitsByIdBussiness(businessId,idUser) {
+        debugger
+        return axios ({
+            method: 'post',
+            url: url + `/${idUser}/deleteFavoraitsByIdBussiness/${businessId}`,
+        })
+        .then(response => {
+            console.log(response)
+            return response.data
+        }).catch(o => {
+            console.log(o);
+        });
+        debugger
+    }
+    
 }
 
 export default new BusinnesService()

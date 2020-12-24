@@ -3,7 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../css/main-color.css";
 import "../../css/style.css";
 import './wishList.css'
-export default function WishList() {
+import { connect } from 'react-redux';
+import { deleteFavoraitsByIdBussiness } from '../../redux/actions/business.action'
+
+ function WishList(props) {
     return (
         <>
         {/* Content
@@ -36,6 +39,10 @@ export default function WishList() {
     <div className="col-lg-12 col-md-12">
       <div className="dashboard-list-box margin-top-0">
         <h4>רשימת מועדפים</h4>
+        <div>
+      <h1>wish list here</h1>
+         <button type="button" onClick={() => { props.deleteFavoraitsByIdBussine("5fde85af7887212f243ab525", "5fcfa1925163a603f8092c96") }}>click to delete</button>
+    </div>
         <ul>
           <li className="d-flex justify-content-between">
             <div className="list-box-listing">
@@ -122,3 +129,19 @@ export default function WishList() {
         </>
     )
 }
+
+export default connect(
+  (state) => {
+    return {
+
+    }
+  },
+  (disatch) => {
+    return {
+      deleteFavoraitsByIdBussine: function (businessId,idUser) {
+        debugger
+        disatch(deleteFavoraitsByIdBussiness(businessId,idUser))
+      },
+    }
+  }
+)(WishList)

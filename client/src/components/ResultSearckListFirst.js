@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import Footer from './Footer';
 // import from bootstrap-icons
 import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory, getResultofSearchByText } from '../redux/actions/category.action';
-import { setSelectedBusinessDetails, addClicksToBusiness, getBusinessBybId } from '../redux/actions/business.action'
+
+import { setSelectedBusinessDetails, addClicksToBusiness, getBusinessBybId , addShereToBusiness} from '../redux/actions/business.action'
 import {setUserLocation} from '../redux/actions/location.action'
 import GeolocationService from './../services/geolocation.service'
 
@@ -125,7 +126,9 @@ const ResoltSearckListFirst = (props) => {
                                                     {val.adress ?
                                                         <span>{val.adress.street + " " + val.adress.city + " " + val.adress.state}</span>
                                                         : ""}</div>
-                                                <span className="like-icon" />
+                                                {/* <span className="like-icon" /> */}
+                                                <span className="like-icon" onClick={() => { props.addShare(val._id,"5fcfa1925163a603f8092c96")}} />
+
                                             </div>
                                             <div className="star-rating" data-rating="3.5">
                                                 <div className="rating-counter">(12 reviews)</div>
@@ -290,7 +293,11 @@ export default connect(
             setUserLocation: function (CurrentUserLocation) {
                 debugger
                 disatch(setUserLocation(CurrentUserLocation))
-              }
+              },
+              addShare: function (businessId,idUser) {
+                debugger
+                disatch(addShereToBusiness(businessId,idUser))
+            },
         }
     }
 )(withRouter(ResoltSearckListFirst))

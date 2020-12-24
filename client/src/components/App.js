@@ -47,7 +47,6 @@ function App(props) {
 
   return (
     <>
-
        <Router>
       <Router>
       <AuthProvider>
