@@ -173,6 +173,7 @@ const getBuisnessByText = async (req, res) => {
             console.log(item)
           })
         });
+        console.log(allBusiness)
         return res.json({ MainCategories: allBusiness });
       }
       else {

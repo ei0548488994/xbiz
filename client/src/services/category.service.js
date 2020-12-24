@@ -10,6 +10,13 @@ class CategoryService {
         }).catch(o => {
              console.log(o); });
     }
+    getAllSubCategories() {
+        return axios.get(url + '/getAllCategories').then(response => {
+            console.log(response)
+            return response.data
+        }).catch(o => {
+             console.log(o); });
+    }
     getResultOfSearchByCategory(text) {
         return axios.get(url + `/getBuisnessByCategory/id=${text}`).then(response => {
             console.log(response)

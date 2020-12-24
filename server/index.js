@@ -16,7 +16,7 @@ const port = 3003;
 //var nodemailer = require("nodemailer");
 dotenv.config();
 app.use(cors());
-
+const placesRouter=require("./routs/placesRouter")
 // const server= http.createServer((req,res)=>{
 //     res.write('hello world')
 //     res.end();
@@ -56,7 +56,7 @@ app.use(express.static(path.join((__dirname, "./build"))));
 
 app.use("/api", router);
 app.use("/sendMail", mailRouter);
-
+app.use("/places", placesRouter);
 app.listen(port, () => {
   console.log("listening");
 });

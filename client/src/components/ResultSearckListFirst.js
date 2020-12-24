@@ -6,8 +6,8 @@ import Footer from './Footer';
 // import from bootstrap-icons
 import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory, getResultofSearchByText } from '../redux/actions/category.action';
 
-import { setSelectedBusinessDetails, addClicksToBusiness, getBusinessBybId , addShereToBusiness} from '../redux/actions/business.action'
-import {setUserLocation} from '../redux/actions/location.action'
+import { setSelectedBusinessDetails, addClicksToBusiness, getBusinessBybId, addShereToBusiness } from '../redux/actions/business.action'
+import { setUserLocation } from '../redux/actions/location.action'
 import GeolocationService from './../services/geolocation.service'
 
 const ResoltSearckListFirst = (props) => {
@@ -19,13 +19,13 @@ const ResoltSearckListFirst = (props) => {
     // console.log(resultOfSearch);
     let arrResultOfSearch = [];
     let { result } = useParams();
-      //shinuy
-      debugger
-      let hoursarr = [];
-      let date = new Date()
-      let day = 2;
-      //date.getDay() + 1;
-      let hours = date.getHours();
+    //shinuy
+    debugger
+    let hoursarr = [];
+    let date = new Date()
+    let day = 2;
+    //date.getDay() + 1;
+    let hours = date.getHours();
     //  Object.keys(props.category).forEach(key => arr2.push({ name: key, value: props.category[key] }))
     //  if(arr2!=undefined){
     //      arr3=arr2[0].value;}
@@ -116,7 +116,7 @@ const ResoltSearckListFirst = (props) => {
                                         <a
                                             className="listing-item-container">
                                             <div onClick={() => {
-                                                  //props.history.push(`/business/${val._id}`)
+                                                //props.history.push(`/business/${val._id}`)
                                                 //props.addClicks(val._id)
                                                 debugger
                                                 //<Link to='/BusinessDetails' params={{id: val._id}} />
@@ -128,18 +128,18 @@ const ResoltSearckListFirst = (props) => {
                                             }} className="listing-item">
                                                 <img src="images/listing-item-01.jpg" alt />
                                                 <div className="listing-badge now-open">
-                                                    {val.opening_houers?
-                                                          Object.keys(val.opening_houers).forEach((key) =>
-                                                          hoursarr.push({ name: key, value: val.opening_houers[key] })
-                                                      )
-                                                    :""}
+                                                    {val.opening_houers ?
+                                                        Object.keys(val.opening_houers).forEach((key) =>
+                                                            hoursarr.push({ name: key, value: val.opening_houers[key] })
+                                                        )
+                                                        : ""}
                                                     {/* hoursarr>0? */}
-                                                    { hoursarr.map((item, i) => (
+                                                    {hoursarr.map((item, i) => (
                                                         <div>
-                                                            {item.name==day?
-                                                            <div key={i}>{item.value.start <= hours&& item.value.end >= hours ? "פתוח עכשיו" : "!!סגור עכשיו!!"}</div>:""}
+                                                            {item.name == day ?
+                                                                <div key={i}>{item.value.start <= hours && item.value.end >= hours ? "פתוח עכשיו" : "!!סגור עכשיו!!"}</div> : ""}
                                                         </div>))
-                                                       }
+                                                    }
                                                 </div>
                                                 <div className="listing-item-content">
                                                     {/* <span className="tag">Eat &amp; Drink</span> */}
@@ -149,7 +149,7 @@ const ResoltSearckListFirst = (props) => {
                                                         <span>{val.adress.street + " " + val.adress.city + " " + val.adress.state}</span>
                                                         : ""}</div>
                                                 {/* <span className="like-icon" /> */}
-                                                <span className="like-icon" onClick={() => { props.addShare(val._id,"5fcfa1925163a603f8092c96")}} />
+                                                <span className="like-icon" onClick={() => { props.addShare(val._id, "5fcfa1925163a603f8092c96") }} />
 
                                             </div>
                                             <div className="star-rating" data-rating="3.5">
@@ -183,10 +183,44 @@ const ResoltSearckListFirst = (props) => {
                                 //     </a>
                                 // </div>
                             ))
-                            : 
+                            :
                             //props.getBusinessById(id)
                             props.history.push(`/BusinessDetails`)
-                            }
+                        }
+                        {props.nearPlacesByText.length > 0 ?
+                            props.nearPlacesByText.map((option, i) => (
+                                <div key={i} className="col-lg-6 col-md-12">
+
+                                    <a
+                                        className="listing-item-container">
+                                        <div onClick={() => {
+                                            props.history.push(`/placesBusiness/${option.value.place_id}`)
+                                            // props.addClicks(option._id)
+                                            debugger
+                                            //<Link to='/BusinessDetails' params={{id: val._id}} />
+                                            props.setBusinessSelectedDetails(option.value)
+                                            // props.history.push('/BusinessDetails')
+
+
+                                        }} className="listing-item">
+                                            <img src="images/listing-item-01.jpg" alt="true" />
+                                            <div className="listing-badge now-open">OPEN NOW</div>
+                                            <div className="listing-item-content">
+                                                {/* <span className="tag">Eat &amp; Drink</span> */}
+                                                <span className="tag">{option.value.name}</span>
+                                                <h3>{option.value.name}<i className="verified-icon" /></h3>
+
+                                                <span>{option.value.vicinity}</span>
+                                            </div>
+                                            <span className="like-icon" />
+                                        </div>
+                                        <div className="star-rating" data-rating="3.5">
+                                            <div className="rating-counter"> </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            ))
+                            : ""}
                         {arrAfterSort.length > 0 ? <h1>yes</h1> : <h1>no</h1>}
                     </div>
                 </div>
@@ -285,6 +319,7 @@ export default connect(
             selectedCategoryId: state.category.selectedCategoryId,
             lat: state.location.currentUserLocation.latitude,
             lon: state.location.currentUserLocation.longitude,
+            nearPlacesByText: state.places.nearPlacesBySearch,
             CheckedBusinessDetails: state.business.CheckedBusinessDetails,
         }
     },
@@ -312,14 +347,14 @@ export default connect(
             getBusinessById: function (id) {
                 debugger
                 disatch(getBusinessBybId(id))
-            },       
+            },
             setUserLocation: function (CurrentUserLocation) {
                 debugger
                 disatch(setUserLocation(CurrentUserLocation))
-              },
-              addShare: function (businessId,idUser) {
+            },
+            addShare: function (businessId, idUser) {
                 debugger
-                disatch(addShereToBusiness(businessId,idUser))
+                disatch(addShereToBusiness(businessId, idUser))
             },
         }
     }
