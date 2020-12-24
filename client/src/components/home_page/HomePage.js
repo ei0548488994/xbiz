@@ -6,6 +6,7 @@ import backgroundImge from '../../images/main-search-background-01.jpg'
 import UserLocation from "../UserLocation";
 import AutoCompleteSearch from "../AutoCompleteSearch";
 import { setUserLocation } from '../../redux/actions/location.action';
+import { getNearPlaces } from "../../redux/actions/places.action"
 import ResultOfSearchListFirst from "../ResultSearckListFirst";
 import {
   withRouter,
@@ -22,6 +23,7 @@ import {
   getAllCategories,
   setSelectedCategoryId,
   setCategory,
+  getAllSubCategories,
   getResultofSearchByText,
   getResultOfSearchByCategory,
   PopularCategories,
@@ -100,9 +102,8 @@ function HomePage(props) {
 }*/
 
   useEffect(() => {
-    {
-      props.getAllCategories();
-    }
+    props.getAllSubCategories();
+    props.getAllCategories();
     localStorage.setItem('changedLocation', "false");
     console.log("out", props.category);
     props.PopularCategories();
@@ -172,7 +173,7 @@ function HomePage(props) {
                                                     : ""}
                                             </select>
                                         </div> */}
-                    <button className="button" onClick={searchClick}>
+                    <button className="button" onClick={searchClick} disabled={selectedText == ''}>
                       חפש
                     </button>
                   </div>
@@ -654,8 +655,15 @@ export default connect(
   },
   (disatch) => {
     return {
+      getAllPlacesNearBySearchText: function () {
+        debugger
+        disatch(getNearPlaces());
+      },
       getAllCategories: function () {
         disatch(getAllCategories());
+      },
+      getAllSubCategories: function () {
+        disatch(getAllSubCategories());
       },
       PopularCategories: function () {
         disatch(PopularCategories());

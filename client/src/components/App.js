@@ -21,6 +21,7 @@ import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import AudioSearch from "./AudioSearch";
+import PlacesDetails from './placesDetails'
 
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
            <Route  path="/business/:id">
             <BusinessDetails />
            </Route>
+           <Route path="/placesBusiness/:id">
+            <PlacesDetails/>
+          </Route>
           {/* <Route path="/ResultOfSearchList">  */}
             {/* <ResultOfSearchListFirst /> */}
             {/* <ResultOfSearchList />
