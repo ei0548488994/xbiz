@@ -49,7 +49,7 @@ export default function Login() {
           <h2 className="css-text text-center mb-4">כניסה</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
-          <Form.Label>אמייל</Form.Label>
+          <Form.Label>שם משתמש (אמייל)</Form.Label>
             <Form.Group id="email" className="input-group">
               <span class="input-group-addon"><i class="im im-icon-Male"></i></span>
               <Form.Control type="email" ref={emailRef} required />
@@ -59,7 +59,7 @@ export default function Login() {
             <span class="input-group-addon"><i class="im im-icon-Lock-2"></i></span>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-center mb-4 mt-4">
             <Button disabled={loading} className="submit" type="submit">
 כניסה            </Button></div>
             {/*<br/>
