@@ -55,7 +55,7 @@ function Header(props) {
                   <span>
                     <img src={img} alt />
                   </span>
-                  Hi, Tom!
+                  {/* Hi, Tom! */}
                 </div>
               </div>
               <div className="header-widget align-items-center justify-content-center d-flex m-0 p-3 pr-5 pl-5">

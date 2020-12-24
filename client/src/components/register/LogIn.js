@@ -69,12 +69,12 @@ export default function Login() {
             type="submit"/>*/}
           </Form>
           <div className="w-100 text-center mt-3">
-            <Link to="/forgot-password">שכחת סיסמה?</Link>
+            <Link to="/forgot-password" className="linka">שכחת סיסמה?</Link>
           </div>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-4 text">
-        צריכים חשבון? <Link to="/signup">הרשמה</Link>
+        צריכים חשבון? <Link to="/signup" className="linka">הרשמה</Link>
       </div>
     </div> 
     </Container>

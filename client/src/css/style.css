@@ -911,7 +911,7 @@ body #navigation.style-1 ul ul li:hover ul li a:hover { color: #66676b; }
 }*/
 
 .user-menu .user-name::before {
-	content: "\f107";
+	/* content: "\f107"; */
 	font-family: "FontAwesome";
 	transition: 0.2s;
 	transform: rotate(0deg);
