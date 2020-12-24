@@ -5,6 +5,16 @@
 .container::after {
     content: none !important;
 }
+.container-forgot-password{
+    height: 100vh;
+}
+.wrapper-forgot-password{
+    width: 400px;
+}
+.css-shadow{
+    box-shadow: 0px 2px 6px #0000001F;
+
+}
 .input-group{
     border: 1px solid #ccc !important;
     border-radius: 3px !important;

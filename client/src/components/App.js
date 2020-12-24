@@ -13,12 +13,12 @@ import Header from './header/Header'
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import ResultOfSearchList from './ResultOfSearchList'
-import Signup from "./Signup";
+import Signup from "./register/Signup";
 import { AuthProvider } from "../contexts/AuthContext";
 import Dashboard from "./Dashboard";
 import Login from "./register/LogIn";
 import PrivateRoute from "./PrivateRoute";
-import ForgotPassword from "./ForgotPassword";
+import ForgotPassword from "./register/ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import AudioSearch from "./AudioSearch";
 
