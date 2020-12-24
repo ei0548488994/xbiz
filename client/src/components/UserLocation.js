@@ -11,7 +11,11 @@ class userLocation extends React.Component {
             debugger
             localStorage.setItem('CurrentUserLocationLat', this.props.coords.latitude);
             localStorage.setItem('CurrentUserLocationLng', this.props.coords.longitude);
-            this.props.history.push("/ResultOfSearchList");
+            var text=localStorage.getItem('searcText');
+            debugger;
+            // this.props.history.push("/ResultOfSearchList");
+            console.log(text,"userLo")
+            this.props.history.push(`/search/${text}`);
             console.log("אישור");
             
         }
@@ -32,7 +36,11 @@ class userLocation extends React.Component {
             alert("לא הצלחנו לזהות את מיקום המדוייק שלך. כדי לקבל את תוצאות הרלוונטיות  ביותר יש לאשר את שירותי המיקום.")
             console.log("חסימה");
             // this.props.coords
-            this.props.history.push("/ResultOfSearchList");
+            //shinuy
+          debugger;
+          var text=this.props.textOfSearch;
+          // this.props.history.push("/ResultOfSearchList");
+          this.props.history.push(`/search/${text}`);
         }
         // if (!this.props.isGeolocationAvailable) {
         //     console.log("isGeolocationAvailable")

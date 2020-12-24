@@ -15,7 +15,9 @@ import { getBusinessBybId } from '../redux/actions/business.action'
 
 // import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory } from '../redux/actions/category.action';
 const BusinessDetails = (props) => {
-  debugger
+  var hours = 0;
+  var date = new Date()
+  var day = 0
   let { id } = useParams();
   console.log(id);
   console.log(props.CheckedBusinessDetails)

@@ -41,6 +41,36 @@ const businessSchema = mongoose.Schema({
   //   mon: { open: 570, close: 1080 },
   //   tue: { open: 570, close: 1050 },
   // }
+  opening_hours: {
+    mon: {
+      start: { type: Number, min: 0, max: 23 },
+      end: { type: Number, min: 0, max: 23 },
+    },
+    tue: {
+      start: { type: Number, min: 0, max: 23 },
+      end: { type: Number, min: 0, max: 23 },
+    },
+    wed: {
+      start: { type: Number, min: 0, max: 23 },
+      end: { type: Number, min: 0, max: 23 },
+    },
+    thu: {
+      start: { type: Number, min: 0, max: 23 },
+      end: { type: Number, min: 0, max: 23 },
+    },
+    fri: {
+      start: { type: Number, min: 0, max: 23 },
+      end: { type: Number, min: 0, max: 23 },
+    },
+    sat: {
+      start: { type: Number, min: 0, max: 23 },
+      end: { type: Number, min: 0, max: 23 },
+    },
+    sun: {
+      start: { type: Number, min: 0, max: 23 },
+      end: { type: Number, min: 0, max: 23 },
+    },
+  },
   adress: {
     state: { type: String },
     city: { type: String },

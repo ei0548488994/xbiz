@@ -66,7 +66,7 @@ router.get("/getAllMainCategories", getAllMainCategories);
 // buisness
 // router.post("/createBusiness", createBusiness);
 router.get("/searchBuisnessByParentCategory/:id",searchBuisnessByParentCategory);
-router.get("/BusinessDetails/:id", getBuisness);
+router.get("/BusinessDetails/:id", getBuisnessById);
 router.post("/updateBuisness/:name", updateBuisness);
 router.post("/deleteBusiness/:id", deleteBusiness);
 router.get("/getBuisnessByCategory/:idCategory", getBuisnessByCategory);
