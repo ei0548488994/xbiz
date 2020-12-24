@@ -12,6 +12,7 @@ import {
   Link,
   BrowserRouter as Router,
   Switch,
+  setSearch,
   Route,
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +34,7 @@ function HomePage(props) {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedText, setSelectedText] = useState("");
   const [CurrentUserLocation, setCurrentUserLocationLng] = useState({ "lat": 0, "lng": 0 });
-    const [ChangedUserLocation, setChangedUserLocation] = useState(false);
+  const [ChangedUserLocation, setChangedUserLocation] = useState(false);
   console.log(props.popularCategories);
   var mainCategoriesArr = [];
   if (props.category != undefined) {
@@ -58,44 +59,54 @@ function HomePage(props) {
   }
   function searchClick() {
     {
+      var text = "yeyyyy";
+      if (selectedText != "") {
+        debugger;
+        text = selectedText;
+        //props.setTextOfSearch(text);
+        props.getResultosSearchBYText(selectedText);
+        localStorage.setItem('searcText', text);
+      }
       if (localStorage.getItem('changedLocation') == "false") {
         //debugger
         let change = "true"
         setChangedUserLocation(change);
         console.log("change")
         console.log(ChangedUserLocation)
-    }
-    setCurrentUserLocationLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
-    props.setUserLocation(CurrentUserLocation) 
-    debugger;
-    if (localStorage.getItem('changedLocation') == "true") {
-      props.history.push("/ResultOfSearchList");
-    }
-      if (selectedCategory != "") {
-        props.setSelectedCategory(selectedCategory);
-        debugger;
-        props.getResultOfSearchBYCategory(selectedCategory);
       }
-      if (selectedText != "") {
+      setCurrentUserLocationLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
+      props.setUserLocation(CurrentUserLocation)
+      debugger;
+      if (localStorage.getItem('changedLocation') == "true") {
+        //props.history.push("/ResultOfSearchList");
         debugger;
-        props.getResultosSearchBYText(selectedText);
+        props.history.push(`/search/${text}`);
       }
+      // if (selectedCategory != "") {
+      //   props.setSelectedCategory(selectedCategory);
+      //   debugger;
+      //   props.getResultOfSearchBYCategory(selectedCategory);
+      // }
+      // if (selectedText != "") {
+      //   debugger;
+      //   props.getResultosSearchBYText(selectedText);
+      // }
     }
-  } 
+  }
   /*function userLocation() {
     debugger
     setCurrentUserLocationLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
     props.setUserLocation(CurrentUserLocation)
 }*/
 
-useEffect(() => {
-  {
-    props.getAllCategories();
-  }
-  localStorage.setItem('changedLocation', "false");
-  console.log("out", props.category);
-  props.PopularCategories();
-}, []);
+  useEffect(() => {
+    {
+      props.getAllCategories();
+    }
+    localStorage.setItem('changedLocation', "false");
+    console.log("out", props.category);
+    props.PopularCategories();
+  }, []);
 
   return (
     <div>
@@ -104,7 +115,7 @@ useEffect(() => {
         <div
           className="main-search-container centered"
           data-background-image={backgroundImge}
-          style ={ { backgroundImage:`url(${backgroundImge})` } }  >
+          style={{ backgroundImage: `url(${backgroundImge})` }}  >
           <div className="main-search-inner">
             <div className="container">
               <div>
@@ -140,14 +151,14 @@ useEffect(() => {
                       />
                     </div>
                     <div className="main-search-input-item location d-flex align-content-center">
-                        <a href="#" className="pt-4">
-                        <i className="fa fa-map-marker"  />
+                      <a href="#" className="pt-4">
+                        <i className="fa fa-map-marker" />
                       </a>
                       <div id="autocomplete-container" className="p-0">
                         <AutoCompleteSearch />
                         {ChangedUserLocation == "true" ? <UserLocation /> : ""}
                       </div>
-                      
+
                     </div>
                     {/* <div className="main-search-input-item" >
                                             <select data-placeholder="All Categories" className="chosen-select" onClick={(e) => { setSelectedCatgory(e.target.value) }}>
@@ -178,25 +189,26 @@ useEffect(() => {
                   <div className="highlighted-categories">
                     {mainCategoriesArr
                       ? mainCategoriesArr.map((option, i) =>
-                          option.value.icons ? (
-                            <Link
-                              to="/ResultOfSearchList"
-                              key={i}
-                              onClick={() => {
-                                props.getResultosSearchBYText(
-                                  option.value.mainCategoryName
-                                );
-                              }}
-                              // href="listings-list-with-sidebar.html"
-                              className="highlighted-category"
-                            >
-                              <i className={option.value.icons} />
-                              <h4>{option.value.mainCategoryName}</h4>
-                            </Link>
-                          ) : (
+                        option.value.icons ? (
+                          <Link
+                            //to="/ResultOfSearchList"
+                            key={i}
+                            onClick={() => {
+                              props.getResultosSearchBYText(
+                                option.value.mainCategoryName
+                              );
+                              props.history.push(`/search/${option.value.mainCategoryName}`);
+                            }}
+                            // href="listings-list-with-sidebar.html"
+                            className="highlighted-category"
+                          >
+                            <i className={option.value.icons} />
+                            <h4>{option.value.mainCategoryName}</h4>
+                          </Link>
+                        ) : (
                             ""
                           )
-                        )
+                      )
                       : ""}
                   </div>
                 </div>
@@ -225,23 +237,25 @@ useEffect(() => {
               <div className="categories-boxes-container margin-top-5 margin-bottom-30 d-flex justify-content-center">
                 {props.popularCategories
                   ? props.popularCategories.map((category, i) => (
-                      <Link
-                        key={i}
-                        to="/ResultOfSearchList"
-                        onClick={() => {
-                          props.getResultosSearchBYText(
-                            category.value.mainCategoryName
-                          );
-                        }}
-                        className="category-small-box"
-                      >
-                        <i className={category.value.icons} />
-                        <h4>{category.value.mainCategoryName}</h4>
-                        <span className="category-box-counter">
-                          {category.value.countBusiness}
-                        </span>
-                      </Link>
-                    ))
+                    <Link
+                      key={i}
+                      //to="/ResultOfSearchList"
+                      onClick={() => {
+                        props.getResultosSearchBYText(
+                          category.value.mainCategoryName
+                        );
+                        props.history.push(`/search/${category.value.mainCategoryName}`);
+
+                      }}
+                      className="category-small-box"
+                    >
+                      <i className={category.value.icons} />
+                      <h4>{category.value.mainCategoryName}</h4>
+                      <span className="category-box-counter">
+                        {category.value.countBusiness}
+                      </span>
+                    </Link>
+                  ))
                   : ""}
               </div>
             </div>
@@ -657,8 +671,8 @@ export default connect(
         disatch(getResultofSearchByText(text));
       },
       setUserLocation: function (CurrentUserLocation) {
-          debugger
-          disatch(setUserLocation(CurrentUserLocation))
+        debugger
+        disatch(setUserLocation(CurrentUserLocation))
       }
     };
   }

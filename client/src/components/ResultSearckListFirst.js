@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import Footer from './Footer';
@@ -13,10 +13,19 @@ import GeolocationService from './../services/geolocation.service'
 const ResoltSearckListFirst = (props) => {
     const [arrAfterSort, setArrAfterSort] = useState([]);
     const [CurrentUserLocation, setCurrentUserLocationLatLng] = useState({ "lat": 0, "lng": 0 });
+    const [selectItem, setSelectItem] = useState("");
     const [selectedText, setSelectedText] = useState("");
     // const resultOfSearch = useSelector((state) => state.resultOfSearch)
     // console.log(resultOfSearch);
     let arrResultOfSearch = [];
+    let { result } = useParams();
+      //shinuy
+      debugger
+      let hoursarr = [];
+      let date = new Date()
+      let day = 2;
+      //date.getDay() + 1;
+      let hours = date.getHours();
     //  Object.keys(props.category).forEach(key => arr2.push({ name: key, value: props.category[key] }))
     //  if(arr2!=undefined){
     //      arr3=arr2[0].value;}
@@ -54,6 +63,10 @@ const ResoltSearckListFirst = (props) => {
     }
     useEffect(() => {
         debugger
+        if (result) {
+            var text = result;
+            props.getResultosSearchBYText(text);
+        }
         setCurrentUserLocationLatLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
         props.setUserLocation(CurrentUserLocation)
     }, [])
@@ -103,21 +116,35 @@ const ResoltSearckListFirst = (props) => {
                                         <a
                                             className="listing-item-container">
                                             <div onClick={() => {
-                                                  props.history.push(`/business/${val._id}`)
-                                                props.addClicks(val._id)
+                                                  //props.history.push(`/business/${val._id}`)
+                                                //props.addClicks(val._id)
                                                 debugger
                                                 //<Link to='/BusinessDetails' params={{id: val._id}} />
+                                                setSelectItem(val)
                                                 props.setBusinessSelectedDetails(val)
                                                 // props.history.push('/BusinessDetails')
 
 
                                             }} className="listing-item">
                                                 <img src="images/listing-item-01.jpg" alt />
-                                                <div className="listing-badge now-open">OPEN NOW</div>
+                                                <div className="listing-badge now-open">
+                                                    {val.opening_houers?
+                                                          Object.keys(val.opening_houers).forEach((key) =>
+                                                          hoursarr.push({ name: key, value: val.opening_houers[key] })
+                                                      )
+                                                    :""}
+                                                    {/* hoursarr>0? */}
+                                                    { hoursarr.map((item, i) => (
+                                                        <div>
+                                                            {item.name==day?
+                                                            <div key={i}>{item.value.start <= hours&& item.value.end >= hours ? "פתוח עכשיו" : "!!סגור עכשיו!!"}</div>:""}
+                                                        </div>))
+                                                       }
+                                                </div>
                                                 <div className="listing-item-content">
                                                     {/* <span className="tag">Eat &amp; Drink</span> */}
                                                     <span className="tag">{val.description}</span>
-                                                    <h3>{val.businessName}<i className="verified-icon" /></h3>
+                                                    <h3 onClick={() => { { props.history.push(`/business/${val._id}`) } props.addClicks(val._id) }}>{val.businessName}<i className="verified-icon" /></h3>
                                                     {val.adress ?
                                                         <span>{val.adress.street + " " + val.adress.city + " " + val.adress.state}</span>
                                                         : ""}</div>
@@ -257,7 +284,8 @@ export default connect(
             category: state.category.category,
             selectedCategoryId: state.category.selectedCategoryId,
             lat: state.location.currentUserLocation.latitude,
-            lon: state.location.currentUserLocation.longitude
+            lon: state.location.currentUserLocation.longitude,
+            CheckedBusinessDetails: state.business.CheckedBusinessDetails,
         }
     },
     (disatch) => {

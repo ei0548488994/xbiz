@@ -33,13 +33,17 @@ function App() {
           <Route path="/HomePage">
             <HomePage />
          </Route>
+         <Route path="/search/:result">
+            {/* <ResultOfSearchListFirst /> */}
+            <ResultOfSearchList />
+          </Route>
            <Route  path="/business/:id">
             <BusinessDetails />
            </Route>
-          <Route path="/ResultOfSearchList"> 
+          {/* <Route path="/ResultOfSearchList">  */}
             {/* <ResultOfSearchListFirst /> */}
-            <ResultOfSearchList />
-          </Route> 
+            {/* <ResultOfSearchList />
+          </Route>  */}
     
           {/* <Route path="/BusinessDetails" component={BusinessDetails}>
             <BusinessDetails />
