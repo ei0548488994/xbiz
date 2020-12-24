@@ -1,26 +1,22 @@
-import React, { useEffect, useState,useParams } from 'react'
-import { withRouter, Link } from 'react-router-dom';
-import ItemResultSearchFirst from './ItemResultSearchFirst';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
+import { withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import Footer from './Footer';
 // import from bootstrap-icons
 import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory, getResultofSearchByText } from '../redux/actions/category.action';
-import { setSelectedBusinessDetails, addClicksToBusiness, getBusinessBybId } from '../redux/actions/business.action'
+
+import { setSelectedBusinessDetails, addClicksToBusiness, getBusinessBybId , addShereToBusiness} from '../redux/actions/business.action'
 import {setUserLocation} from '../redux/actions/location.action'
 import GeolocationService from './../services/geolocation.service'
 
 const ResoltSearckListFirst = (props) => {
-    const dispatch = useDispatch();
     const [arrAfterSort, setArrAfterSort] = useState([]);
     const [CurrentUserLocation, setCurrentUserLocationLatLng] = useState({ "lat": 0, "lng": 0 });
     const [selectedText, setSelectedText] = useState("");
     // const resultOfSearch = useSelector((state) => state.resultOfSearch)
-    // console.log(resultOfSearch)
-    var arr2 = [];
-    var arr3;
-    var arr4;
-    var arrResultOfSearch = [];
+    // console.log(resultOfSearch);
+    let arrResultOfSearch = [];
     //  Object.keys(props.category).forEach(key => arr2.push({ name: key, value: props.category[key] }))
     //  if(arr2!=undefined){
     //      arr3=arr2[0].value;}
@@ -125,7 +121,9 @@ const ResoltSearckListFirst = (props) => {
                                                     {val.adress ?
                                                         <span>{val.adress.street + " " + val.adress.city + " " + val.adress.state}</span>
                                                         : ""}</div>
-                                                <span className="like-icon" />
+                                                {/* <span className="like-icon" /> */}
+                                                <span className="like-icon" onClick={() => { props.addShare(val._id,"5fcfa1925163a603f8092c96")}} />
+
                                             </div>
                                             <div className="star-rating" data-rating="3.5">
                                                 <div className="rating-counter">(12 reviews)</div>
@@ -290,9 +288,11 @@ export default connect(
             setUserLocation: function (CurrentUserLocation) {
                 debugger
                 disatch(setUserLocation(CurrentUserLocation))
-              }
+              },
+              addShare: function (businessId,idUser) {
+                debugger
+                disatch(addShereToBusiness(businessId,idUser))
+            },
         }
     }
 )(withRouter(ResoltSearckListFirst))
-
-// export default withRouter(ResoltSearckListFirst)

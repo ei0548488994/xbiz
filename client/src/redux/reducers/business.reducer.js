@@ -1,8 +1,9 @@
-import { SET_SELECTED_BUSINESS_DETAILS, CREATE_BUSINESS, SEND_MAIL, ADD_CLICK_TO_BUSINESS } from '../actions/business.action'
+
+import { SET_SELECTED_BUSINESS_DETAILS, CREATE_BUSINESS, SEND_MAIL, ADD_CLICK_TO_BUSINESS, ADD_SHERE_TO_BUSINESS, GET_ALL_FAVORAITS, DELETE_FAVORITS_BY_BUSSINES } from '../actions/business.action'
+
 const initialState = {
     CheckedBusinessDetails: "",
 }
-
 
 export default function bisinessReducer(state = initialState, action) {
     switch (action.type) {
@@ -18,8 +19,22 @@ export default function bisinessReducer(state = initialState, action) {
                 debugger
                 return action.payload
             }
+            case ADD_SHERE_TO_BUSINESS:
+            {
+                debugger
+                return action.payload
+            }
+        case GET_ALL_FAVORAITS:
+            {
+                debugger
+                return action.payload
+            }
+        case DELETE_FAVORITS_BY_BUSSINES:
+            {
+                debugger
+                return action.payload
+            }
         default:
             return state
-
     }
 }

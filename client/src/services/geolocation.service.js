@@ -1,5 +1,3 @@
-// 
-
 class GeolocationService {
     // Callback function for asynchronous call to HTML5 geolocation
     // UserLocation(position) {
@@ -66,7 +64,6 @@ class GeolocationService {
             console.log(index + "i")
             console.log(dif + "dif")
             //copyCity.push({ "dif": dif, "index": index })
-
             copyCity[index] = { "dif": dif, "index": index }
             console.log(copyCity[index] + "jckj")
         }

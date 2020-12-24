@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../../css/main-color.css";
 import "../../css/style.css";
 import backgroundImge from '../../images/main-search-background-01.jpg'
-// import Header from "../header/Header";
 import UserLocation from "../UserLocation";
 import AutoCompleteSearch from "../AutoCompleteSearch";
 import { setUserLocation } from '../../redux/actions/location.action';
@@ -30,69 +29,24 @@ import { getBusinessBybId } from '../../redux/actions/business.action'
 import Typed from "react-typed";
 import "./homePage.css";
 
-// import { getAllCategoriesAction } from '../actions/index'
 function HomePage(props) {
-  // const { allCategories } = useSelector(state => ({
-  //     allCategories: state.allCategories,
-  // }));
-  const dispatch = useDispatch();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedText, setSelectedText] = useState("");
   const [CurrentUserLocation, setCurrentUserLocationLng] = useState({ "lat": 0, "lng": 0 });
     const [ChangedUserLocation, setChangedUserLocation] = useState(false);
-  console.log("vhbjnk");
   console.log(props.popularCategories);
-  //const home = useSelector((state) => state.home)
-  // console.log(allCategories);
   var mainCategoriesArr = [];
-  // debugger;
   if (props.category != undefined) {
     Object.keys(props.category).forEach((key) =>
       mainCategoriesArr.push({ name: key, value: props.category[key] })
     );
     console.log("if", mainCategoriesArr);
   }
-  // Header hero text
-  // let textRotate = function (el, toRotate, period) {
-  //     this.toRotate = toRotate;
-  //     this.el = el;
-  //     this.loopNum = 0;
-  //     this.period = parseInt(period, 10) || 2000;
-  //     this.txt = '';
-  //     this.tick();
-  //     this.isDeleting = false;
-  // };
-  // textRotate.prototype.tick = function () {
-  //     let i = this.loopNum % this.toRotate.length;
-  //     let fullTxt = this.toRotate[i];
-  //     if (this.isDeleting) {
-  //         this.txt = fullTxt.substring(0, this.txt.length - 1);
-  //     } else {
-  //         this.txt = fullTxt.substring(0, this.txt.length + 1);
-  //     }
-  //     this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
-  //     let that = this;
-  //     let delta = 300 - Math.random() * 100;
-  //     if (this.isDeleting) { delta /= 2; }
-  //     if (!this.isDeleting && this.txt === fullTxt) {
-  //         delta = this.period;
-  //         this.isDeleting = true;
-  //     } else if (this.isDeleting && this.txt === '') {
-  //         this.isDeleting = false;
-  //         this.loopNum++;
-  //         delta = 500;
-  //     }
-
-  //     setTimeout(function () {
-  //         that.tick();
-  //     }, delta);
-  // };
   function setSelectedCatgory(e) {
-    var SelectedCategoryId;
-    debugger;
+    //debugger;
     mainCategoriesArr.forEach((element) => {
       if (element.value.mainCategoryName == e) {
-        var SelectedCategoryId = element.value._id;
+        let SelectedCategoryId = element.value._id;
         console.log(SelectedCategoryId);
         setSelectedCategory(SelectedCategoryId);
       }
@@ -105,8 +59,8 @@ function HomePage(props) {
   function searchClick() {
     {
       if (localStorage.getItem('changedLocation') == "false") {
-        debugger
-        var change = "true"
+        //debugger
+        let change = "true"
         setChangedUserLocation(change);
         console.log("change")
         console.log(ChangedUserLocation)
@@ -128,11 +82,11 @@ function HomePage(props) {
       }
     }
   } 
-  function userLocation() {
+  /*function userLocation() {
     debugger
     setCurrentUserLocationLng({ "lat": localStorage.getItem('CurrentUserLocationLat'), "lng": localStorage.getItem('CurrentUserLocationLng') })
     props.setUserLocation(CurrentUserLocation)
-}
+}*/
 
 useEffect(() => {
   {
@@ -141,46 +95,12 @@ useEffect(() => {
   localStorage.setItem('changedLocation', "false");
   console.log("out", props.category);
   props.PopularCategories();
-
-  // dispatch(getAllCategoriesAction(2));
-  // if (allCategories.length > 0) {
-  //     Object.keys(allCategories).forEach(key => mainCategoriesArr.push({ name: key, value: allCategories[key] }))
-  //     debugger;
-  //     console.log(allCategories);
-  //     console.log(mainCategoriesArr)
-  // }
-  // let elements = document.getElementsByClassName('text-rotate');
-  // for (let i = 0; i < elements.length; i++) {
-  //     let toRotate = elements[i].getAttribute('data-rotate');
-  //     let period = elements[i].getAttribute('data-period');
-  //     if (toRotate) {
-  //         new textRotate(elements[i], JSON.parse(toRotate), period);
-  //     }
-  // }
-  // // INJECT CSS
-  // let css = document.createElement("style");
-  // css.type = "text/css";
-  // css.innerHTML = ".text-rotate > .wrap { border-right: 0.08em solid #666 }";
-  // document.body.appendChild(css);
 }, []);
 
   return (
     <div>
-      {/* <button onClick={() => {
-                props.getAllCategories();
-            }}>
-                press
-      </button> */}
       <div id="wrapper">
-        {/* <img className="imgBackGroung" src="category-box-06.jpg" alt="Second slide"/> */}
-        {/* Header Container================================================== */}
-        {/* Header */}
-
-        {/* Header / End */}
         <div className="clearfix" />
-        {/* Header Container / End */}
-        {/* Banner
-================================================== */}
         <div
           className="main-search-container centered"
           data-background-image={backgroundImge}
@@ -212,7 +132,6 @@ useEffect(() => {
                   <h4>את האטרקציות הכי שוות, עסקים ועוד</h4>
                   <div className="main-search-input">
                     <div className="main-search-input-item text">
-                      {/* <AutoCompleteSearch /> */}
                       <input
                         type="text"
                         onChange={(e) => flagSearchByText(e.target.value)}
@@ -293,8 +212,6 @@ useEffect(() => {
             </div>
           </div>
         </div>
-        {/* Content
-================================================== */}
         <div className="container">
           <div className="row">
             <div className="col-md-12">
@@ -326,42 +243,6 @@ useEffect(() => {
                       </Link>
                     ))
                   : ""}
-                {/* Box
-                                <a href="listings-list-with-sidebar.html" className="category-small-box">
-                                    <i className="im im-icon-Hamburger" />
-                                    <h4>אוכל &amp; שתיה</h4>
-                                    <span className="category-box-counter">12</span>
-                                </a> */}
-                {/* Box */}
-                {/* <a href="listings-list-with-sidebar.html" className="category-small-box">
-                                    <i className="im  im-icon-Sleeping" />
-                                    <h4>מלונות</h4>
-                                    <span className="category-box-counter">32</span>
-                                </a> */}
-                {/* Box */}
-                {/* <a href="listings-list-with-sidebar.html" className="category-small-box">
-                                    <i className="im im-icon-Shopping-Bag" />
-                                    <h4>חנויות</h4>
-                                    <span className="category-box-counter">11</span>
-                                </a> */}
-                {/* Box */}
-                {/* <a href="listings-list-with-sidebar.html" className="category-small-box">
-                                    <i className="im im-icon-Cocktail" />
-                                    <h4>Nightlife</h4>
-                                    <span className="category-box-counter">15</span>
-                                </a> */}
-                {/* Box */}
-                {/* <a href="listings-list-with-sidebar.html" className="category-small-box">
-                                    <i className="im im-icon-Electric-Guitar" />
-                                    <h4>ארועים</h4>
-                                    <span className="category-box-counter">21</span>
-                                </a> */}
-                {/* Box */}
-                {/* <a href="listings-list-with-sidebar.html" className="category-small-box">
-                                    <i className="im im-icon-Dumbbell" />
-                                    <h4>ספורט</h4>
-                                    <span className="category-box-counter">28</span>
-                                </a> */}
               </div>
             </div>
           </div>

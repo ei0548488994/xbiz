@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Alert, Popover, OverlayTrigger } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import Parser from 'html-react-parser';
-//import logo from '../img/logo.png'; 
 
 export default function Dashboard() {
   const [error, setError] = useState("")

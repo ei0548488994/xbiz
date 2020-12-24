@@ -20,13 +20,15 @@ import { getAllCategories } from "../../redux/actions/category.action";
 import logo from "../../images/logo.png";
 import img from "../../images/dashboard-avatar.jpg";
 import "./header.css";
+ import { getAllFavoraits } from '../../redux/actions/business.action'
+
 function Header(props) {
   const [modalShow, setModalShow] = React.useState(false);
   return (
     <>
       <header
         id="header-container"
-        // className={""+setIsHomePage===true?'darkHeader':'transParentHeader'}
+      // className={""+setIsHomePage===true?'darkHeader':'transParentHeader'}
       >
         <div id="header" className="not-sticky">
           <div className="container d-flex justify-content-between">
@@ -36,7 +38,7 @@ function Header(props) {
                   <img src={logo} alt />
                 </Link>
               </div>
-              
+
               {/* <div className="mmenu-trigger">
                 <button className="hamburger hamburger--collapse" type="button">
                   <span className="hamburger-box">
@@ -45,8 +47,10 @@ function Header(props) {
                 </button>
               </div> */}
             </div>
+            {/* <button type="button" onClick={() => { props.getAllFavoraits("5fcfa1925163a603f8092c96") }}>wish list</button> */}
+
             <div className="right-side d-flex">
-            <div className="user-menu">
+              <div className="user-menu">
                 <div className="user-name">
                   <span>
                     <img src={img} alt />
@@ -98,6 +102,10 @@ export default connect(
     return {
       getAllCategories: function () {
         disatch(getAllCategories());
+      },
+      getAllFavoraits: function (idUser) {
+        debugger
+        disatch(getAllFavoraits(idUser))
       },
     };
   }

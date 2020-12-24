@@ -60,7 +60,3 @@ app.use("/sendMail", mailRouter);
 app.listen(port, () => {
   console.log("listening");
 });
-
-// mongoose.connection.on('connected',()=>{
-//     console.log('mongoDB connected!')
-// });

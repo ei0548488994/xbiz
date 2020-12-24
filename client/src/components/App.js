@@ -1,5 +1,3 @@
-// import BusinessDetails from './BusinessDetails.js/index.js.js';
-//import LogIn from './LogIn'
 import { Button } from 'react-bootstrap';
 import ContactPage from "./ContactPage"
 import BusinessDetails from './BusinessDetails'
@@ -11,20 +9,10 @@ import {
 } from "react-router-dom";
 import React from 'react';
 import HomePage from './home_page/HomePage';
-import { getCategory } from '../actions/Home'
 import Header from './header/Header'
-import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
-import ResultSearch from './ResultSearch';
-import Register from './Register.js';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import ResultOfSearchList from './ResultOfSearchList'
-import { searchByCategory } from '../actions/Busieness';
-import Contact from './Contact'
-import Add_buisness from "./add_business/add_business";
-import ResultOfSearchListFirst from "./ResultSearckListFirst"
-import GoogleMap from './GoogleMap';
-import WishList from './wishList/WishList';
-/*********** */
 import Signup from "./Signup";
 import { AuthProvider } from "../contexts/AuthContext";
 import Dashboard from "./Dashboard";
@@ -34,20 +22,9 @@ import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
 import AudioSearch from "./AudioSearch";
 
-
-function App(props) {
-  // const [allCategories, setAllCategories] = useState()
-  const [currentCategoryId, setCurrentCategoryId] = useState(null);
-
-  const dispatch = useDispatch();
-  // useEffect(() => {
-  //   // dispatch(getCategory())
-  //   /////////////////
-  // }, [dispatch]);
-
+function App() {
   return (
     <>
-
        <Router>
       <Router>
       <AuthProvider>

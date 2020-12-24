@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import '../css/style.css'
 import '../css/main-color.css'
-import Header from "./header/Header";
-import Location from './Location'
 import Pricing from "./Pricing";
 import Footer from "./Footer";
 import Reviews from './Reviews';
@@ -13,7 +11,7 @@ import { connect } from 'react-redux';
 import Contact from './Contact';
 import { withRouter, useParams } from 'react-router-dom';
 import MapContainer from './MapContainer'
-import { setSelectedBusinessDetails, addClicksToBusiness, getBusinessBybId } from '../redux/actions/business.action'
+import { getBusinessBybId } from '../redux/actions/business.action'
 
 // import { getAllCategories, setSelectedCategoryId, setCategory, getResultOfSearchByCategory } from '../redux/actions/category.action';
 const BusinessDetails = (props) => {

@@ -1,11 +1,13 @@
-////zvvvvvvv
-
 import BusinnesService from "../../services/business.service";
 export const ADD_CLICK_TO_BUSINESS="[business] ADD_CLICK_TO_BUSINESS"
 export const SET_SELECTED_BUSINESS_DETAILS="[business] SET_SELECTED_BUSINESS_DETAILS"
 export const CREATE_BUSINESS="[business] CREATE_BUSINESS"
 export const SEND_MAIL="[business] SEND_MAIL"
 export const GET_BUSINESS_By_ID="[business] GET_BUSINESS_By_ID"
+export const ADD_SHERE_TO_BUSINESS="[business] ADD_SHERE_TO_BUSINESS"
+export const GET_ALL_FAVORAITS="[business] GET_ALL_FAVORAITS"
+export const DELETE_FAVORITS_BY_BUSSINES="[business] DELETE_FAVORITS_BY_BUSSINES"
+
 export function setSelectedBusinessDetails(businessDetails){
     console.log(businessDetails)
     return{
@@ -66,5 +68,28 @@ export function getBusinessBybId(id) {
         const business = await BusinnesService.getBusiness(id);
         debugger
         dispatch(setSelectedBusinessDetails(business))
+    }
+}
+
+export function addShereToBusiness(businessId,idUser){
+    debugger
+
+    return async (dispatch) => {
+        debugger
+        const data = await BusinnesService.addShareToBusiness(businessId,idUser);
+        console.log(data,"   dataaaaaaaaaaa");
+    }
+}
+
+export function getAllFavoraits(userID) {
+    return async (dispatch) => {
+        const favoraits = await BusinnesService.getAllFavoraits(userID);
+        dispatch(getAllFavoraits(userID))
+    }
+}
+export function deleteFavoraitsByIdBussiness(businessId,idUser) {
+    return async (dispatch) => {
+        const favoraits = await BusinnesService.deleteFavoraitsByIdBussiness(businessId,idUser);
+        dispatch(deleteFavoraitsByIdBussiness(businessId,idUser))
     }
 }
