@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import './login.css';
 //import firebase from "firebase";
 //import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 export default function Login() {
@@ -45,20 +46,22 @@ export default function Login() {
          style={{ maxWidth: "400px" }}>
       <Card className="css-shadow">
         <Card.Body>
-          <h2 className="css-text text-center mb-4">Log In</h2>
+          <h2 className="css-text text-center mb-4">כניסה</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
+          <Form.Label>אמייל</Form.Label>
+            <Form.Group id="email" className="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
+            <Form.Label>סיסמה</Form.Label>
+            <Form.Group id="password" className="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
-              Log In
-            </Button>
+            <div className="d-flex justify-content-end">
+            <Button disabled={loading} className="submit" type="submit">
+כניסה            </Button></div>
             {/*<br/>
             <StyledFirebaseAuth 
               uiConfig={uiConfig}
@@ -66,15 +69,19 @@ export default function Login() {
             type="submit"/>*/}
           </Form>
           <div className="w-100 text-center mt-3">
-            <Link to="/forgot-password">Forgot Password?</Link>
+            <Link to="/forgot-password">שכחת סיסמה?</Link>
           </div>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/signup">Sign Up</Link>
+      <div className="w-100 text-center mt-4 text">
+        צריכים חשבון? <Link to="/signup">הרשמה</Link>
       </div>
     </div> 
-    </Container> 
-    </>
+    </Container>
+    <script> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   </script> </>
   )
 }
